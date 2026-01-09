@@ -40,3 +40,6 @@ Thumbs.db
 Homestead.json
 Homestead.yaml
 
+# MkDocs build output
+/site
+/_site
