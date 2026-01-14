@@ -17,9 +17,8 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->tinyInteger('rating');
             $table->text('message')->nullable();
-            $table->timestamp('created_at')->useCurrent();
-
-            $table->unique(['user_id', 'product_id']);
+            $table->unique(['user_id', 'product_id']); // combinación única
+            $table->timestamps(); // <<--- esto crea created_at y updated_at automáticamente
         });
     }
 
