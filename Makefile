@@ -43,3 +43,6 @@ artisan:
 migrate_fresh:
 	docker compose run --rm app php artisan migrate:fresh
 
+populate:
+	docker compose run --rm app php artisan db:seed
+
