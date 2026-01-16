@@ -6,7 +6,7 @@
     <title>@yield('title', 'BitKeys')</title>
 
     {{-- Cargar estilos y scripts desde Vite en localhost --}}
-    @vite(['resources/scss/app.scss', 'resources/js/app.js'], 'http://localhost:5173')
+    @vite(['resources/scss/app.scss', 'resources/js/app.js'])
 </head>
 <body class="body">
     <header class="header">
