@@ -1,0 +1,7 @@
+@mixin hover-shadow($color) {
+  transition: box-shadow 0.2s;
+
+  &:hover {
+    box-shadow: 0 0px 1.5vh $color;
+  }
+}

@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   app:
     build:
@@ -71,6 +69,21 @@ services:
       - "8080:80"
     depends_on:
       - db
+
+  vite:
+    image: node:20
+    container_name: pi-laravel-vite
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html
+    environment:
+      VITE_DEV_SERVER_HOST: localhost
+      VITE_DEV_SERVER_PORT: 5173
+    command: npm run dev --host 0.0.0.0
+    ports:
+      - "5173:5173"
+    depends_on:
+      - app
 
 volumes:
   db_data:

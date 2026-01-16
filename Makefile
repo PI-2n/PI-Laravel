@@ -1,7 +1,9 @@
 SHELL := /bin/bash
+.PHONY: artisan up down reset sh logs install migrate test migrate_fresh populate
 
 up:
 	docker compose up -d --build
+	docker compose up -d vite
 
 down:
 	docker compose down
@@ -11,7 +13,6 @@ reset:
 	rm -rf vendor node_modules bootstrap/cache/*.php public/storage
 	rm -f .env
 
-
 sh:
 	docker compose exec -u www-data app bash
 
@@ -19,7 +20,6 @@ logs:
 	docker compose logs -f --tail=100
 
 install:
-	# Crea Laravel solo si no existe (no pisa nada)
 	if [ ! -f artisan ]; then \
 		docker compose run --rm app bash -lc 'set -e; \
 		  composer create-project laravel/laravel /tmp/laravel; \
@@ -45,4 +45,3 @@ migrate_fresh:
 
 populate:
 	docker compose run --rm app php artisan db:seed
-
