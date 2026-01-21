@@ -18,7 +18,7 @@ class Product extends Model
         'video_url',
         'is_new',
         'is_offer',
-        'offer_value',
+        'offer_percentage',
         'offer_start_date',
         'offer_end_date',
         'release_date',

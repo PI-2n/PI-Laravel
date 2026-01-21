@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string('sku')->unique();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->decimal('price', 10, 2);
             $table->string('image_url')->nullable();
             $table->string('video_url')->nullable();
+            $table->decimal('price', 10, 2);
             $table->boolean('is_new')->default(false);
             $table->boolean('is_offer')->default(false);
-            $table->integer('offer_value')->nullable();
+            $table->decimal('offer_percentage', 5, 2)->nullable();
             $table->date('offer_start_date')->nullable();
             $table->date('offer_end_date')->nullable();
             $table->date('release_date')->nullable();
