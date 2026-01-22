@@ -4,11 +4,28 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CommentController;
 
-// Página principal: llama al ProductController@index
-Route::get('/', [ProductController::class, 'index']);
+/*
+|--------------------------------------------------------------------------
+| HOME
+|--------------------------------------------------------------------------
+| Página principal (equivale a tu antiguo index.php)
+*/
 
-// Rutas de productos
-Route::resource('/products', ProductController::class);
+Route::get('/', [ProductController::class, 'index'])->name('home');
 
-// Rutas de comentarios (opcional)
-// Route::resource('/comments', CommentController::class);
+/*
+|--------------------------------------------------------------------------
+| PRODUCTOS
+|--------------------------------------------------------------------------
+| Solo las rutas que realmente usas
+*/
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+
+/*
+|--------------------------------------------------------------------------
+| COMENTARIOS
+|--------------------------------------------------------------------------
+| Se mantiene preparada para el formulario
+*/
+Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');

@@ -9,10 +9,25 @@ class ProductController extends Controller
 {
     public function index()
     {
-        // Obtenemos los productos para el catálogo
-        $products = Product::where('active', true)->get();
-        return view('products.index', compact('products'));
+        $featured = Product::where('active', true)
+            ->where('is_new', true)
+            ->whereNotNull('video_url')
+            ->latest('release_date')
+            ->first();
+
+        $news = Product::where('active', true)
+            ->where('is_new', true)
+            ->orderByDesc('release_date')
+            ->get();
+
+        $offers = Product::where('active', true)
+            ->where('is_offer', true)
+            ->orderByDesc('offer_percentage')
+            ->get();
+
+        return view('index', compact('featured', 'news', 'offers'));
     }
+
 
     public function show(Product $product)
     {
@@ -37,6 +52,6 @@ class ProductController extends Controller
         Product::create($validated);
 
         return redirect()->route('products.index')
-                         ->with('success', '¡Producto creado correctamente!');
+            ->with('success', '¡Producto creado correctamente!');
     }
 }

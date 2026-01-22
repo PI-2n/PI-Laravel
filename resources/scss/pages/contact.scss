@@ -1,4 +1,5 @@
-// _contact.scss
+@use "../base/variables" as *;
+
 main {
     display: flex;
     flex-direction: column;
@@ -14,10 +15,13 @@ form#contactForm {
     padding: 2rem;
     background-color: $color-card;
     border-radius: 10px;
-    
-    h3 { margin-bottom: 5px; }
 
-    input, textarea {
+    h3 {
+        margin-bottom: 5px;
+    }
+
+    input,
+    textarea {
         width: 100%;
         padding: 10px;
         margin-bottom: 15px;
@@ -25,10 +29,12 @@ form#contactForm {
         border: none;
         border-radius: 5px;
         color: white;
-        
-        &:focus { outline: 2px solid $color-accent; }
+
+        &:focus {
+            outline: 2px solid $color-accent;
+        }
     }
-    
+
     button {
         padding: 10px 20px;
         margin-right: 10px;
@@ -37,8 +43,12 @@ form#contactForm {
         color: white;
         cursor: pointer;
         border-radius: 5px;
-        
-        &:hover { background-color: $color-accent-hover; }
-        &[type="reset"] { background-color: #555; }
+
+        &:hover {
+            background-color: $color-accent-hover;
+        }
+        &[type="reset"] {
+            background-color: #555;
+        }
     }
 }

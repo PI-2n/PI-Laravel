@@ -1,11 +1,13 @@
-main {
-  width: 100%;
-}
+@mixin styles {
+    main {
+        width: 100%;
+    }
 
-.error {
-  color: red;
-}
+    .error {
+        color: red;
+    }
 
-.ok {
-  color: green;
+    .ok {
+        color: green;
+    }
 }

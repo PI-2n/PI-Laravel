@@ -1,0 +1,74 @@
+@use "../base/variables" as *;
+
+.product-page-main {
+    background-color: $color-bg-tertiary;
+    min-height: calc(100vh - 160px);
+    width: 100%;
+}
+
+.product-page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    color: $color-text;
+
+    .product-detail {
+        display: flex;
+        gap: 40px;
+        margin-bottom: 40px;
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+        }
+    }
+
+    .product-image img {
+        width: 100%;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        object-fit: cover;
+        background-color: $color-card;
+    }
+
+    .product-info {
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: $color-text;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            color: $color-accent;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+
+        .description {
+            line-height: 1.6;
+            font-size: 1.1rem;
+            color: rgba($color-text, 0.9);
+            margin-bottom: 30px;
+        }
+
+        .btn-add-cart {
+            width: 100%;
+            max-width: 300px;
+            padding: 18px;
+            background-color: $color-accent;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background-color: $color-accent-hover;
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba($color-accent, 0.4);
+            }
+        }
+    }
+}

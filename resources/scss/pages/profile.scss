@@ -1,3 +1,5 @@
+@use "../base/variables" as *;
+
 main {
     padding: 2rem;
     color: white;
@@ -16,7 +18,7 @@ form {
     padding: 1.5rem;
     border-radius: 10px;
     margin-top: 1rem;
-    
+
     input {
         background-color: $color-bg-input;
         border: 1px solid #444;
