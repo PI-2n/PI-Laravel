@@ -54,3 +54,5 @@ test:
 artisan:
 	@docker compose run --rm app php artisan $(CMD)
 	@true
+
+# Comandillo para volver al docker de daemon por defecto de linux: docker context use default

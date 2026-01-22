@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class ProductFactory extends Factory
 {
@@ -11,12 +12,13 @@ class ProductFactory extends Factory
 
     public function definition()
     {
-        $price = $this->faker->randomFloat(2, 10, 200); // precio entre 10 y 200
-        $hasOffer = $this->faker->boolean(30); // 30% chance de oferta
+        $price = $this->faker->randomFloat(2, 10, 200);
+        $hasOffer = $this->faker->boolean(30);
         $offerPercentage = $hasOffer ? $this->faker->numberBetween(5, 50) : null;
-        $priceWithOffer = $hasOffer ? max($price * (1 - $offerPercentage / 100), 0) : null;
 
         return [
+            'sku' => 'P' . str_pad($this->faker->unique()->numberBetween(1, 99999), 5, '0', STR_PAD_LEFT),
+
             'name' => $this->faker->words(3, true),
             'description' => $this->faker->sentence(10),
             'price' => $price,

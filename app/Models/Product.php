@@ -10,10 +10,10 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
+        'sku',
         'name',
         'description',
         'price',
-        'price_with_offer',
         'image_url',
         'video_url',
         'is_new',
@@ -25,9 +25,30 @@ class Product extends Model
         'active',
     ];
 
-    // Relación con comentarios
+    // Comentarios
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    // Tags (N a N)
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+    // Platforms (N a N)
+    public function platforms()
+    {
+        return $this->belongsToMany(Platform::class);
+    }
+
+    public function getFinalPriceAttribute()
+    {
+        if ($this->is_offer && $this->offer_percentage) {
+            return $this->price * (1 - $this->offer_percentage / 100);
+        }
+
+        return $this->price;
     }
 }
