@@ -4,6 +4,12 @@
 @use "components/header";
 @use "components/footer";
 
-@include reset.styles;
+// Páginas
+@use "pages/index";
+@use "pages/login";
+@use "pages/register";
+@use "pages/profile";
+@use "pages/product";
+
 @include header.styles;
 @include footer.styles;

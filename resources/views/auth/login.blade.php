@@ -1,29 +1,26 @@
-@include('partials.header')
+@extends('layouts.app')
 
-<div class="login-page">
-    @if ($errors->any())
-        <p class="login-error" style="color: red; margin-bottom: 1rem;">
-            {{ $errors->first() }}
-        </p>
-    @endif
+@section('title', 'Iniciar Sesión - BitKeys')
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-        <label>Email:
-            <input type="email" name="email" required>
-        </label><br>
-        <label>Contraseña:
-            <input type="password" name="password" required>
-        </label><br>
-        <button type="submit">Iniciar sesión</button>
-    </form>
+@section('content')
+    <div class="login-page">
+        @if ($errors->any())
+            <p class="login-error" style="color: red; margin-bottom: 1rem;">
+                {{ $errors->first() }}
+            </p>
+        @endif
 
-    <p>No tienes cuenta? <a href="{{ route('register') }}"><b>Regístrate</b></a></p>
-</div>
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+            <label>Email:
+                <input type="email" name="email" required>
+            </label><br>
+            <label>Contraseña:
+                <input type="password" name="password" required>
+            </label><br>
+            <button type="submit">Iniciar sesión</button>
+        </form>
 
-@include('partials.footer')
-
-{{-- Carga los estilos específicos --}}
-@vite([
-    'resources/scss/pages/login.scss'
-])
+        <p>No tienes cuenta? <a href="{{ route('register') }}"><b>Regístrate</b></a></p>
+    </div>
+@endsection

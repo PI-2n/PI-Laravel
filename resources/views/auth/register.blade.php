@@ -1,36 +1,34 @@
-@include('partials.header')
+@extends('layouts.app')
 
-<div class="register-page">
-    @if ($errors->any())
-        <p style="color: red;">{{ $errors->first() }}</p>
-    @endif
+@section('title', 'Registro - BitKeys')
 
-    <form method="POST" action="{{ route('register') }}" novalidate>
-        @csrf
-        <label>Nombre*:
-            <input type="text" name="name" required>
-        </label><br>
+@section('content')
+    <div class="register-page">
+        @if ($errors->any())
+            <p style="color: red;">{{ $errors->first() }}</p>
+        @endif
 
-        <label>Email*:
-            <input type="email" name="email" required>
-        </label><br>
+        <form method="POST" action="{{ route('register') }}" novalidate>
+            @csrf
+            <label>Nombre*:
+                <input type="text" name="name" required>
+            </label><br>
 
-        <label>Contraseña*:
-            <input type="password" name="password" required>
-        </label><br>
+            <label>Email*:
+                <input type="email" name="email" required>
+            </label><br>
 
-        <label>Repetir contraseña*:
-            <input type="password" name="password_confirmation" required>
-        </label><br>
+            <label>Contraseña*:
+                <input type="password" name="password" required>
+            </label><br>
 
-        <button type="submit">Registrarse</button>
-    </form>
+            <label>Repetir contraseña*:
+                <input type="password" name="password_confirmation" required>
+            </label><br>
 
-    <p>¿Ya tienes cuenta? <a href="{{ route('login') }}"><b>Inicia sesión</b></a></p>
-</div>
+            <button type="submit">Registrarse</button>
+        </form>
 
-@include('partials.footer')
-
-@vite([
-    'resources/scss/pages/register.scss'
-])
+        <p>¿Ya tienes cuenta? <a href="{{ route('login') }}"><b>Inicia sesión</b></a></p>
+    </div>
+@endsection

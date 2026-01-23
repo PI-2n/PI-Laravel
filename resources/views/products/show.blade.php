@@ -3,7 +3,7 @@
 @section('title', $product->name)
 
 @section('content')
-    @vite(['resources/scss/pages/product.scss'])
+
     <main class="product-page-main">
         <div class="product-page-container">
 
