@@ -22,15 +22,23 @@
         }
     }
 
-    .product-image img {
-        width: 100%;
-        border-radius: 15px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-        object-fit: cover;
-        background-color: $color-card;
+    .product-image {
+        flex: 0 0 400px;
+
+        img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 3/4;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            object-fit: cover;
+            background-color: $color-card;
+        }
     }
 
     .product-info {
+        flex: 1;
+
         h1 {
             font-size: clamp(2rem, 5vw, 3rem);
             font-weight: 700;
@@ -52,22 +60,89 @@
             margin-bottom: 30px;
         }
 
-        .btn-add-cart {
-            width: 100%;
-            max-width: 300px;
-            padding: 18px;
-            background-color: $color-accent;
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .product-actions {
+            display: flex;
+            gap: 1rem;
+            max-width: 400px; // Limit width of the button group
 
-            &:hover {
-                background-color: $color-accent-hover;
-                transform: translateY(-3px);
-                box-shadow: 0 5px 15px rgba($color-accent, 0.4);
+            button {
+                border: none;
+                border-radius: 50px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                padding: 15px 25px; // Consistent padding
+                color: white;
+                background-color: $color-accent;
+
+                img {
+                    height: 1.5rem;
+                    width: auto;
+                    filter: brightness(0) invert(1); // Ensure icons are white
+                }
+
+                &:hover {
+                    background-color: $color-accent-hover;
+                    transform: translateY(-3px);
+                    box-shadow: 0 5px 15px rgba($color-accent, 0.4);
+                }
+            }
+
+            .btn-add-cart {
+                flex: 1; // Takes more space
+                justify-content: space-between; // Text left, icon right
+            }
+
+            .btn-fast-buy {
+                justify-content: center;
+                aspect-ratio: 1/1; // Square-ish (or at least consistent height)
+                padding: 15px; // Override padding for icon-only button if needed
+            }
+        }
+    }
+
+    .comments-section {
+        margin-top: 40px;
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba($color-text, 0.2);
+            padding-bottom: 10px;
+        }
+
+        .comment-item {
+            background-color: $color-card;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+            .comment-header {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 10px;
+                font-weight: bold;
+                font-size: 1.1rem;
+
+                .rating {
+                    color: $color-accent;
+                }
+            }
+
+            p {
+                line-height: 1.5;
+                color: rgba($color-text, 0.9);
+            }
+
+            .comment-date {
+                display: block;
+                text-align: right;
+                font-size: 0.85rem;
+                color: rgba($color-text, 0.5);
+                margin-top: 15px;
             }
         }
     }
