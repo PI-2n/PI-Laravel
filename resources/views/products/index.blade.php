@@ -2,19 +2,15 @@
 
 {{-- FEATURED --}}
 @if($featured)
-<section class="featured">
-    <video
-        src="{{ asset('/video/'.$featured->video_url) }}"
-        muted
-        loop
-        autoplay
-        class="featured-background-video"></video>
+    <section class="featured">
+        <video src="{{ asset('/video/' . $featured->video_url) }}" muted loop autoplay
+            class="featured-background-video"></video>
 
-    <a href="{{ route('products.show', $featured->id) }}" class="featured-link">
-        <h1 class="featured-title">{{ $featured->name }}</h1>
-        <p class="featured-subtitle">Ya disponible</p>
-    </a>
-</section>
+        <a href="{{ route('products.show', $featured->id) }}" class="featured-link">
+            <h1 class="featured-title">{{ $featured->name }}</h1>
+            <p class="featured-subtitle">Ya disponible</p>
+        </a>
+    </section>
 @endif
 
 
@@ -26,10 +22,11 @@
         <button class="carousel-btn carousel-btn--prev" aria-label="Anterior">&lt;</button>
 
         <div class="carousel-track" data-index="0">
+
             @foreach($news as $product)
-            <div class="carousel-slide">
-                <x-product :product="$product" />
-            </div>
+                <div class="carousel-slide">
+                    <x-product :product="$product" />
+                </div>
             @endforeach
         </div>
 
@@ -44,7 +41,7 @@
 
     <div class="products">
         @foreach($offers as $product)
-        <x-product :product="$product" />
+            <x-product :product="$product" />
         @endforeach
     </div>
 </section>
