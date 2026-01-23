@@ -2,7 +2,7 @@
 
 <div class="register-page">
     @if ($errors->any())
-    <p style="color: red;">{{ $errors->first() }}</p>
+        <p style="color: red;">{{ $errors->first() }}</p>
     @endif
 
     <form method="POST" action="{{ route('register') }}" novalidate>
@@ -32,6 +32,5 @@
 @include('partials.footer')
 
 @vite([
-'resources/scss/components/header.scss',
-'resources/scss/components/footer.scss',
-'resources/scss/pages/register.scss'])
+    'resources/scss/pages/register.scss'
+])

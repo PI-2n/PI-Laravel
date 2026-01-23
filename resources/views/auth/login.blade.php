@@ -2,9 +2,9 @@
 
 <div class="login-page">
     @if ($errors->any())
-    <p class="login-error" style="color: red; margin-bottom: 1rem;">
-        {{ $errors->first() }}
-    </p>
+        <p class="login-error" style="color: red; margin-bottom: 1rem;">
+            {{ $errors->first() }}
+        </p>
     @endif
 
     <form method="POST" action="{{ route('login') }}">
@@ -25,6 +25,5 @@
 
 {{-- Carga los estilos específicos --}}
 @vite([
-'resources/scss/components/header.scss',
-'resources/scss/components/footer.scss',
-'resources/scss/pages/login.scss'])
+    'resources/scss/pages/login.scss'
+])
