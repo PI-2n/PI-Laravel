@@ -23,7 +23,15 @@
   </div>
   <div class="separator"></div>
   <div class="user-btn-container">
-    <a href="#"><img src="{{ asset('images/icons/user.png') }}" alt="Usuario" class="user-btn" /></a>
+    @auth
+    <a href="{{ route('profile.edit') }}">
+      <img src="{{ asset('images/icons/user.png') }}" alt="Usuario" class="user-btn" />
+    </a>
+    @else
+    <a href="{{ route('register') }}">
+      <img src="{{ asset('images/icons/user.png') }}" alt="Usuario" class="user-btn" />
+    </a>
+    @endauth
     <a href="#"><img src="{{ asset('images/icons/carrito.png') }}" alt="Carrito" class="user-btn" /></a>
   </div>
 </div>

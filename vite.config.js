@@ -6,6 +6,8 @@ export default defineConfig({
         laravel([
             // Archivo global (layout)
             "resources/scss/app.scss",
+            "resources/scss/components/header.scss",
+            "resources/scss/components/footer.scss",
 
             // Páginas individuales
             "resources/scss/pages/index.scss",
