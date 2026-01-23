@@ -6,6 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'BitKeys')</title>
     @vite(['resources/scss/app.scss', 'resources/js/app.js'])
+
+    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+    <script type="module">
+        import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+        createChat({
+            webhookUrl: 'http://localhost:5678/webhook/1cac85f5-c84f-4a32-a4cc-dc79da54b413/chat'
+        });
+    </script>
 </head>
 
 <body class="body">
