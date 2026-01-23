@@ -1,3 +1,7 @@
-import "./bootstrap";
-import "./carousel.js";
-import "./product-video.js";
+import './bootstrap';
+
+import Alpine from 'alpinejs';
+
+window.Alpine = Alpine;
+
+Alpine.start();
