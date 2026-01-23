@@ -4,7 +4,7 @@
 @if($featured)
 <section class="featured">
     <video
-        src="{{ asset($featured->video_url) }}"
+        src="{{ asset('/video/'.$featured->video_url) }}"
         muted
         loop
         autoplay
