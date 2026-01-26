@@ -19,52 +19,6 @@ Route::post('/comments', [CommentController::class, 'store'])->name('comments.st
 
 /*
 |--------------------------------------------------------------------------
-| Autenticación (manual, sin Breeze)
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/login', fn() => view('auth.login'))->name('login');
-Route::post('/login', function () {
-    $credentials = request()->validate([
-        'email' => 'required|email',
-        'password' => 'required',
-    ]);
-
-    if (Auth::attempt($credentials, request()->boolean('remember'))) {
-        request()->session()->regenerate();
-        return redirect()->intended('/');
-    }
-
-    return back()->withErrors(['email' => 'Credenciales inválidas']);
-});
-
-Route::post('/logout', function () {
-    Auth::logout();
-    request()->session()->invalidate();
-    request()->session()->regenerateToken();
-    return redirect('/');
-})->name('logout');
-
-Route::get('/register', fn() => view('auth.register'))->name('register');
-Route::post('/register', function () {
-    $data = request()->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|unique:users',
-        'password' => 'required|min:8|confirmed',
-    ]);
-
-    $user = \App\Models\User::create([
-        'name' => $data['name'],
-        'email' => $data['email'],
-        'password' => bcrypt($data['password']),
-    ]);
-
-    Auth::login($user);
-    return redirect('/mi-cuenta');
-});
-
-/*
-|--------------------------------------------------------------------------
 | Rutas protegidas (requieren login)
 |--------------------------------------------------------------------------
 */
