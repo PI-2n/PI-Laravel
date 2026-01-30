@@ -13,11 +13,9 @@ class UserFactory extends Factory
 
     public function definition()
     {
-        // Obtener todos los roles existentes
-        $roles = Role::all();
-
-        // Si no hay roles, asignar null (o podrías lanzar excepción)
-        $roleId = $roles->isNotEmpty() ? $roles->random()->id : null;
+        // Obtener un rol existente o crear uno si no hay (para tests)
+        $role = Role::first() ?? Role::create(['name' => 'customer']);
+        $roleId = $role->id;
 
         return [
             'name' => $this->faker->firstName,

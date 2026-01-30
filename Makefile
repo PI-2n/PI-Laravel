@@ -49,10 +49,10 @@ populate:
 	docker compose run --rm app php artisan db:seed
 
 test:
-	docker compose run --rm app php artisan test -q
+	docker compose run --rm -e APP_ENV=testing -e DB_CONNECTION=sqlite -e DB_DATABASE=:memory: app php artisan test
 
 artisan:
-	@docker compose run --rm app php artisan $(CMD)
+	@docker compose run --rm app php artisan $(if $(CMD),$(CMD),$(cmd))
 	@true
 
 # Comandillo para volver al docker de daemon por defecto de linux: docker context use default

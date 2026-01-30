@@ -12,7 +12,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
 
     Route::apiResource('products', ProductController::class)
-        ->except(['index', 'show']);
+        ->except(['show']);
 
     Route::get('/user', function (Request $request) {
         return $request->user();
@@ -20,4 +20,4 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::apiResource('products', ProductController::class)
-    ->only(['index', 'show']);
+    ->only(['index']);

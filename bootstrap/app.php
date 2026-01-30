@@ -17,8 +17,13 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (\Throwable $e, \Illuminate\Http\Request $request) {
             if ($request->is('api/*')) {
                 $statusCode = 500;
+
                 if ($e instanceof \Symfony\Component\HttpKernel\Exception\HttpExceptionInterface) {
                     $statusCode = $e->getStatusCode();
+                } elseif ($e instanceof \Illuminate\Auth\AuthenticationException) {
+                    $statusCode = 401;
+                } elseif ($e instanceof \Illuminate\Validation\ValidationException) {
+                    $statusCode = 422;
                 }
 
                 return response()->json([
