@@ -1,0 +1,30 @@
+meta {
+  name: crear-producto
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:8000/api/products
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 2|uwnFQTjhLhaD7sR7rlRxeLmWTMfmyA9VvABxjqfeb2cc2928
+}
+
+body:json {
+  {
+    "sku": "PROD-001",
+    "name": "Nuevo Producto de Prueba",
+    "price": 99.99,
+    "description": "Descripción del producto de prueba",
+    "active": true
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -1,0 +1,28 @@
+meta {
+  name: actualizar-producto
+  type: http
+  seq: 6
+}
+
+put {
+  url: http://localhost:8000/api/products/11
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 2|uwnFQTjhLhaD7sR7rlRxeLmWTMfmyA9VvABxjqfeb2cc2928
+}
+
+body:json {
+  {
+    "sku": "PROD-001",
+    "name": "Producto Actualizado",
+    "price": 150.00
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -1,0 +1,20 @@
+meta {
+  name: borrar-producto
+  type: http
+  seq: 7
+}
+
+delete {
+  url: http://localhost:8000/api/products/11
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: 2|uwnFQTjhLhaD7sR7rlRxeLmWTMfmyA9VvABxjqfeb2cc2928
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
