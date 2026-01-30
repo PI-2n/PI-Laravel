@@ -136,6 +136,8 @@
                 display: block;
             }
 
+
+
             .product-video {
                 width: 100%;
                 aspect-ratio: 3 / 4;
@@ -207,6 +209,23 @@
         transition: transform 0.3s;
         @include mixins.hover-shadow($color-accent-hover);
 
+        .price {
+            font-weight: bold;
+            color: $color-accent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+
+            .old-price {
+                text-decoration: line-through;
+                color: $color-separator;
+                font-size: 0.85em;
+                font-weight: normal;
+                opacity: 0.8;
+            }
+        }
+
         a {
             text-decoration: none;
             color: inherit;
@@ -221,6 +240,20 @@
                 aspect-ratio: 3/4;
                 object-fit: cover;
                 border-bottom: 1px solid #333;
+            }
+
+            .discount-badge {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                background-color: $color-accent;
+                color: white;
+                font-weight: bold;
+                padding: 0.3rem 0.6rem;
+                border-radius: 8px;
+                font-size: 0.9rem;
+                z-index: 5;
+                box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
             }
         }
     }
