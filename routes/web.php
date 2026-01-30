@@ -33,4 +33,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/mi-cuenta', fn() => view('user.dashboard'))->name('user.dashboard');
 });
 
+/*
+|--------------------------------------------------------------------------
+| Rutas de administración (requieren login + rol admin)
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+    Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+});
+
 require __DIR__ . '/auth.php';
