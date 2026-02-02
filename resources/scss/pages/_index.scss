@@ -114,7 +114,6 @@
         }
 
         .product {
-            position: relative;
             overflow: hidden;
             margin: 0.5rem;
 
@@ -137,7 +136,6 @@
             }
 
 
-
             .product-video {
                 width: 100%;
                 aspect-ratio: 3 / 4;
@@ -153,6 +151,11 @@
 
             &.show-video .product-video {
                 display: block;
+            }
+
+            a .discount-badge {
+                font-size: 1.5rem;
+                padding: 0.8rem 1.2rem;
             }
         }
 
@@ -203,6 +206,7 @@
 
     /* ===== ESTILOS DEL PRODUCTO (compartidos) ===== */
     .product {
+        position: relative;
         background-color: $color-card;
         border-radius: 15px;
         overflow: hidden;
@@ -249,9 +253,9 @@
                 background-color: $color-accent;
                 color: white;
                 font-weight: bold;
-                padding: 0.3rem 0.6rem;
+                padding: 0.5rem 1rem;
                 border-radius: 8px;
-                font-size: 0.9rem;
+                font-size: 1.2rem;
                 z-index: 5;
                 box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
             }
