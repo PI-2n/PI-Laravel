@@ -1,0 +1,328 @@
+@use "../base/variables" as *;
+
+// Contenedor principal del formulario
+.product-form-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 20px;
+
+    @media (max-width: 768px) {
+        margin: 1rem;
+        padding: 0 10px;
+    }
+}
+
+// Cabecera del formulario
+.form-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+
+    @media (max-width: 768px) {
+        margin-bottom: 1.5rem;
+    }
+}
+
+.form-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: $color-text;
+    margin-bottom: 0.5rem;
+
+    @media (max-width: 768px) {
+        font-size: 1.5rem;
+    }
+}
+
+.form-subtitle {
+    font-size: 1rem;
+    color: rgba($color-text, 0.7);
+    margin: 0;
+
+    @media (max-width: 768px) {
+        font-size: 0.9rem;
+    }
+}
+
+// Formulario principal
+.product-form {
+    background-color: $color-bg-tertiary;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+
+    @media (max-width: 768px) {
+        padding: 1.5rem;
+    }
+}
+
+// Secciones del formulario
+.form-section {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid $color-separator;
+
+    &:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+}
+
+.tags-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 0.5rem;
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+}
+
+.tag-checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background-color: rgba($color-bg-input, 0.5);
+    border-radius: 6px;
+    border: 1px solid $color-separator;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background-color: rgba($color-accent, 0.1);
+        border-color: $color-accent;
+    }
+}
+
+.no-tags-message {
+    color: rgba($color-text, 0.7);
+    font-style: italic;
+    margin: 0.5rem 0;
+
+    a {
+        color: $color-accent;
+        text-decoration: none;
+        font-weight: 600;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.section-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: $color-text;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid $color-accent;
+
+    @media (max-width: 768px) {
+        font-size: 1.1rem;
+    }
+}
+
+// Grupos de formulario
+.form-group {
+    margin-bottom: 1.5rem;
+
+    @media (max-width: 768px) {
+        margin-bottom: 1rem;
+    }
+}
+
+.form-label {
+    display: block;
+    font-weight: 500;
+    color: $color-text;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+
+    @media (max-width: 768px) {
+        font-size: 0.9rem;
+    }
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background-color: $color-bg-input;
+    border: 1px solid $color-separator;
+    border-radius: 8px;
+    color: $color-text;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+
+    &:focus {
+        outline: none;
+        border-color: $color-accent;
+        box-shadow: 0 0 0 3px rgba($color-accent, 0.3);
+    }
+
+    @media (max-width: 768px) {
+        padding: 0.7rem;
+        font-size: 0.95rem;
+    }
+}
+
+.form-input-file {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: $color-bg-input;
+    border: 1px dashed $color-separator;
+    border-radius: 8px;
+    color: $color-text;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+        border-color: $color-accent;
+        background-color: rgba($color-accent, 0.1);
+    }
+
+    &:focus {
+        outline: none;
+        border-color: $color-accent;
+        box-shadow: 0 0 0 3px rgba($color-accent, 0.3);
+    }
+}
+
+.form-hint {
+    font-size: 0.85rem;
+    color: rgba($color-text, 0.6);
+    margin-top: 0.3rem;
+    font-style: italic;
+
+    @media (max-width: 768px) {
+        font-size: 0.8rem;
+    }
+}
+
+// Mensajes de error
+.error-message {
+    display: block;
+    color: #ff6b6b;
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+    font-weight: 500;
+
+    @media (max-width: 768px) {
+        font-size: 0.8rem;
+    }
+}
+
+// Checkbox groups
+.form-checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}
+
+.form-checkbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: $color-accent;
+
+    @media (max-width: 768px) {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+.form-checkbox-label {
+    font-weight: 500;
+    color: $color-text;
+    cursor: pointer;
+    font-size: 0.95rem;
+
+    @media (max-width: 768px) {
+        font-size: 0.9rem;
+    }
+}
+
+// Botones de acción
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid $color-separator;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+}
+
+.btn {
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+
+    @media (max-width: 768px) {
+        width: 100%;
+        justify-content: center;
+    }
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.btn-secondary {
+    background-color: $color-bg-secondary;
+    color: $color-text;
+    border: 1px solid $color-separator;
+
+    &:hover {
+        background-color: rgba($color-bg-secondary, 0.8);
+    }
+}
+
+.btn-primary {
+    background-color: $color-accent;
+    color: white;
+
+    &:hover {
+        background-color: $color-accent-hover;
+    }
+}
+
+// Estilos específicos para textarea
+.product-form textarea.form-input {
+    resize: vertical;
+    min-height: 100px;
+    line-height: 1.5;
+}
+
+// Responsive para inputs de número
+.product-form input[type="number"].form-input {
+    -moz-appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}

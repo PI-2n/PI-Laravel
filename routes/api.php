@@ -11,6 +11,7 @@ Route::post('register', [AuthController::class, 'register']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
 
+    // Rutas CRUD completas para productos (solo para usuarios autenticados)
     Route::apiResource('products', ProductController::class)
         ->except(['show']);
 
@@ -19,5 +20,5 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 });
 
-Route::apiResource('products', ProductController::class)
-    ->only(['index']);
+// Ruta pública explícita para index (sin usar apiResource)
+Route::get('products', [ProductController::class, 'index'])->name('api.products.index');
