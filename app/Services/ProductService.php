@@ -28,9 +28,12 @@ class ProductService
         // Handle Offer Dates
         $this->handleOfferDates($data);
 
-        // Handle Tags (separate from main create)
-        $tagId = $data['tag_id'] ?? null;
-        unset($data['tag_id']);
+        // Handle Tags
+        $tagIds = $data['tag_ids'] ?? [];
+        unset($data['tag_ids']);
+        // Remove legacy tag_id if present
+        if (isset($data['tag_id']))
+            unset($data['tag_id']);
 
         // Default valid fields for creation
         $data['release_date'] = now();
@@ -38,8 +41,8 @@ class ProductService
 
         $product = Product::create($data);
 
-        if ($tagId) {
-            $product->tags()->attach($tagId);
+        if (!empty($tagIds)) {
+            $product->tags()->sync($tagIds);
         }
 
         return $product;
@@ -72,10 +75,13 @@ class ProductService
         $this->handleOfferDates($data);
 
         // Handle Tags
-        if (isset($data['tag_id'])) {
-            $product->tags()->sync($data['tag_id'] ? [$data['tag_id']] : []);
-            unset($data['tag_id']);
+        if (isset($data['tag_ids'])) {
+            $product->tags()->sync($data['tag_ids']);
+            unset($data['tag_ids']);
         }
+        // Remove legacy tag_id if present
+        if (isset($data['tag_id']))
+            unset($data['tag_id']);
 
         // Handle 'featured' checkbox mapping for 'is_new' if present
         if (isset($data['featured'])) {

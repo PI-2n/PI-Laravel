@@ -17,6 +17,16 @@
                 <h2 class="section-title">Información Básica</h2>
 
                 <div class="form-group">
+                    <label for="sku" class="form-label">SKU (Código de Producto) *</label>
+                    <input type="text" id="sku" name="sku" value="{{ old('sku', $product->sku) }}" required
+                        class="form-input" placeholder="Ej: SMART-001" maxlength="50">
+                    <p class="form-hint">Código único para identificar el producto</p>
+                    @error('sku')
+                        <span class="error-message">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
                     <label for="name" class="form-label">Nombre del Producto *</label>
                     <input type="text" id="name" name="name" value="{{ old('name', $product->name) }}" required
                         class="form-input" placeholder="Ej: Smartphone Pro Max">
@@ -27,8 +37,8 @@
 
                 <div class="form-group">
                     <label for="price" class="form-label">Precio (€) *</label>
-                    <input type="number" id="price" name="price" step="0.01"
-                        value="{{ old('price', $product->price) }}" required class="form-input" placeholder="Ej: 999.99">
+                    <input type="number" id="price" name="price" step="0.01" value="{{ old('price', $product->price) }}"
+                        required class="form-input" placeholder="Ej: 999.99">
                     @error('price')
                         <span class="error-message">{{ $message }}</span>
                     @enderror
@@ -90,8 +100,7 @@
                 <h2 class="section-title">Configuración de Oferta</h2>
 
                 <div class="form-group form-checkbox-group">
-                    <input type="checkbox" id="is_offer" name="is_offer" value="1"
-                        {{ old('is_offer', $product->is_offer) ? 'checked' : '' }} class="form-checkbox">
+                    <input type="checkbox" id="is_offer" name="is_offer" value="1" {{ old('is_offer', $product->is_offer) ? 'checked' : '' }} class="form-checkbox">
                     <label for="is_offer" class="form-checkbox-label">¿Este producto está en oferta?</label>
                 </div>
 
@@ -122,14 +131,12 @@
                 <h2 class="section-title">Estado y Visibilidad</h2>
 
                 <div class="form-group form-checkbox-group">
-                    <input type="checkbox" id="active" name="active" value="1"
-                        {{ old('active', $product->active) ? 'checked' : '' }} class="form-checkbox">
+                    <input type="checkbox" id="active" name="active" value="1" {{ old('active', $product->active) ? 'checked' : '' }} class="form-checkbox">
                     <label for="active" class="form-checkbox-label">Producto activo (visible en la tienda)</label>
                 </div>
 
                 <div class="form-group form-checkbox-group">
-                    <input type="checkbox" id="featured" name="featured" value="1"
-                        {{ old('featured', $product->featured) ? 'checked' : '' }} class="form-checkbox">
+                    <input type="checkbox" id="featured" name="featured" value="1" {{ old('featured', $product->featured) ? 'checked' : '' }} class="form-checkbox">
                     <label for="featured" class="form-checkbox-label">Destacar como producto principal</label>
                 </div>
             </div>
@@ -141,8 +148,7 @@
             </div>
         </form>
 
-        <form id="delete-form" action="{{ route('products.destroy', $product->id) }}" method="POST"
-            style="display: none;">
+        <form id="delete-form" action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: none;">
             @csrf
             @method('DELETE')
         </form>
@@ -151,7 +157,7 @@
     @push('scripts')
         <script>
             // Mostrar/Ocultar campo de porcentaje de oferta
-            document.getElementById('is_offer').addEventListener('change', function() {
+            document.getElementById('is_offer').addEventListener('change', function () {
                 const offerGroup = document.getElementById('offer_percentage_group');
                 offerGroup.style.display = this.checked ? 'block' : 'none';
             });
@@ -164,7 +170,7 @@
             }
 
             // Validación adicional
-            document.querySelector('.product-form').addEventListener('submit', function(e) {
+            document.querySelector('.product-form').addEventListener('submit', function (e) {
                 const isOffer = document.getElementById('is_offer').checked;
                 const offerPercentage = document.getElementById('offer_percentage').value;
 
