@@ -29,6 +29,7 @@
     <footer class="footer">
         @include('partials.footer')
     </footer>
+    @stack('scripts')
 </body>
 
 </html>

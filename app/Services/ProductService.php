@@ -15,14 +15,16 @@ class ProductService
     {
         // Handle Image
         if ($image) {
-            $imagePath = $image->store('products', 'public');
-            $data['image_url'] = basename($imagePath);
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('images/products'), $imageName);
+            $data['image_url'] = $imageName;
         }
 
         // Handle Video
         if ($video) {
-            $videoPath = $video->store('video', 'public');
-            $data['video_url'] = basename($videoPath);
+            $videoName = time() . '_' . $video->getClientOriginalName();
+            $video->move(public_path('video'), $videoName);
+            $data['video_url'] = $videoName;
         }
 
         // Handle Offer Dates
@@ -55,20 +57,26 @@ class ProductService
     {
         // Handle Image
         if ($image) {
-            if ($product->image_url) {
-                Storage::disk('public')->delete('products/' . $product->image_url);
+            // Delete old image
+            if ($product->image_url && file_exists(public_path('images/products/' . $product->image_url))) {
+                unlink(public_path('images/products/' . $product->image_url));
             }
-            $imagePath = $image->store('products', 'public');
-            $data['image_url'] = basename($imagePath);
+
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('images/products'), $imageName);
+            $data['image_url'] = $imageName;
         }
 
         // Handle Video
         if ($video) {
-            if ($product->video_url) {
-                Storage::disk('public')->delete('video/' . $product->video_url);
+            // Delete old video
+            if ($product->video_url && file_exists(public_path('video/' . $product->video_url))) {
+                unlink(public_path('video/' . $product->video_url));
             }
-            $videoPath = $video->store('video', 'public');
-            $data['video_url'] = basename($videoPath);
+
+            $videoName = time() . '_' . $video->getClientOriginalName();
+            $video->move(public_path('video'), $videoName);
+            $data['video_url'] = $videoName;
         }
 
         // Handle Offer Dates
@@ -99,12 +107,12 @@ class ProductService
      */
     public function deleteProduct(Product $product): void
     {
-        if ($product->image_url) {
-            Storage::disk('public')->delete('products/' . $product->image_url);
+        if ($product->image_url && file_exists(public_path('images/products/' . $product->image_url))) {
+            unlink(public_path('images/products/' . $product->image_url));
         }
 
-        if ($product->video_url) {
-            Storage::disk('public')->delete('video/' . $product->video_url);
+        if ($product->video_url && file_exists(public_path('video/' . $product->video_url))) {
+            unlink(public_path('video/' . $product->video_url));
         }
 
         $product->delete();
