@@ -75,8 +75,6 @@
                     @endif
                 </div>
 
-                <h3 class="section-subtitle">Actualizar Multimedia</h3>
-
                 <div class="form-group">
                     <label for="image_url" class="form-label">Nueva Imagen (dejar vacío para mantener actual)</label>
                     <input type="file" id="image_url" name="image_url" accept="image/*" class="form-input-file">
