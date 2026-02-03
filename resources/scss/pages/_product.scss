@@ -11,6 +11,7 @@
     margin: 0 auto;
     padding: 60px 20px;
     color: $color-text;
+    position: relative;
 
     .product-detail {
         display: flex;
@@ -100,6 +101,42 @@
                 aspect-ratio: 1/1; // Square-ish (or at least consistent height)
                 padding: 15px; // Override padding for icon-only button if needed
             }
+        }
+    }
+
+    .edit-container {
+        position: absolute;
+        top: 60px;
+        right: -3rem;
+
+        background-color: $color-bg-tertiary;
+        padding: 2rem;
+        border-radius: 15px;
+        max-width: 300px;
+        width: 100%;
+        z-index: 10;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+        h3 {
+            margin-bottom: 2rem;
+        }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 1rem;
+            background-color: #555;
+            border: none;
+            border-radius: 5px;
+            color: #ddd;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: $font-main;
+            font-size: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background-color: #666;
         }
     }
 

@@ -40,6 +40,18 @@
 
             </div>
 
+            {{-- Botón de edición solo para admins --}}
+            @auth
+                @if(Auth::user()->role_id === 1)
+                    <div class="edit-container">
+                        <h3>{{ __('Modificar Producto') }}</h3>
+                        <div class="product-actions">
+                            <a href="{{ route('products.edit', $product) }}" class="btn-secondary">{{ __('Editar Producto') }}</a>
+                        </div>
+                    </div>
+                @endif
+            @endauth
+
             {{-- COMENTARIOS --}}
             <hr>
 
