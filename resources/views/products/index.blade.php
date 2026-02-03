@@ -41,7 +41,7 @@
 
     <div class="products">
         @foreach($offers as $product)
-            <x-product :product="$product" />
+            <x-product :product="$product" :show-video="false" />
         @endforeach
     </div>
 </section>
