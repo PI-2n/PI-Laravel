@@ -13,6 +13,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Rutas CRUD completas para productos (solo para usuarios autenticados)
     Route::apiResource('products', ProductController::class)
+        ->names('api.products')
         ->except(['show']);
 
     Route::get('/user', function (Request $request) {
