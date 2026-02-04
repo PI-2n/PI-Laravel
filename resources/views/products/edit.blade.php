@@ -65,7 +65,7 @@
                 <div class="form-group" id="offer_percentage_group"
                     style="{{ $product->offer_percentage > 0 ? 'display: block;' : 'display: none;' }}">
                     <label for="offer_percentage" class="form-label">Porcentaje de Descuento (%)</label>
-                    <input type="number" id="offer_percentage" name="offer_percentage" min="1" max="100"
+                    <input type="number" id="offer_percentage" name="offer_percentage" min="0" max="100"
                         value="{{ old('offer_percentage', $product->offer_percentage) }}" class="form-input"
                         placeholder="Ej: 20">
                     <p class="form-hint">El precio final será calculado automáticamente</p>
@@ -174,7 +174,7 @@
 
                 if (isOffer && offerPercentage && (offerPercentage <= 0 || offerPercentage > 100)) {
                     e.preventDefault();
-                    alert('Por favor, ingresa un porcentaje de descuento válido (1-100%)');
+                    alert('Por favor, ingresa un porcentaje de descuento válido (0-100%)');
                 }
             });
         </script>

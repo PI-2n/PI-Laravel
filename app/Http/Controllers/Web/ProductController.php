@@ -97,7 +97,7 @@ class ProductController extends Controller
             'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'video_url' => 'nullable|file|mimes:mp4,webm|max:10240',
             'is_offer' => 'nullable|boolean',
-            'offer_percentage' => 'nullable|numeric|min:1|max:100',
+            'offer_percentage' => 'nullable|numeric|min:0|max:100',
             'offer_start_date' => 'nullable|date',
             'offer_end_date' => 'nullable|date|after_or_equal:offer_start_date',
             'active' => 'nullable|boolean',
