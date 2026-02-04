@@ -59,12 +59,14 @@
             font-size: 1.1rem;
             color: rgba($color-text, 0.9);
             margin-bottom: 30px;
+            text-align: justify;
+            hyphens: auto;
         }
 
         .product-actions {
             display: flex;
             gap: 1rem;
-            max-width: 400px; // Limit width of the button group
+            max-width: 400px;
 
             button {
                 border: none;
@@ -108,7 +110,6 @@
         position: absolute;
         top: 60px;
         right: -3rem;
-
         background-color: $color-bg-tertiary;
         padding: 2rem;
         border-radius: 15px;
@@ -133,6 +134,7 @@
             transition: background-color 0.3s;
             font-family: $font-main;
             font-size: 1rem;
+            text-decoration: none;
         }
 
         .btn-secondary:hover {

@@ -55,6 +55,37 @@
             </div>
 
             <div class="form-section">
+                <h2 class="section-title">Configuración de Oferta</h2>
+
+                <div class="form-group form-checkbox-group">
+                    <input type="checkbox" id="is_offer" name="is_offer" value="1" {{ old('is_offer', $product->is_offer) ? 'checked' : '' }} class="form-checkbox">
+                    <label for="is_offer" class="form-checkbox-label">Listar en ofertas</label>
+                </div>
+
+                <div class="form-group" id="offer_percentage_group"
+                    style="{{ $product->offer_percentage > 0 ? 'display: block;' : 'display: none;' }}">
+                    <label for="offer_percentage" class="form-label">Porcentaje de Descuento (%)</label>
+                    <input type="number" id="offer_percentage" name="offer_percentage" min="1" max="100"
+                        value="{{ old('offer_percentage', $product->offer_percentage) }}" class="form-input"
+                        placeholder="Ej: 20">
+                    <p class="form-hint">El precio final será calculado automáticamente</p>
+                    @if ($product->offer_percentage)
+                        @php
+                            $discounted = $product->price * (1 - $product->offer_percentage / 100);
+                        @endphp
+                        <p class="current-offer-info">
+                            Precio actual con oferta: <strong>{{ number_format($discounted, 2) }}€</strong>
+                            <br>
+                            <span class="old-price">Precio original: {{ number_format($product->price, 2) }}€</span>
+                        </p>
+                    @endif
+                    @error('offer_percentage')
+                        <span class="error-message">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="form-section">
                 <h2 class="section-title">Multimedia Actual</h2>
 
                 <div class="current-media">
@@ -89,37 +120,6 @@
                     <input type="file" id="video_url" name="video_url" accept="video/*" class="form-input-file">
                     <p class="form-hint">Formatos aceptados: MP4, WEBM (máx. 10MB)</p>
                     @error('video_url')
-                        <span class="error-message">{{ $message }}</span>
-                    @enderror
-                </div>
-            </div>
-
-            <div class="form-section">
-                <h2 class="section-title">Configuración de Oferta</h2>
-
-                <div class="form-group form-checkbox-group">
-                    <input type="checkbox" id="is_offer" name="is_offer" value="1" {{ old('is_offer', $product->is_offer) ? 'checked' : '' }} class="form-checkbox">
-                    <label for="is_offer" class="form-checkbox-label">¿Este producto está en oferta?</label>
-                </div>
-
-                <div class="form-group" id="offer_percentage_group"
-                    style="{{ old('is_offer', $product->is_offer) ? 'display: block;' : 'display: none;' }}">
-                    <label for="offer_percentage" class="form-label">Porcentaje de Descuento (%)</label>
-                    <input type="number" id="offer_percentage" name="offer_percentage" min="1" max="100"
-                        value="{{ old('offer_percentage', $product->offer_percentage) }}" class="form-input"
-                        placeholder="Ej: 20">
-                    <p class="form-hint">El precio final será calculado automáticamente</p>
-                    @if ($product->is_offer && $product->offer_percentage)
-                        @php
-                            $discounted = $product->price * (1 - $product->offer_percentage / 100);
-                        @endphp
-                        <p class="current-offer-info">
-                            Precio actual con oferta: <strong>{{ number_format($discounted, 2) }}€</strong>
-                            <br>
-                            <span class="old-price">Precio original: {{ number_format($product->price, 2) }}€</span>
-                        </p>
-                    @endif
-                    @error('offer_percentage')
                         <span class="error-message">{{ $message }}</span>
                     @enderror
                 </div>

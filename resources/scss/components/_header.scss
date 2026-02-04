@@ -7,11 +7,9 @@
         grid-template-areas: "logo search buttons";
         grid-template-columns: auto 1fr auto;
         align-items: center;
-        position: relative;
         padding: clamp(0.5rem, 1vw, 2rem);
         background-color: rgba($color-bg-main, 1);
         gap: clamp(1rem, 2vw, 2rem);
-
         position: sticky;
         width: 100%;
         top: 0;
@@ -106,10 +104,16 @@
             width: auto;
             transition: transform 0.2s ease;
 
-            &:hover {
+            &:hover,
+            &:active,
+            &.is-active,
+            &:focus-visible {
                 filter: brightness(0) saturate(100%) invert(55%) sepia(96%)
                     saturate(746%) hue-rotate(358deg) brightness(101%)
                     contrast(93%);
+            }
+
+            &:hover {
                 transform: scale(1.3);
             }
         }

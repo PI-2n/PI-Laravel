@@ -24,9 +24,7 @@
         <div class="profile-sidebar">
             @if (Auth::user()->role_id === 1)
                 <div class="profile-container">
-                    <h3>{{ __('Gestión de Productos') }}</h3>
-                    <p class="section-description">{{ __('Administra tus productos.') }}</p>
-
+                    <h3 class="add-product">{{ __('Añadir producto') }}</h3>
                     <div class="product-actions">
                         <a href="{{ route('products.create') }}" class="btn-secondary">{{ __('Añadir Producto') }}</a>
                     </div>
@@ -35,7 +33,6 @@
 
             <div class="profile-container">
                 <h3>{{ __('Cerrar Sesión') }}</h3>
-                <p class="section-description">{{ __('Cierra tu sesión en este dispositivo.') }}</p>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="btn-secondary">{{ __('Cerrar sesión') }}</button>
