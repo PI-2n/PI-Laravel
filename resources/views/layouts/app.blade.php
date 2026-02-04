@@ -12,8 +12,22 @@
         import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
 
         createChat({
-            webhookUrl: 'http://localhost:5678/webhook/1cac85f5-c84f-4a32-a4cc-dc79da54b413/chat'
-        });
+            webhookUrl: 'http://localhost:5678/webhook/1cac85f5-c84f-4a32-a4cc-dc79da54b413/chat',
+        element: document.getElementById('chatbot-container'),
+        i18n: {
+            en: {
+                title: 'Asistente BitKeys',
+                subtitle: '¿En qué puedo ayudarte hoy?',
+                inputPlaceholder: 'Escribe tu mensaje...',
+                welcomeMessage: '¡Hola! Soy tu asistente virtual de BitKeys. ¿Cómo te puedo ayudar?',
+                errorMessage: 'Lo siento, ocurrió un error. Por favor intenta nuevamente.',
+                retryMessage: 'Reintentar',
+                conversationStarted: 'Conversación iniciada',
+                conversationEnded: 'Conversación finalizada',
+                poweredBy: 'Powered by BitKeys'
+            }
+        }
+    });
     </script>
 </head>
 
