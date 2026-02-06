@@ -2,15 +2,20 @@
 @use "../utils/mixins" as mixins;
 
 .page-index {
-    display: grid;
-    grid-template-areas: "featured" "news" "offers";
+    @media (min-width: 1025px) {
+        display: grid;
+        grid-template-areas:
+            "featured"
+            "news"
+            "offers";
+    }
 
     h2 {
         font-size: clamp(1.8rem, 4vw, 3rem);
         font-weight: 600;
         color: $color-text;
         text-align: left;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
         margin-left: 3vw;
     }
 
@@ -135,7 +140,6 @@
                 display: block;
             }
 
-
             .product-video {
                 width: 100%;
                 aspect-ratio: 3 / 4;
@@ -158,22 +162,9 @@
                 padding: 0.8rem 1.2rem;
             }
         }
-
-        /* Responsive: en tablets/móviles */
-        @media (max-width: 992px) {
-            .carousel-slide {
-                flex: 0 0 calc(50% - clamp(0.5rem, 0.5vw, 1.5rem));
-            }
-        }
-
-        @media (max-width: 576px) {
-            .carousel-slide {
-                flex: 0 0 100%;
-            }
-        }
     }
 
-    /* ===== OFERTAS (sin cambios mayores) ===== */
+    /* ===== OFERTAS ===== */
     .offers {
         grid-area: offers;
         background-color: $color-bg-tertiary;
@@ -186,7 +177,6 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 1rem;
-
         }
 
         .product-text {
@@ -195,7 +185,6 @@
             color: $color-text;
             margin-top: 0.5rem;
             margin-bottom: 1rem;
-
 
             .price {
                 font-weight: bold;
@@ -260,64 +249,196 @@
                 box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
             }
         }
-
     }
+}
 
-    /* Responsive: Tablet (1024px) */
-    @media (max-width: 1024px) {
-        // User requested: No featured on tablet/mobile
-        grid-template-areas: "news" "offers";
+@media (max-width: 1024px) {
+    .page-index {
+        grid-template-areas:
+            "news"
+            "offers";
 
         h2 {
             margin-left: 2rem;
+            font-size: clamp(1.6rem, 3.5vw, 2.2rem);
         }
 
         .featured {
-            display: none;
-        }
-
-        .news .carousel-container {
-            padding: 0 1rem;
-        }
-    }
-
-    /* Responsive: Mobile (768px) */
-    @media (max-width: 768px) {
-        grid-template-areas: "news" "offers";
-        gap: 1rem;
-
-        h2 {
-            margin-left: 1rem;
-            font-size: 2rem;
-            text-align: center;
-        }
-
-        .featured {
-            height: 40vh;
-
-            .featured-title {
-                font-size: 3rem;
-            }
-
-            .featured-subtitle {
-                font-size: 1.2rem;
-            }
+            display: none !important;
         }
 
         .news {
-            padding: 1rem 0;
+            padding: 1.5rem 0;
 
-            .carousel-btn {
-                width: 36px;
-                height: 36px;
-                font-size: 1rem;
+            .carousel-container {
+                padding: 0 1.5rem;
+            }
+
+            .carousel-slide {
+                flex: 0 0 calc(50% - 1rem);
             }
         }
 
         .offers {
+            padding: 1.5rem 0;
+
             .products {
-                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+                margin-left: 15px;
+            }
+        }
+
+        .product {
+            .product-text {
+                font-size: 0.9rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .page-index {
+        grid-template-areas:
+            "news"
+            "offers";
+        gap: 1rem;
+
+        h2 {
+            margin-left: 1rem;
+            font-size: 1.6rem;
+            text-align: center;
+        }
+
+        .featured {
+            display: none !important;
+        }
+
+        .news {
+            padding: 1rem 0;
+            background-color: $color-bg-secondary;
+
+            .carousel-container {
+                padding: 0 1rem;
+                overflow: hidden;
+
+                .carousel-btn {
+                    display: none !important;
+                }
+            }
+
+            .carousel-track {
+                display: flex;
                 gap: 1rem;
+                padding: 0 0.5rem;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scroll-snap-type: x mandatory;
+                scrollbar-width: none;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+            }
+
+            .carousel-slide {
+                flex: 0 0 auto;
+                width: 160px;
+                scroll-snap-align: start;
+            }
+
+            .product {
+                margin: 0;
+
+                .product-text {
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 0.3rem;
+                    padding: 0.5rem 0.3rem;
+
+                    .title {
+                        font-size: 0.8rem;
+                        text-align: center;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        width: 100%;
+                    }
+
+                    .price {
+                        font-size: 0.85rem;
+                    }
+                }
+
+                img,
+                .product-video {
+                    aspect-ratio: 2 / 3;
+                    object-fit: cover;
+                }
+            }
+        }
+
+        .offers {
+            padding: 1rem 0;
+            background-color: $color-bg-tertiary;
+
+            .products {
+                display: flex;
+                flex-wrap: nowrap;
+                gap: 1rem;
+                padding: 0 1rem;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scroll-snap-type: x mandatory;
+                scrollbar-width: none;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+            }
+        }
+
+        .product {
+            flex: 0 0 auto;
+            width: 140px;
+            scroll-snap-align: start;
+            margin: 0;
+            border-radius: 12px;
+
+            .product-text {
+                grid-template-columns: 1fr;
+                padding: 0.5rem 0.3rem;
+                text-align: center;
+
+                .title {
+                    font-size: 0.75rem;
+                    margin: 0;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    line-height: 1.2;
+                }
+
+                .price {
+                    font-size: 0.8rem;
+                    margin: 0.2rem 0 0;
+                    font-weight: 700;
+                }
+            }
+
+            img,
+            .product-video {
+                aspect-ratio: 2 / 3;
+                object-fit: cover;
+            }
+
+            a {
+                .discount-badge {
+                    font-size: 0.9rem;
+                    padding: 0.3rem 0.5rem;
+                    top: 8px;
+                    left: 8px;
+                }
             }
         }
     }
