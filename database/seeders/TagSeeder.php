@@ -17,5 +17,7 @@ class TagSeeder extends Seeder
         Tag::create(['name' => 'Estrategia']);
         Tag::create(['name' => 'Shooter']);
         Tag::create(['name' => 'Multijugador']);
+        Tag::create(['name' => 'Productividad']);
+
     }
 }
