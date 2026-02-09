@@ -30,8 +30,11 @@
                     <p class="description">{{ $product->description }}</p>
 
                     <div class="product-actions">
-                        <button class="btn-add-cart">Añadir al carrito <img src="{{ asset('images/icons/carrito.png') }}"
-                                alt="carrito"></button>
+                        <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn-add-cart">Añadir al carrito <img
+                                    src="{{ asset('images/icons/carrito.png') }}" alt="carrito"></button>
+                        </form>
 
                         <button class="btn-fast-buy"><img src="{{ asset('images/icons/fast-buy.png') }}"
                                 title="Comprar ahora" alt="carrito"></button>

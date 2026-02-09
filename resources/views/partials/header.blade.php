@@ -25,14 +25,17 @@
   <div class="user-btn-container">
     @auth
       <a href="{{ route('profile.edit') }}">
-        <img src="{{ asset('images/icons/user.png') }}" alt="Usuario" class="user-btn {{ request()->routeIs('profile.*') ? 'is-active' : '' }}" />
+        <img src="{{ asset('images/icons/user.png') }}" alt="Usuario"
+          class="user-btn {{ request()->routeIs('profile.*') ? 'is-active' : '' }}" />
       </a>
     @else
       <a href="{{ route('login') }}">
-        <img src="{{ asset('images/icons/user.png') }}" alt="Usuario" class="user-btn {{ request()->routeIs('login', 'register') ? 'is-active' : '' }}" />
+        <img src="{{ asset('images/icons/user.png') }}" alt="Usuario"
+          class="user-btn {{ request()->routeIs('login', 'register') ? 'is-active' : '' }}" />
       </a>
     @endauth
-    <a href="#"><img src="{{ asset('images/icons/carrito.png') }}" alt="Carrito" class="user-btn" /></a>
+    <a href="{{ route('cart.index') }}"><img src="{{ asset('images/icons/carrito.png') }}" alt="Carrito"
+        class="user-btn" /></a>
   </div>
 </div>
 

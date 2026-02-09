@@ -12,7 +12,7 @@
                     <video src="{{ asset('video/' . $product->video_url) }}" muted preload="none" class="product-video"></video>
                 @endif
 
-                @if($product->offer_percentage && $product->offer_percentage>0)
+                @if($product->offer_percentage && $product->offer_percentage > 0)
                     <div class="discount-badge">
                         -{{ intval($product->offer_percentage) }}%
                     </div>
@@ -23,7 +23,7 @@
             <div class="product-text">
                 <p class="title">{{ $product->name }}</p>
 
-                @if($product->offer_percentage && $product->offer_percentage>0)
+                @if($product->offer_percentage && $product->offer_percentage > 0)
                     @php
                         $discounted = $product->price * (1 - $product->offer_percentage / 100);
                     @endphp
