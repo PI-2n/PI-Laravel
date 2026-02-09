@@ -50,11 +50,28 @@ class CartController extends Controller
                 'line_total' => $product->price * 1,
             ]);
         }
-
-        // Update line totals if needed, or calculate on the fly. 
-        // For simplicity in this step, I'm just creating.
-
         return redirect()->back()->with('success', 'Producto añadido al carrito.');
+    }
+
+    public function update(Request $request, $itemId)
+    {
+        $request->validate([
+            'quantity' => 'required|integer|min:1',
+        ]);
+
+        $user = Auth::user();
+        $cart = ShoppingCart::where('user_id', $user->id)->first();
+
+        if ($cart) {
+            $item = ShoppingCartItem::where('shopping_cart_id', $cart->id)->where('id', $itemId)->first();
+            if ($item) {
+                $item->quantity = $request->quantity;
+                $item->line_total = $item->quantity * $item->unit_price;
+                $item->save();
+            }
+        }
+
+        return redirect()->route('cart.index')->with('success', 'Cantidad actualizada.');
     }
 
     public function remove($itemId)

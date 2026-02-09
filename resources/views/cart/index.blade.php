@@ -36,22 +36,31 @@
                                 <div class="item-pricing">
                                     <span class="item-price">{{ number_format($item->product->price, 2) }} €</span>
 
-                                    <form action="{{ route('cart.remove', $item->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn-delete" title="Eliminar producto">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <polyline points="3 6 5 6 21 6"></polyline>
-                                                <path
-                                                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                                </path>
-                                                <line x1="10" y1="11" x2="10" y2="17"></line>
-                                                <line x1="14" y1="11" x2="14" y2="17"></line>
-                                            </svg>
-                                        </button>
-                                    </form>
+                                    <div class="actions-container">
+                                        <form action="{{ route('cart.update', $item->id) }}" method="POST" class="update-form">
+                                            @csrf
+                                            @method('PATCH')
+                                            <input type="number" name="quantity" value="{{ $item->quantity }}" min="1" max="10"
+                                                class="quantity-input" onchange="this.form.submit()">
+                                        </form>
+
+                                        <form action="{{ route('cart.remove', $item->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn-delete" title="Eliminar producto">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                    <path
+                                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                    </path>
+                                                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                </svg>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         @endforeach
@@ -85,12 +94,10 @@
                 </div>
 
             @else
-                <div style="text-align: center; padding: 4rem;">
+                <div class="cart-empty-state">
                     <h2>Tu carrito está vacío</h2>
                     <p>¿Por qué no echas un vistazo a nuestras ofertas?</p>
-                    <a href="{{ route('home') }}" class="btn-checkout"
-                        style="display: inline-block; width: auto; background-color: #dd7710ec; margin-top: 1rem;">Ver
-                        tienda</a>
+                    <a href="{{ route('home') }}" class="btn-view-store">Ver tienda</a>
                 </div>
             @endif
         </div>

@@ -104,6 +104,28 @@
             font-weight: bold;
         }
 
+        .actions-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quantity-input {
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 4px;
+            padding: 0.3rem;
+            width: 50px;
+            text-align: center;
+            font-size: 1rem;
+
+            &:focus {
+                outline: none;
+                border-color: $color-accent;
+            }
+        }
+
         .btn-delete {
             background: none;
             border: none;
@@ -186,4 +208,33 @@
         margin-bottom: 1.5rem;
     }
 
+}
+
+.cart-empty-state {
+    text-align: center;
+    padding: 4rem;
+
+    h2 {
+        margin-bottom: 1rem;
+    }
+
+    p {
+        margin-bottom: 2rem;
+        color: #aaa;
+    }
+
+    .btn-view-store {
+        display: inline-block;
+        width: auto;
+        background-color: $color-accent;
+        color: white;
+        padding: 0.8rem 1.5rem;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: $color-accent-hover;
+        }
+    }
 }
