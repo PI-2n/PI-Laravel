@@ -37,8 +37,9 @@ class User extends Authenticatable
     }
 
     // Relación con comentarios
-    public function comments()
+    // Relación con tarjetas de crédito
+    public function creditCards()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(CreditCard::class);
     }
 }
