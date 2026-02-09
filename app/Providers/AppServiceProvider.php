@@ -19,6 +19,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        view()->composer('*', function ($view) {
+            if (auth()->check()) {
+                $cart = \App\Models\ShoppingCart::where('user_id', auth()->id())->first();
+                $cartCount = $cart ? $cart->items->sum('quantity') : 0;
+            } else {
+                $cartCount = 0;
+            }
+            $view->with('cartCount', $cartCount);
+        });
     }
 }

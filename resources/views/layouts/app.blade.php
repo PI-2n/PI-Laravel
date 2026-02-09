@@ -29,6 +29,32 @@
     <footer class="footer">
         @include('partials.footer')
     </footer>
+
+    {{-- Toast Notification --}}
+    @if(session('success'))
+        <div id="toast-notification" class="toast-notification success show">
+            <span>✅</span> {{ session('success') }}
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const toast = document.getElementById('toast-notification');
+                if (toast) {
+                    setTimeout(() => {
+                        toast.classList.remove('show');
+                    }, 3000);
+
+                    const badge = document.querySelector('.cart-badge');
+                    if (badge) {
+                        badge.classList.add('pulse');
+                        setTimeout(() => {
+                            badge.classList.remove('pulse');
+                        }, 500);
+                    }
+                }
+            });
+        </script>
+    @endif
+
     @stack('scripts')
 </body>
 
