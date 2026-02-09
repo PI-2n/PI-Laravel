@@ -38,8 +38,38 @@
 
                     <p class="description">{{ $product->description }}</p>
 
+                    @if($product->platforms->count() > 0)
+                        <div class="platform-selector">
+                            <p class="selector-label">Plataforma:</p>
+                            <div class="platforms-grid">
+                                @foreach($product->platforms as $platform)
+                                    @php
+                                        $iconName = 'pc';
+                                        $name = strtolower($platform->name);
+                                        if (Str::contains($name, 'xbox'))
+                                            $iconName = 'xbox';
+                                        elseif (Str::contains($name, ['ps', 'playstation']))
+                                            $iconName = 'ps';
+                                        elseif (Str::contains($name, ['switch', 'nintendo']))
+                                            $iconName = 'switch';
+                                        elseif (Str::contains($name, 'steam'))
+                                            $iconName = 'steam';
+                                    @endphp
+                                    <label class="platform-option">
+                                        <input type="radio" name="platform_id" value="{{ $platform->id }}" {{ $loop->first ? 'checked' : '' }} form="add-to-cart-form">
+                                        <span class="platform-badge">
+                                            <img src="{{ asset('images/icons/' . $iconName . '.png') }}"
+                                                alt="{{ $platform->name }}">
+                                            {{ $platform->name }}
+                                        </span>
+                                    </label>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+
                     <div class="product-actions">
-                        <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                        <form action="{{ route('cart.add', $product->id) }}" method="POST" id="add-to-cart-form">
                             @csrf
                             <button type="submit" class="btn-add-cart">Añadir al carrito <img
                                     src="{{ asset('images/icons/carrito.png') }}" alt="carrito"></button>

@@ -29,12 +29,18 @@ class CartController extends Controller
             return redirect()->route('login')->with('error', 'Debes iniciar sesión para añadir productos al carrito.');
         }
 
+        $request->validate([
+            'platform_id' => 'nullable|exists:platforms,id',
+        ]);
+
         $product = Product::findOrFail($productId);
+        $platformId = $request->input('platform_id');
 
         $cart = ShoppingCart::firstOrCreate(['user_id' => $user->id]);
 
         $cartItem = ShoppingCartItem::where('shopping_cart_id', $cart->id)
             ->where('product_id', $product->id)
+            ->where('platform_id', $platformId)
             ->first();
 
         if ($cartItem) {
@@ -45,6 +51,7 @@ class CartController extends Controller
             ShoppingCartItem::create([
                 'shopping_cart_id' => $cart->id,
                 'product_id' => $product->id,
+                'platform_id' => $platformId,
                 'quantity' => 1,
                 'unit_price' => $product->price,
                 'line_total' => $product->price * 1,

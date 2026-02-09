@@ -22,14 +22,25 @@
                                 <div class="item-details">
                                     <h3 class="item-title">{{ $item->product->name }}</h3>
                                     <div class="item-platform">
-                                        {{-- Platform logic would go here, hardcoded example based on mockup or platform
-                                        relationship if exists --}}
-                                        {{-- Assuming product has platforms, otherwise static for now or generic icon --}}
-                                        @foreach($item->product->platforms as $platform)
-                                            <img src="{{ asset('images/icons/' . strtolower($platform->name) . '.png') }}"
-                                                alt="{{ $platform->name }}">
-                                            <span>{{ $platform->name }}</span>
-                                        @endforeach
+                                        @if($item->platform)
+                                            @php
+                                                $iconName = 'pc';
+                                                $name = strtolower($item->platform->name);
+                                                if (Str::contains($name, 'xbox'))
+                                                    $iconName = 'xbox';
+                                                elseif (Str::contains($name, ['ps', 'playstation']))
+                                                    $iconName = 'ps';
+                                                elseif (Str::contains($name, ['switch', 'nintendo']))
+                                                    $iconName = 'switch';
+                                                elseif (Str::contains($name, 'steam'))
+                                                    $iconName = 'steam';
+                                            @endphp
+                                            <img src="{{ asset('images/icons/' . $iconName . '.png') }}"
+                                                alt="{{ $item->platform->name }}">
+                                            <span>{{ $item->platform->name }}</span>
+                                        @else
+                                            <span>Plataforma no especificada</span>
+                                        @endif
                                     </div>
                                 </div>
 

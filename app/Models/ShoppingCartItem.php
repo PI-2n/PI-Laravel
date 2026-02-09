@@ -12,6 +12,7 @@ class ShoppingCartItem extends Model
     protected $fillable = [
         'shopping_cart_id',
         'product_id',
+        'platform_id',
         'quantity',
         'unit_price',
         'line_total',
@@ -25,5 +26,10 @@ class ShoppingCartItem extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function platform()
+    {
+        return $this->belongsTo(Platform::class);
     }
 }
