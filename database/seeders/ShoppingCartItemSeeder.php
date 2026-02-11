@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\ShoppingCartItem;
-use App\Models\ShoppingCart;
 use App\Models\Product;
+use App\Models\ShoppingCart;
+use App\Models\ShoppingCartItem;
 use Illuminate\Database\Seeder;
 
 class ShoppingCartItemSeeder extends Seeder
@@ -22,7 +22,12 @@ class ShoppingCartItemSeeder extends Seeder
                 $product = $productsShuffled[$i];
 
                 $quantity = rand(1, 5);
-                $unitPrice = rand(10, 100);
+                $price = $product->price;
+                $discount = (float) ($product->offer_percentage ?? 0);
+                $unitPrice = $discount > 0
+                    ? $price * (1 - $discount / 100)
+                    : $price;
+                $unitPrice = round($unitPrice, 2);
 
                 ShoppingCartItem::create([
                     'shopping_cart_id' => $cart->id,

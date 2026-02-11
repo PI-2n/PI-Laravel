@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Product;
-use Illuminate\Database\Seeder;
 use Carbon\Carbon;
+use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
 {
@@ -43,21 +43,6 @@ class ProductSeeder extends Seeder
             ],
             [
                 'sku' => 'P00003',
-                'name' => "Baldur's Gate III",
-                'description' => "Sumérgete en un RPG épico ambientado en el universo de Dungeons & Dragons. Baldur's Gate III ofrece una narrativa rica, decisiones que influyen directamente en la historia y un sistema de combate por turnos profundo y estratégico.",
-                'image_url' => 'cover_baldurs_gate.jpg',
-                'video_url' => 'baldurs_gate.mp4',
-                'price' => 40,
-                'is_new' => true,
-                'is_offer' => false,
-                'offer_percentage' => null,
-                'offer_start_date' => null,
-                'offer_end_date' => null,
-                'release_date' => Carbon::now()->subDays(60),
-                'active' => true,
-            ],
-            [
-                'sku' => 'P000010',
                 'name' => "Baldur's Gate III",
                 'description' => "Sumérgete en un RPG épico ambientado en el universo de Dungeons & Dragons. Baldur's Gate III ofrece una narrativa rica, decisiones que influyen directamente en la historia y un sistema de combate por turnos profundo y estratégico.",
                 'image_url' => 'cover_baldurs_gate.jpg',
@@ -168,7 +153,6 @@ class ProductSeeder extends Seeder
         }
     }
 }
-
 
 /*
 public function run(): void

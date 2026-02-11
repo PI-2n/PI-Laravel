@@ -98,10 +98,13 @@
         flex-direction: column;
         align-items: flex-end;
         gap: 0.5rem;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: $color-accent;
 
-        .item-price {
-            font-size: 1.2rem;
-            font-weight: bold;
+        .item-price-original {
+            color: $color-bg-input;
+            font-size: 0.9rem;
         }
 
         .actions-container {
@@ -207,7 +210,6 @@
         font-size: 1.5rem;
         margin-bottom: 1.5rem;
     }
-
 }
 
 .cart-empty-state {
