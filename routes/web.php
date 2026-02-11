@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Web\ProductController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ProductImportController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Web\ProductController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Panel de usuario
-    Route::get('/mi-cuenta', fn() => view('user.dashboard'))->name('user.dashboard');
+    Route::get('/mi-cuenta', fn () => view('user.dashboard'))->name('user.dashboard');
 });
 
 /*
@@ -53,4 +53,8 @@ Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.a
 Route::patch('/cart/update/{item}', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/cart/remove/{item}', [CartController::class, 'remove'])->name('cart.remove');
 
-require __DIR__ . '/auth.php';
+Route::post('/products/import', [ProductImportController::class, 'import'])
+    ->middleware('auth')
+    ->name('products.import');
+
+require __DIR__.'/auth.php';
