@@ -21,37 +21,40 @@
         </div>
 
         {{-- Panel de cierre de sesión y gestión de productos (a la derecha en desktop) --}}
-        @if (Auth::user()->role_id === 1)
+        <div class="profile-sidebar">
             <div class="profile-container">
-                <h3 class="add-product">{{ __('Añadir producto') }}</h3>
-
-                <div class="product-actions">
-                    <a href="{{ route('products.create') }}" class="btn-secondary">
-                        {{ __('Añadir Producto') }}
-                    </a>
-                </div>
-
-                <!-- IMPORTAR PRODUCTOS -->
-                <div class="product-actions" style="margin-top: 10px;">
-                    <form action="{{ route('products.import') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-
-                        <input type="file" name="file" required>
-
-                        <button type="submit" class="btn-secondary">
-                            {{ __('Importar Productos') }}
-                        </button>
-                    </form>
-                </div>
+                <h3>{{ __('Cerrar Sesión') }}</h3>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="btn-secondary">{{ __('Cerrar sesión') }}</button>
+                </form>
             </div>
-        @endif
 
-        <div class="profile-container">
-            <h3>{{ __('Cerrar Sesión') }}</h3>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="btn-secondary">{{ __('Cerrar sesión') }}</button>
-            </form>
+            @if (Auth::user()->role_id === 1)
+                <div class="profile-container">
+                    <h3 class="add-product">{{ __('Añadir producto') }}</h3>
+
+                    <div class="product-actions">
+                        <a href="{{ route('products.create') }}" class="btn-secondary">
+                            {{ __('Añadir Producto') }}
+                        </a>
+                    </div>
+                </div>
+                <div class="profile-container">
+                    <h3>{{ __('Importar productos desde Excel') }}</h3>
+                    <div class="product-actions" style="margin-top: 10px;">
+                        <form action="{{ route('products.import') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+
+                            <input type="file" name="file" required class="file-input">
+
+                            <button type="submit" class="btn-secondary" style="margin-top: 10px;">
+                                {{ __('Importar') }}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            @endif
         </div>
 
     </div>

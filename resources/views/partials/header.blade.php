@@ -35,7 +35,8 @@
       </a>
     @endauth
     <a href="{{ route('cart.index') }}" class="cart-btn-wrapper" style="position: relative; display: inline-block;">
-      <img src="{{ asset('images/icons/carrito.png') }}" alt="Carrito" class="user-btn" />
+      <img src="{{ asset('images/icons/carrito.png') }}" alt="Carrito"
+        class="user-btn {{ request()->routeIs('cart.index') ? 'is-active' : '' }}" />
       @if(isset($cartCount) && $cartCount > 0)
         <span class="cart-badge">{{ $cartCount }}</span>
       @endif
