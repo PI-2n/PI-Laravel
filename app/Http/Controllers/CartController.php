@@ -17,7 +17,16 @@ class CartController extends Controller
             return redirect()->route('login');
         }
 
-        $cart = ShoppingCart::with('items.product')->where('user_id', $user->id)->first();
+        // Solo obtener carritos 'active'
+        $cart = ShoppingCart::with('items.product')
+            ->where('user_id', $user->id)
+            ->where('status', 'active')
+            ->first();
+
+        // Si no hay carrito activo o está vacío, mostrar carrito vacío
+        if (!$cart || $cart->items->count() === 0) {
+            return view('cart.index', ['cart' => null]);
+        }
 
         return view('cart.index', compact('cart'));
     }
@@ -36,7 +45,17 @@ class CartController extends Controller
         $product = Product::findOrFail($productId);
         $platformId = $request->input('platform_id');
 
-        $cart = ShoppingCart::firstOrCreate(['user_id' => $user->id]);
+        // Obtener o crear carrito activo
+        $cart = ShoppingCart::where('user_id', $user->id)
+            ->where('status', 'active')
+            ->first();
+
+        if (!$cart) {
+            $cart = ShoppingCart::create([
+                'user_id' => $user->id,
+                'status' => 'active',
+            ]);
+        }
 
         $cartItem = ShoppingCartItem::where('shopping_cart_id', $cart->id)
             ->where('product_id', $product->id)
@@ -48,15 +67,19 @@ class CartController extends Controller
             $cartItem->line_total = $cartItem->quantity * $cartItem->unit_price;
             $cartItem->save();
         } else {
+            // Usar final_price para guardar el precio con descuento
+            $unitPrice = $product->final_price;
+            
             ShoppingCartItem::create([
                 'shopping_cart_id' => $cart->id,
                 'product_id' => $product->id,
                 'platform_id' => $platformId,
                 'quantity' => 1,
-                'unit_price' => $product->price,
-                'line_total' => $product->price * 1,
+                'unit_price' => $unitPrice,
+                'line_total' => $unitPrice,
             ]);
         }
+        
         return redirect()->back()->with('success', 'Producto añadido al carrito.');
     }
 
@@ -67,10 +90,15 @@ class CartController extends Controller
         ]);
 
         $user = Auth::user();
-        $cart = ShoppingCart::where('user_id', $user->id)->first();
+        $cart = ShoppingCart::where('user_id', $user->id)
+            ->where('status', 'active')
+            ->first();
 
         if ($cart) {
-            $item = ShoppingCartItem::where('shopping_cart_id', $cart->id)->where('id', $itemId)->first();
+            $item = ShoppingCartItem::where('shopping_cart_id', $cart->id)
+                ->where('id', $itemId)
+                ->first();
+            
             if ($item) {
                 $item->quantity = $request->quantity;
                 $item->line_total = $item->quantity * $item->unit_price;
@@ -84,10 +112,15 @@ class CartController extends Controller
     public function remove($itemId)
     {
         $user = Auth::user();
-        $cart = ShoppingCart::where('user_id', $user->id)->first();
+        $cart = ShoppingCart::where('user_id', $user->id)
+            ->where('status', 'active')
+            ->first();
 
         if ($cart) {
-            $item = ShoppingCartItem::where('shopping_cart_id', $cart->id)->where('id', $itemId)->first();
+            $item = ShoppingCartItem::where('shopping_cart_id', $cart->id)
+                ->where('id', $itemId)
+                ->first();
+            
             if ($item) {
                 $item->delete();
             }

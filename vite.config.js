@@ -7,6 +7,7 @@ export default defineConfig({
             // Archivo global (layout)
             "resources/scss/app.scss",
             "resources/js/app.js",
+            'resources/js/checkout.js',
         ]),
     ],
 });

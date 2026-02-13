@@ -47,21 +47,14 @@
 
                                 <div class="item-pricing">
                                     @php
-                                        // Usar final_price en lugar de price_with_discount
-                                        $priceWithDiscount = $item->product->final_price;
-                                        $hasDiscount =
-                                            $item->product->hasDiscount() && $priceWithDiscount < $item->product->price;
+                                        $finalPrice = $item->product->final_price;
+                                        $hasDiscount = $item->product->hasDiscount() && $finalPrice < $item->product->price;
                                     @endphp
 
                                     @if ($hasDiscount)
-                                        {{-- Precio con descuento (arriba, en naranja) --}}
-                                        <span class="item-price-discounted">{{ number_format($priceWithDiscount, 2) }}
-                                            €</span>
-                                        {{-- Precio original tachado (abajo, gris) --}}
-                                        <span class="item-price-original">{{ number_format($item->product->price, 2) }}
-                                            €</span>
+                                        <span class="item-price-discounted">{{ number_format($finalPrice, 2) }} €</span>
+                                        <span class="item-price-original">{{ number_format($item->product->price, 2) }} €</span>
                                     @else
-                                        {{-- Precio normal (sin descuento) --}}
                                         <span class="item-price">{{ number_format($item->product->price, 2) }} €</span>
                                     @endif
 
@@ -110,13 +103,7 @@
 
                         <div class="summary-row total">
                             <span>Total</span>
-                            <span>{{ number_format(
-                                $cart->items->sum(function ($item) {
-                                    return $item->quantity * $item->product->final_price;
-                                }),
-                                2,
-                            ) }}
-                                €</span>
+                            <span>{{ number_format($cart->items->sum(fn($item) => $item->quantity * $item->product->final_price), 2) }} €</span>
                         </div>
 
                         <a href="{{ route('checkout.index') }}" class="btn-checkout">Comprar</a>

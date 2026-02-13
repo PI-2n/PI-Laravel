@@ -9,7 +9,11 @@ class ShoppingCart extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id'];
+    protected $fillable = ['user_id', 'status'];
+
+    protected $casts = [
+        'status' => 'string',
+    ];
 
     public function user()
     {

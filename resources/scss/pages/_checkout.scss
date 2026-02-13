@@ -9,7 +9,7 @@
 .checkout-container {
     max-width: 1200px;
     margin: 0 auto;
-    background: white;
+    background: $color-bg-tertiary;
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
@@ -28,7 +28,7 @@
 }
 
 .order-summary {
-    background: #f8f9fa;
+    background: $color-bg-input;
     padding: 25px;
     border-radius: 10px;
     border: 1px solid #e9ecef;
@@ -60,12 +60,12 @@
 
 .order-item .item-info p {
     margin: 0 0 5px 0;
-    color: #666;
+    color: $color-text;
     font-size: 0.95em;
 }
 
 .order-item .item-info small {
-    color: #888;
+    color: $color-text;
     font-size: 0.85em;
 }
 
@@ -83,12 +83,12 @@
     font-weight: bold;
     margin-top: 20px;
     padding-top: 20px;
-    border-top: 2px solid #000;
-    color: #000;
+    border-top: 2px solid $color-accent;
+    color: $color-accent;
 }
 
 .payment-section {
-    background: white;
+    background: $color-bg-input;
     padding: 30px;
     border-radius: 10px;
     border: 1px solid #e9ecef;
@@ -147,7 +147,7 @@
     display: block;
     margin-bottom: 8px;
     font-weight: 500;
-    color: #495057;
+    color: $color-text;
     font-size: 0.9em;
 }
 
