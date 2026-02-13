@@ -47,10 +47,19 @@ class Product extends Model
 
     public function getFinalPriceAttribute()
     {
-        if ($this->is_offer && $this->offer_percentage) {
-            return $this->price * (1 - $this->offer_percentage / 100);
+        if (!$this->offer_percentage || $this->offer_percentage <= 0) {
+            return $this->price;
         }
 
-        return $this->price;
+        $discount = $this->offer_percentage / 100;
+        $finalPrice = $this->price * (1 - $discount);
+    
+        return round($finalPrice, 2);
+    }
+
+    public function hasDiscount(): bool
+    {
+        return $this->offer_percentage > 0 && 
+            $this->getFinalPriceAttribute() < $this->price;
     }
 }

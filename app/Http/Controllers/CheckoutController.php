@@ -40,15 +40,22 @@ class CheckoutController extends Controller
      */
     public function processPayment(Request $request)
     {
-        $request->validate([
+        // Validación condicional según el método de pago
+        $rules = [
             'payment_method' => 'required|in:new_card,saved_card',
-            'card_id' => 'required_if:payment_method,saved_card',
-            'card_number' => 'required_if:payment_method,new_card|numeric|digits_between:13,19',
-            'card_holder_name' => 'required_if:payment_method,new_card|string|max:255',
-            'expiration_date' => 'required_if:payment_method,new_card|string|regex:/^\d{2}\/\d{2}$/',
-            'cvv' => 'required_if:payment_method,new_card|numeric|digits:3,4',
-            'save_card' => 'nullable|boolean',
-        ]);
+        ];
+
+        if ($request->payment_method === 'saved_card') {
+            $rules['card_id'] = 'required|exists:credit_cards,id,user_id,' . auth()->id();
+        } elseif ($request->payment_method === 'new_card') {
+            $rules['card_number'] = 'required|string|regex:/^[0-9\s]{13,23}$/';
+            $rules['card_holder_name'] = 'required|string|max:255';
+            $rules['expiration_date'] = 'required|string|regex:/^\d{2}\/\d{2}$/';
+            $rules['cvv'] = 'required|numeric|digits_between:3,4';
+            $rules['save_card'] = 'nullable|boolean';
+        }
+
+        $request->validate($rules);
 
         $cart = ShoppingCart::where('user_id', auth()->id())
             ->where('status', 'active')
@@ -81,9 +88,12 @@ class CheckoutController extends Controller
             $creditCard = null;
             
             if ($request->payment_method === 'new_card' && $request->save_card) {
+                // Eliminar espacios del número de tarjeta antes de guardar
+                $cardNumber = preg_replace('/\s+/', '', $request->card_number);
+                
                 $creditCard = CreditCard::create([
                     'user_id' => auth()->id(),
-                    'card_number' => $request->card_number,
+                    'card_number' => $cardNumber,
                     'card_holder_name' => $request->card_holder_name,
                     'expiration_date' => $request->expiration_date,
                     'cvv' => $request->cvv,
@@ -101,7 +111,7 @@ class CheckoutController extends Controller
                 'order_id' => $order->id,
                 'credit_card_id' => $creditCard?->id,
                 'amount' => $total,
-                'status' => 'completed', // Simulamos que el pago fue exitoso
+                'status' => 'completed',
                 'payment_method' => 'credit_card',
                 'transaction_id' => $transactionId,
             ]);

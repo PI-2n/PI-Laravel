@@ -100,11 +100,27 @@
         gap: 0.5rem;
         font-size: 1.2rem;
         font-weight: bold;
-        color: $color-accent;
 
+        // Precio con descuento (arriba, en naranja)
+        .item-price-discounted {
+            color: #ff6b35; // Naranja para destacar el descuento
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        // Precio original tachado (abajo, gris)
         .item-price-original {
-            color: $color-bg-input;
+            color: #aaa; // Gris para el precio original
             font-size: 0.9rem;
+            text-decoration: line-through; // Línea tachada
+            font-weight: normal;
+        }
+
+        // Precio normal (sin descuento)
+        .item-price {
+            color: $color-accent;
+            font-size: 1.2rem;
+            font-weight: bold;
         }
 
         .actions-container {

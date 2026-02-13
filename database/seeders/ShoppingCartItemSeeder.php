@@ -11,28 +11,29 @@ class ShoppingCartItemSeeder extends Seeder
 {
     public function run(): void
     {
-        $shoppingCarts = ShoppingCart::all();
+        // Obtener solo carritos activos
+        $shoppingCarts = ShoppingCart::where('status', 'active')->get();
         $products = Product::all();
 
         foreach ($shoppingCarts as $cart) {
-            $itemsCount = rand(1, 3);
+            // 2-5 items por carrito
+            $itemsCount = rand(2, 5);
             $productsShuffled = $products->shuffle();
 
             for ($i = 0; $i < $itemsCount && $i < $productsShuffled->count(); $i++) {
                 $product = $productsShuffled[$i];
 
+                // Obtener las plataformas del producto
                 $platform = null;
                 if ($product->platforms->count() > 0) {
                     $platform = $product->platforms->random();
                 }
 
-                $quantity = rand(1, 5);
-                $price = $product->price;
-                $discount = (float) ($product->offer_percentage ?? 0);
-                $unitPrice = $discount > 0
-                    ? $price * (1 - $discount / 100)
-                    : $price;
-                $unitPrice = round($unitPrice, 2);
+                $quantity = rand(1, 3);
+                
+                // USAR final_price para guardar el precio con descuento
+                $unitPrice = $product->final_price;
+                $lineTotal = $quantity * $unitPrice;
 
                 ShoppingCartItem::create([
                     'shopping_cart_id' => $cart->id,
@@ -40,7 +41,7 @@ class ShoppingCartItemSeeder extends Seeder
                     'platform_id' => $platform?->id,
                     'quantity' => $quantity,
                     'unit_price' => $unitPrice,
-                    'line_total' => $quantity * $unitPrice,
+                    'line_total' => $lineTotal,
                 ]);
             }
         }

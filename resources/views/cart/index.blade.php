@@ -46,13 +46,23 @@
                                 </div>
 
                                 <div class="item-pricing">
-                                    @if ($item->unit_price < $item->product->price)
-                                        <span class="item-price-discounted">{{ number_format($item->unit_price, 2) }}
+                                    @php
+                                        // Usar final_price en lugar de price_with_discount
+                                        $priceWithDiscount = $item->product->final_price;
+                                        $hasDiscount =
+                                            $item->product->hasDiscount() && $priceWithDiscount < $item->product->price;
+                                    @endphp
+
+                                    @if ($hasDiscount)
+                                        {{-- Precio con descuento (arriba, en naranja) --}}
+                                        <span class="item-price-discounted">{{ number_format($priceWithDiscount, 2) }}
                                             €</span>
-                                        <span class="item-price-original"><s>{{ number_format($item->product->price, 2) }}
-                                                €</s></span>
+                                        {{-- Precio original tachado (abajo, gris) --}}
+                                        <span class="item-price-original">{{ number_format($item->product->price, 2) }}
+                                            €</span>
                                     @else
-                                        <span class="item-price">{{ number_format($item->unit_price, 2) }} €</span>
+                                        {{-- Precio normal (sin descuento) --}}
+                                        <span class="item-price">{{ number_format($item->product->price, 2) }} €</span>
                                     @endif
 
                                     <div class="actions-container">
@@ -102,22 +112,22 @@
                             <span>Total</span>
                             <span>{{ number_format(
                                 $cart->items->sum(function ($item) {
-                                    return $item->quantity * $item->product->price;
+                                    return $item->quantity * $item->product->final_price;
                                 }),
                                 2,
                             ) }}
                                 €</span>
                         </div>
 
-                        <button class="btn-checkout">Comprar</button>
+                        <a href="{{ route('checkout.index') }}" class="btn-checkout">Comprar</a>
                     </div>
 
                 </div>
 
-                {{-- HEADER RECOMENDADOS (Placeholder) --}}
+                {{-- RECOMENDADOS (Placeholder) --}}
                 <div class="cart-recommendations">
                     <h2>Recomendados</h2>
-                    {{-- To be implemented with product component potentially --}}
+                    {{-- To be implemented --}}
                 </div>
             @else
                 <div class="cart-empty-state">
