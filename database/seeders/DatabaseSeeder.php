@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             ShoppingCartItemSeeder::class,
             OrderSeeder::class,
             OrderItemSeeder::class,
+            CreditCardSeeder::class,
         ]);
     }
 }

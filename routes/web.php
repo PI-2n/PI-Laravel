@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductImportController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Web\ProductController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,11 @@ Route::middleware('auth')->group(function () {
 
     // Panel de usuario
     Route::get('/mi-cuenta', fn () => view('user.dashboard'))->name('user.dashboard');
+
+    // Compra
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/checkout/process', [CheckoutController::class, 'processPayment'])->name('checkout.process');
+    Route::get('/checkout/success/{orderId}', [CheckoutController::class, 'success'])->name('checkout.success');
 });
 
 /*
