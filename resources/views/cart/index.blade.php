@@ -100,7 +100,13 @@
 
                         <div class="summary-row total">
                             <span>Total</span>
-                            <span>{{ number_format($cart->items->sum('line_total'), 2) }} €</span>
+                            <span>{{ number_format(
+                                $cart->items->sum(function ($item) {
+                                    return $item->quantity * $item->product->price;
+                                }),
+                                2,
+                            ) }}
+                                €</span>
                         </div>
 
                         <button class="btn-checkout">Comprar</button>
