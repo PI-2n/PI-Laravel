@@ -21,6 +21,11 @@ class ShoppingCartItemSeeder extends Seeder
             for ($i = 0; $i < $itemsCount && $i < $productsShuffled->count(); $i++) {
                 $product = $productsShuffled[$i];
 
+                $platform = null;
+                if ($product->platforms->count() > 0) {
+                    $platform = $product->platforms->random();
+                }
+
                 $quantity = rand(1, 5);
                 $price = $product->price;
                 $discount = (float) ($product->offer_percentage ?? 0);
@@ -32,6 +37,7 @@ class ShoppingCartItemSeeder extends Seeder
                 ShoppingCartItem::create([
                     'shopping_cart_id' => $cart->id,
                     'product_id' => $product->id,
+                    'platform_id' => $platform?->id,
                     'quantity' => $quantity,
                     'unit_price' => $unitPrice,
                     'line_total' => $quantity * $unitPrice,

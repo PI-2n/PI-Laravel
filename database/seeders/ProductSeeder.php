@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Product;
+use App\Models\Tag;
+use App\Models\Platform;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
@@ -25,6 +27,8 @@ class ProductSeeder extends Seeder
                 'offer_end_date' => null,
                 'release_date' => Carbon::now()->subDays(10),
                 'active' => true,
+                'tags' => ['Aventura', 'Plataformas', 'Indie'],
+                'platforms' => ['PC', 'PlayStation 5', 'Xbox Series X', 'Nintendo Switch'],
             ],
             [
                 'sku' => 'P00002',
@@ -40,6 +44,8 @@ class ProductSeeder extends Seeder
                 'offer_end_date' => null,
                 'release_date' => Carbon::now()->subDays(30),
                 'active' => true,
+                'tags' => ['Plataformas', 'Indie'],
+                'platforms' => ['PC', 'PlayStation 5', 'Xbox Series X', 'Nintendo Switch'],
             ],
             [
                 'sku' => 'P00003',
@@ -55,6 +61,8 @@ class ProductSeeder extends Seeder
                 'offer_end_date' => null,
                 'release_date' => Carbon::now()->subDays(60),
                 'active' => true,
+                'tags' => ['RPG', 'Aventura'],
+                'platforms' => ['PC', 'PlayStation 5', 'Xbox Series X'],
             ],
             [
                 'sku' => 'P00004',
@@ -70,6 +78,8 @@ class ProductSeeder extends Seeder
                 'offer_end_date' => Carbon::now()->addDays(20),
                 'release_date' => Carbon::now()->subMonths(6),
                 'active' => true,
+                'tags' => ['Shooter', 'Acción', 'Multijugador'],
+                'platforms' => ['PC', 'PlayStation 5', 'Xbox Series X'],
             ],
             [
                 'sku' => 'P00005',
@@ -85,6 +95,8 @@ class ProductSeeder extends Seeder
                 'offer_end_date' => Carbon::now()->addDays(15),
                 'release_date' => Carbon::now()->subYears(3),
                 'active' => true,
+                'tags' => ['Acción', 'Plataformas', 'Indie'],
+                'platforms' => ['PC', 'PlayStation 5', 'Xbox Series X', 'Nintendo Switch'],
             ],
             [
                 'sku' => 'P00006',
@@ -100,6 +112,8 @@ class ProductSeeder extends Seeder
                 'offer_end_date' => Carbon::now()->addDays(30),
                 'release_date' => Carbon::now()->subMonths(4),
                 'active' => true,
+                'tags' => ['Acción', 'Shooter', 'Multijugador'],
+                'platforms' => ['PC'],
             ],
             [
                 'sku' => 'P00007',
@@ -115,6 +129,8 @@ class ProductSeeder extends Seeder
                 'offer_end_date' => Carbon::now()->addDays(25),
                 'release_date' => Carbon::now()->subYear(),
                 'active' => true,
+                'tags' => ['RPG', 'Aventura'],
+                'platforms' => ['PC', 'PlayStation 5', 'Xbox Series X', 'Nintendo Switch'],
             ],
             [
                 'sku' => 'P00008',
@@ -130,6 +146,8 @@ class ProductSeeder extends Seeder
                 'offer_end_date' => Carbon::now()->addDays(10),
                 'release_date' => Carbon::now()->subMonths(2),
                 'active' => true,
+                'tags' => ['RPG', 'Aventura'],
+                'platforms' => ['Nintendo Switch'],
             ],
             [
                 'sku' => 'P00009',
@@ -145,19 +163,31 @@ class ProductSeeder extends Seeder
                 'offer_end_date' => Carbon::now()->addDays(60),
                 'release_date' => Carbon::now()->subMonths(18),
                 'active' => true,
+                'tags' => ['Productividad'],
+                'platforms' => ['PC'],
             ],
         ];
 
-        foreach ($products as $product) {
-            Product::create($product);
+        foreach ($products as $productData) {
+            // Extraer los tags y platforms antes de crear el producto
+            $tagNames = $productData['tags'] ?? [];
+            $platformNames = $productData['platforms'] ?? [];
+            unset($productData['tags'], $productData['platforms']);
+            
+            // Crear el producto
+            $product = Product::create($productData);
+            
+            // Asignar los tags si existen
+            if (!empty($tagNames)) {
+                $tagIds = Tag::whereIn('name', $tagNames)->pluck('id');
+                $product->tags()->attach($tagIds);
+            }
+            
+            // Asignar las plataformas si existen
+            if (!empty($platformNames)) {
+                $platformIds = Platform::whereIn('name', $platformNames)->pluck('id');
+                $product->platforms()->attach($platformIds);
+            }
         }
     }
 }
-
-/*
-public function run(): void
-{
-    // Crea 10 productos de ejemplo
-    Product::factory(10)->create();
-}
-    */
