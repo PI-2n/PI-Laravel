@@ -1,0 +1,14 @@
+@use "variables" as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: $font-main;
+}
+
+html,
+body {
+    width: 100%;
+    position: relative; // Helps with some absolute positioning contexts
+}

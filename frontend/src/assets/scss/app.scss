@@ -1,0 +1,20 @@
+// Solo lo necesario para todo el sitio
+@use "base/variables" as *;
+@use "base/reset";
+@use "components/header";
+@use "components/footer";
+@use "utils/animations";
+
+// Páginas
+@use "pages/index";
+@use "pages/login";
+@use "pages/register";
+@use "pages/profile";
+@use "pages/product";
+@use "pages/product-form";
+@use "pages/cart";
+@use "pages/checkout";
+@use 'pages/checkout-success';
+
+@include header.styles;
+@include footer.styles;

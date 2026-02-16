@@ -22,6 +22,10 @@ class CreditCard extends Model
         'cvv',
     ];
 
+    protected $appends = [
+        'masked_card_number',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

@@ -30,11 +30,19 @@ class ProductImportController extends Controller
             $file = $request->file('file');
 
             // 🔎 Validar MIME real
-            if (! in_array($file->getMimeType(), [
-                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                'text/csv',
-                'application/vnd.ms-excel',
-            ])) {
+            if (
+                !in_array($file->getMimeType(), [
+                    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                    'text/csv',
+                    'application/vnd.ms-excel',
+                ])
+            ) {
+                if ($request->wantsJson()) {
+                    return response()->json([
+                        'message' => 'Formato de archivo no válido',
+                        'errors' => ['file' => ['Formato de archivo no válido']]
+                    ], 422);
+                }
                 return back()->withErrors(['file' => 'Formato de archivo no válido']);
             }
 
@@ -71,10 +79,10 @@ class ProductImportController extends Controller
                     );
 
                     // TAGS
-                    if (! empty($row[13])) {
+                    if (!empty($row[13])) {
 
                         $tagIds = collect(explode(',', $row[13]))
-                            ->map(fn ($tag) => trim($tag))
+                            ->map(fn($tag) => trim($tag))
                             ->filter()
                             ->map(function ($tagName) {
                                 return Tag::firstOrCreate([
@@ -86,10 +94,10 @@ class ProductImportController extends Controller
                     }
 
                     // PLATFORMS
-                    if (! empty($row[14])) {
+                    if (!empty($row[14])) {
 
                         $platformIds = collect(explode(',', $row[14]))
-                            ->map(fn ($platform) => trim($platform))
+                            ->map(fn($platform) => trim($platform))
                             ->filter()
                             ->map(function ($platformName) {
                                 return Platform::firstOrCreate([
@@ -104,9 +112,20 @@ class ProductImportController extends Controller
 
         } catch (\Throwable $e) {
 
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'message' => 'Error al procesar el archivo.',
+                    'errors' => ['file' => ['Error al procesar el archivo.']]
+                ], 422);
+            }
+
             return back()->withErrors([
                 'file' => 'Error al procesar el archivo.',
             ]);
+        }
+
+        if ($request->wantsJson()) {
+            return response()->json(['message' => 'Productos importados correctamente'], 200);
         }
 
         return back()->with('success', 'Productos importados correctamente');
