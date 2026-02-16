@@ -13,8 +13,10 @@ A continuación se muestra un resumen de las tareas realizadas en cada Sprint pa
 - Diseño del formulario
 - Elaboración del plan de riesgos laborales y prevención
 
-## 🚀 Sprint 2
-_Pendiente de completar..._
+## 🚀 [Sprint 2 (31/10/2025 - 12/12/2025)](sprints/sprint2.md)
+- Importación de excel con PhPSpreadsheet
+- Gestión de usuarios, sesiones y cookies
+- Comentarios y valoraciones
 
 ## 📈 Sprint 3
 _Pendiente de completar..._
