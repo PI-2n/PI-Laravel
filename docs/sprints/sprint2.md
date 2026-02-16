@@ -34,7 +34,7 @@ http://localhost:3000/products
 
 ---
 
-### 🧾 Ejemplo de estructura `db.json` para los productos:
+### 🧾 Ejemplo de estructura `db.json` para los productos
 
 ```json
 {
