@@ -39,7 +39,14 @@ class ProductService
 
         // Default valid fields for creation
         $data['release_date'] = now();
-        $data['is_new'] = 1;
+
+        // Handle 'featured' checkbox mapping for 'is_new'
+        if (isset($data['featured'])) {
+            $data['is_new'] = $data['featured'] ? 1 : 0;
+            unset($data['featured']);
+        } else {
+            $data['is_new'] = 1;
+        }
 
         $product = Product::create($data);
 
@@ -132,6 +139,7 @@ class ProductService
         } else {
             $data['offer_start_date'] = isset($data['offer_start_date']) ? \Carbon\Carbon::parse($data['offer_start_date']) : null;
             $data['offer_end_date'] = isset($data['offer_end_date']) ? \Carbon\Carbon::parse($data['offer_end_date']) : null;
+            $data['offer_percentage'] = null;
         }
     }
 }

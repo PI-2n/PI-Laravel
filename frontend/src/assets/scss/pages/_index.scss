@@ -1,0 +1,445 @@
+@use "../base/variables" as *;
+@use "../utils/mixins" as mixins;
+
+.page-index {
+    @media (min-width: 1025px) {
+        display: grid;
+        grid-template-areas:
+            "featured"
+            "news"
+            "offers";
+    }
+
+    h2 {
+        font-size: clamp(1.8rem, 4vw, 3rem);
+        font-weight: 600;
+        color: $color-text;
+        text-align: left;
+        margin-bottom: 1rem;
+        margin-left: 3vw;
+    }
+
+    .featured {
+        grid-area: featured;
+        position: relative;
+        height: 65vh;
+        overflow: hidden;
+        text-align: center;
+
+        .featured-background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.5;
+        }
+
+        .featured-link {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            color: white;
+            display: grid;
+            place-content: center;
+            gap: 2vh;
+        }
+
+        .featured-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+        }
+
+        .featured-subtitle {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 400;
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.9);
+        }
+    }
+
+    /* ===== CARRUSEL DE NOVEDADES ===== */
+    .news {
+        grid-area: news;
+        background-color: $color-bg-secondary;
+        padding: 2rem 0;
+        position: relative;
+
+        .carousel-container {
+            position: relative;
+            max-width: 1400px;
+            margin: 0 auto;
+            overflow: hidden;
+            padding: 0 2rem;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: clamp(1rem, 1vw, 3rem);
+            transition: transform 0.4s ease;
+        }
+
+        .carousel-slide {
+            flex: 0 0 calc((100% - 2 * clamp(1rem, 1vw, 3rem)) / 3);
+            min-width: 0;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba($color-bg-input, 0.8);
+            color: $color-text;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.2rem;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+
+            &:hover {
+                background: rgba($color-accent, 0.9);
+            }
+        }
+
+        .carousel-btn--prev {
+            left: 1rem;
+        }
+
+        .carousel-btn--next {
+            right: 1rem;
+        }
+
+        .product {
+            overflow: hidden;
+            margin: 0.5rem;
+
+            .product-text {
+                display: flex;
+                justify-content: space-between;
+                margin: 0.7rem;
+                color: $color-text;
+
+                .price {
+                    font-weight: bold;
+                }
+            }
+
+            img {
+                width: 100%;
+                aspect-ratio: 3/4;
+                object-fit: cover;
+                display: block;
+            }
+
+            .product-video {
+                width: 100%;
+                aspect-ratio: 3 / 4;
+                display: block;
+                object-fit: scale-down;
+                transition: opacity 0.3s ease;
+                display: none;
+            }
+
+            &.show-video img {
+                display: none;
+            }
+
+            &.show-video .product-video {
+                display: block;
+            }
+
+            a .discount-badge {
+                font-size: 1.5rem;
+                padding: 0.8rem 1.2rem;
+            }
+        }
+    }
+
+    /* ===== OFERTAS ===== */
+    .offers {
+        grid-area: offers;
+        background-color: $color-bg-tertiary;
+        padding: 2rem 0;
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: clamp(1rem, 3vw, 3rem);
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .product-text {
+            text-align: center;
+            grid-column: 1 / -1;
+            color: $color-text;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+
+            .price {
+                font-weight: bold;
+                margin-top: 0.5rem;
+            }
+        }
+    }
+
+    /* ===== ESTILOS DEL PRODUCTO (compartidos) ===== */
+    .product {
+        position: relative;
+        background-color: $color-card;
+        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.3s;
+        @include mixins.hover-shadow($color-accent-hover);
+
+        .price {
+            font-weight: bold;
+            color: $color-accent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+
+            .old-price {
+                text-decoration: line-through;
+                color: $color-separator;
+                font-size: 0.85em;
+                font-weight: normal;
+                opacity: 0.8;
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+
+            &:focus {
+                outline: none;
+            }
+
+            img {
+                width: 100%;
+                aspect-ratio: 3/4;
+                object-fit: cover;
+                border-bottom: 1px solid #333;
+            }
+
+            .discount-badge {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                background-color: $color-accent;
+                color: white;
+                font-weight: bold;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                font-size: 1.2rem;
+                z-index: 5;
+                box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            }
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .page-index {
+        grid-template-areas:
+            "news"
+            "offers";
+
+        h2 {
+            margin-left: 2rem;
+            font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+        }
+
+        .featured {
+            display: none !important;
+        }
+
+        .news {
+            padding: 1.5rem 0;
+
+            .carousel-container {
+                padding: 0 1.5rem;
+            }
+
+            .carousel-slide {
+                flex: 0 0 calc(50% - 1rem);
+            }
+        }
+
+        .offers {
+            padding: 1.5rem 0;
+
+            .products {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+                margin-left: 15px;
+            }
+        }
+
+        .product {
+            .product-text {
+                font-size: 0.9rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .page-index {
+        grid-template-areas:
+            "news"
+            "offers";
+        gap: 1rem;
+
+        h2 {
+            margin-left: 1rem;
+            font-size: 1.6rem;
+            text-align: center;
+        }
+
+        .featured {
+            display: none !important;
+        }
+
+        .news {
+            padding: 1rem 0;
+            background-color: $color-bg-secondary;
+
+            .carousel-container {
+                padding: 0 1rem;
+                overflow: hidden;
+
+                .carousel-btn {
+                    display: none !important;
+                }
+            }
+
+            .carousel-track {
+                display: flex;
+                gap: 1rem;
+                padding: 0 0.5rem;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scroll-snap-type: x mandatory;
+                scrollbar-width: none;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+            }
+
+            .carousel-slide {
+                flex: 0 0 auto;
+                width: 160px;
+                scroll-snap-align: start;
+            }
+
+            .product {
+                margin: 0;
+
+                .product-text {
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 0.3rem;
+                    padding: 0.5rem 0.3rem;
+
+                    .title {
+                        font-size: 0.8rem;
+                        text-align: center;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        width: 100%;
+                    }
+
+                    .price {
+                        font-size: 0.85rem;
+                    }
+                }
+
+                img,
+                .product-video {
+                    aspect-ratio: 2 / 3;
+                    object-fit: cover;
+                }
+            }
+        }
+
+        .offers {
+            padding: 1rem 0;
+            background-color: $color-bg-tertiary;
+
+            .products {
+                display: flex;
+                flex-wrap: nowrap;
+                gap: 1rem;
+                padding: 0 1rem;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scroll-snap-type: x mandatory;
+                scrollbar-width: none;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+            }
+        }
+
+        .product {
+            flex: 0 0 auto;
+            width: 140px;
+            scroll-snap-align: start;
+            margin: 0;
+            border-radius: 12px;
+
+            .product-text {
+                grid-template-columns: 1fr;
+                padding: 0.5rem 0.3rem;
+                text-align: center;
+
+                .title {
+                    font-size: 0.75rem;
+                    margin: 0;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    line-height: 1.2;
+                }
+
+                .price {
+                    font-size: 0.8rem;
+                    margin: 0.2rem 0 0;
+                    font-weight: 700;
+                }
+            }
+
+            img,
+            .product-video {
+                aspect-ratio: 2 / 3;
+                object-fit: cover;
+            }
+
+            a {
+                .discount-badge {
+                    font-size: 0.9rem;
+                    padding: 0.3rem 0.5rem;
+                    top: 8px;
+                    left: 8px;
+                }
+            }
+        }
+    }
+}

@@ -22,8 +22,36 @@ class ProductController extends Controller
         return ProductResource::collection(Product::query()->paginate(10));
     }
 
+    public function home()
+    {
+        $featured = Product::where('active', true)
+            ->where('is_new', true)
+            ->whereNotNull('video_url')
+            ->latest('release_date')
+            ->first();
+
+        $news = Product::where('active', true)
+            ->where('is_new', true)
+            ->orderByDesc('release_date')
+            ->take(10) // Limit for API
+            ->get();
+
+        $offers = Product::where('active', true)
+            ->where('is_offer', true)
+            ->orderByDesc('offer_percentage')
+            ->take(10) // Limit for API
+            ->get();
+
+        return response()->json([
+            'featured' => $featured ? new ProductResource($featured) : null,
+            'news' => ProductResource::collection($news),
+            'offers' => ProductResource::collection($offers),
+        ]);
+    }
+
     public function show(Product $product)
     {
+        $product->load(['platforms', 'comments.user']);
         return new ProductResource($product);
     }
 
@@ -46,6 +74,9 @@ class ProductController extends Controller
 
     public function update(ProductRequest $request, Product $product)
     {
+        // Debugging validation errors
+        // Log::info('Update Product Request Data:', $request->all());
+
         $data = $request->validated();
 
         $product = $this->productService->updateProduct(
