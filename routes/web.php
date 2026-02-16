@@ -13,7 +13,6 @@ use App\Http\Controllers\CheckoutController;
 | Rutas protegidas (requieren login)
 |--------------------------------------------------------------------------
 */
-
 Route::middleware('auth')->group(function () {
     // Perfil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -27,14 +26,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::post('/checkout/process', [CheckoutController::class, 'processPayment'])->name('checkout.process');
     Route::get('/checkout/success/{orderId}', [CheckoutController::class, 'success'])->name('checkout.success');
+
+    // ✅ Comentarios (protegidos con auth)
+    Route::post('/products/{product}/comments', [CommentController::class, 'store'])->name('comments.store');
+    Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 });
 
 /*
 |--------------------------------------------------------------------------
-| Rutas de administración (requieren login + rol admin)
+| Rutas de administración
 |--------------------------------------------------------------------------
 */
-
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
     Route::post('/products', [ProductController::class, 'store'])->name('products.store');
@@ -45,14 +48,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 /*
 |--------------------------------------------------------------------------
-| Rutas públicas (ecommerce)
+| Rutas públicas
 |--------------------------------------------------------------------------
 */
-
 Route::get('/', [ProductController::class, 'index'])->name('home');
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
-Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
