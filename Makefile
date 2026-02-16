@@ -4,6 +4,9 @@ SHELL := /bin/bash
 up:
 	docker compose up -d --build
 	docker compose up -d vite
+	@echo "Esperando a que los contenedores arranquen..."
+	@sleep 5
+	cd frontend && npm install && npm run dev
 
 down:
 	docker compose down
