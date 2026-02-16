@@ -396,9 +396,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ejemplo-de-estructura-json-generada" class="md-nav__link">
+  <a href="#ejemplo-de-estructura-dbjson-para-los-productos" class="md-nav__link">
     <span class="md-ellipsis">
-      🧾 Ejemplo de estructura JSON generada
+      🧾 Ejemplo de estructura db.json para los productos:
     </span>
   </a>
   
@@ -447,9 +447,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ejemplo-de-estructura-usersjson" class="md-nav__link">
+  <a href="#ejemplo-de-estructura-dbjson-para-los-usuarios" class="md-nav__link">
     <span class="md-ellipsis">
-      🧾 Ejemplo de estructura users.json
+      🧾 Ejemplo de estructura db.json para los usuarios:
     </span>
   </a>
   
@@ -499,24 +499,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#buenas-practicas-aplicadas" class="md-nav__link">
-    <span class="md-ellipsis">
-      🧠 Buenas prácticas aplicadas
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#estructura-del-proyecto-actualizada" class="md-nav__link">
-    <span class="md-ellipsis">
-      🗂️ Estructura del proyecto actualizada
-    </span>
-  </a>
   
 </li>
       
@@ -666,27 +648,30 @@
 <li><strong>Subida del archivo Excel</strong> mediante formulario HTML.  </li>
 <li>Almacenamiento del archivo en la carpeta <code>/uploads/</code>.  </li>
 <li>Lectura del contenido con PhpSpreadsheet.  </li>
-<li>Validación de columnas obligatorias (<code>nombre</code>, <code>precio</code>, <code>stock</code>, etc.).  </li>
+<li>Validación de columnas obligatorias.  </li>
 <li>Conversión de los datos a formato JSON.  </li>
 <li>Generación automática del archivo <code>/data/products.json</code>.  </li>
 <li>Publicación de los productos a través de JSON Server.  </li>
 </ol>
 <hr />
-<h3 id="ejemplo-de-estructura-json-generada">🧾 Ejemplo de estructura JSON generada<a class="headerlink" href="#ejemplo-de-estructura-json-generada" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="p">{</span>
-<span class="linenos" data-linenos=" 2 "></span><span class="w">  </span><span class="nt">&quot;productes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="linenos" data-linenos=" 3 "></span><span class="w">    </span><span class="p">{</span>
-<span class="linenos" data-linenos=" 4 "></span><span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="linenos" data-linenos=" 5 "></span><span class="w">      </span><span class="nt">&quot;sku&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A001&quot;</span><span class="p">,</span>
-<span class="linenos" data-linenos=" 6 "></span><span class="w">      </span><span class="nt">&quot;nom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Producto ejemplo&quot;</span><span class="p">,</span>
-<span class="linenos" data-linenos=" 7 "></span><span class="w">      </span><span class="nt">&quot;preu&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">19.99</span><span class="p">,</span>
-<span class="linenos" data-linenos=" 8 "></span><span class="w">      </span><span class="nt">&quot;estoc&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span>
-<span class="linenos" data-linenos=" 9 "></span><span class="w">    </span><span class="p">}</span>
-<span class="linenos" data-linenos="10 "></span><span class="w">  </span><span class="p">]</span>
-<span class="linenos" data-linenos="11 "></span><span class="p">}</span>
-</code></pre></div>
 <p>Una vez generado, los productos pueden consultarse en:</p>
-<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>http://localhost:3000/productes
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>http://localhost:3000/products
+</code></pre></div>
+<hr />
+<h3 id="ejemplo-de-estructura-dbjson-para-los-productos">🧾 Ejemplo de estructura <code>db.json</code> para los productos:<a class="headerlink" href="#ejemplo-de-estructura-dbjson-para-los-productos" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="p">{</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="w">  </span><span class="nt">&quot;products&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="w">    </span><span class="p">{</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;9&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="w">      </span><span class="nt">&quot;sku&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;G005&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="w">      </span><span class="nt">&quot;nom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Borderlands 4&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="w">      </span><span class="nt">&quot;descripcio&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nuevo título de la saga shooter looter (Pre-order).&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="w">      </span><span class="nt">&quot;img&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;watermark/cover_borderlands4.jpg&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="w">      </span><span class="nt">&quot;preu&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;59.99&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="10 "></span><span class="w">      </span><span class="nt">&quot;estoc&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span>
+<span class="linenos" data-linenos="11 "></span><span class="w">    </span><span class="p">}</span>
+<span class="linenos" data-linenos="12 "></span><span class="w">  </span><span class="p">]</span>
+<span class="linenos" data-linenos="13 "></span><span class="p">}</span>
 </code></pre></div>
 <hr />
 <h3 id="integracion-con-docker">🐳 Integración con Docker<a class="headerlink" href="#integracion-con-docker" title="Permanent link">&para;</a></h3>
@@ -721,23 +706,21 @@
 <li>Página de perfil editable  </li>
 <li>Cierre de sesión  </li>
 </ul>
-<p>Los usuarios se almacenan en el archivo <code>/data/users.json</code> con contraseñas cifradas mediante:</p>
-<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="x">password_hash()</span>
-<span class="linenos" data-linenos="2 "></span><span class="x">password_verify()</span>
-</code></pre></div>
 <hr />
-<h3 id="ejemplo-de-estructura-usersjson">🧾 Ejemplo de estructura <code>users.json</code><a class="headerlink" href="#ejemplo-de-estructura-usersjson" title="Permanent link">&para;</a></h3>
+<h3 id="ejemplo-de-estructura-dbjson-para-los-usuarios">🧾 Ejemplo de estructura <code>db.json</code> para los usuarios:<a class="headerlink" href="#ejemplo-de-estructura-dbjson-para-los-usuarios" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="p">{</span>
-<span class="linenos" data-linenos=" 2 "></span><span class="w">  </span><span class="nt">&quot;usuaris&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="w">  </span><span class="nt">&quot;users&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="linenos" data-linenos=" 3 "></span><span class="w">    </span><span class="p">{</span>
-<span class="linenos" data-linenos=" 4 "></span><span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="linenos" data-linenos=" 5 "></span><span class="w">      </span><span class="nt">&quot;nom_usuari&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;usuario1&quot;</span><span class="p">,</span>
-<span class="linenos" data-linenos=" 6 "></span><span class="w">      </span><span class="nt">&quot;contrasenya&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hash_encriptado&quot;</span><span class="p">,</span>
-<span class="linenos" data-linenos=" 7 "></span><span class="w">      </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;usuario@email.com&quot;</span><span class="p">,</span>
-<span class="linenos" data-linenos=" 8 "></span><span class="w">      </span><span class="nt">&quot;data_registre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-10-31T10:00:00Z&quot;</span>
-<span class="linenos" data-linenos=" 9 "></span><span class="w">    </span><span class="p">}</span>
-<span class="linenos" data-linenos="10 "></span><span class="w">  </span><span class="p">]</span>
-<span class="linenos" data-linenos="11 "></span><span class="p">}</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="w">      </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Martita69&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="w">      </span><span class="nt">&quot;contrasenya&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1234&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="w">      </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;marta@example.com&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="w">      </span><span class="nt">&quot;nom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Marta&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="w">      </span><span class="nt">&quot;lastName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Pérez&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="10 "></span><span class="w">      </span><span class="nt">&quot;data_registre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-10-31T10:00:00Z&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="11 "></span><span class="w">    </span><span class="p">}</span>
+<span class="linenos" data-linenos="12 "></span><span class="w">  </span><span class="p">]</span>
+<span class="linenos" data-linenos="13 "></span><span class="p">}</span>
 </code></pre></div>
 <hr />
 <h2 id="flujo-de-autenticacion">🔄 Flujo de autenticación<a class="headerlink" href="#flujo-de-autenticacion" title="Permanent link">&para;</a></h2>
@@ -763,35 +746,6 @@
 <li>Destrucción de sesión.  </li>
 <li>Redirección a página principal.  </li>
 </ul>
-<hr />
-<h2 id="buenas-practicas-aplicadas">🧠 Buenas prácticas aplicadas<a class="headerlink" href="#buenas-practicas-aplicadas" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Encriptación segura de contraseñas.  </li>
-<li>Validación de datos tanto en cliente como en servidor.  </li>
-<li>Control de duplicados.  </li>
-<li>Separación de lógica en archivos organizados (<code>auth/</code>, <code>includes/</code>).  </li>
-<li>Protección básica frente a manipulación de datos.  </li>
-<li>Regeneración de ID de sesión tras login.  </li>
-</ul>
-<hr />
-<h2 id="estructura-del-proyecto-actualizada">🗂️ Estructura del proyecto actualizada<a class="headerlink" href="#estructura-del-proyecto-actualizada" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span>backend/
-<span class="linenos" data-linenos=" 2 "></span>├── auth/
-<span class="linenos" data-linenos=" 3 "></span>│   ├── register.php
-<span class="linenos" data-linenos=" 4 "></span>│   ├── login.php
-<span class="linenos" data-linenos=" 5 "></span>│   ├── logout.php
-<span class="linenos" data-linenos=" 6 "></span>│   └── profile.php
-<span class="linenos" data-linenos=" 7 "></span>├── includes/
-<span class="linenos" data-linenos=" 8 "></span>│   └── json_connect.php
-<span class="linenos" data-linenos=" 9 "></span>├── importar_excel.php
-<span class="linenos" data-linenos="10 "></span>
-<span class="linenos" data-linenos="11 "></span>data/
-<span class="linenos" data-linenos="12 "></span>├── products.json
-<span class="linenos" data-linenos="13 "></span>└── users.json
-<span class="linenos" data-linenos="14 "></span>
-<span class="linenos" data-linenos="15 "></span>uploads/
-<span class="linenos" data-linenos="16 "></span>└── productes.xlsx
-</code></pre></div>
 <hr />
 <h2 id="conclusion-del-sprint-2">✅ Conclusión del Sprint 2<a class="headerlink" href="#conclusion-del-sprint-2" title="Permanent link">&para;</a></h2>
 <p>Este sprint ha permitido dotar al proyecto de <strong>funcionalidad real y dinámica</strong>.</p>
