@@ -68,7 +68,7 @@ const handleSaved = () => {
                     <span class="comment-date">{{ comment.formatted_date || comment.created_at }}</span>
                 </div>
                 <div class="rating">
-                    <span v-for="n in 5" :key="n">{{ n <= comment.rating ? '★' : '☆' }}</span>
+                    <span v-for="n in 5" :key="n" :class="{ 'filled': n <= comment.rating }">★</span>
                 </div>
             </div>
 
