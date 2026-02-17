@@ -83,6 +83,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#sprint-3-migracion-a-laravel-y-arquitectura-mvc" class="md-skip">
+          Saltar a contenido
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -351,6 +356,21 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Sprint 3
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="sprint3.html" class="md-nav__link md-nav__link--active">
         
@@ -363,6 +383,112 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#creacion-del-proyecto-laravel-y-configuracion-del-entorno" class="md-nav__link">
+    <span class="md-ellipsis">
+      🏗️ Creación del proyecto Laravel y configuración del entorno
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creacion-de-base-de-datos-y-migraciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      🗄️ Creación de base de datos y migraciones
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gestion-de-login-con-laravel-breeze" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔐 Gestión de login con Laravel Breeze
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#importacion-de-productos-desde-excel-a-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      📥 Importación de productos desde Excel a MySQL
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creacion-de-api-basica-de-productos" class="md-nav__link">
+    <span class="md-ellipsis">
+      🌐 Creación de API básica de productos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🌐 Creación de API básica de productos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#endpoints-creados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Endpoints creados:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crud-de-administracion-de-productos" class="md-nav__link">
+    <span class="md-ellipsis">
+      🛠️ CRUD de administración de productos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructura-del-proyecto-directorios-relevantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      🗂️ Estructura del proyecto (Directorios relevantes)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion-del-sprint-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Conclusión del Sprint 3
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -461,9 +587,228 @@
 
 
 
-  <h1>Sprint 3</h1>
-
-
+<h1 id="sprint-3-migracion-a-laravel-y-arquitectura-mvc">📈 Sprint 3 — Migración a Laravel y Arquitectura MVC<a class="headerlink" href="#sprint-3-migracion-a-laravel-y-arquitectura-mvc" title="Permanent link">&para;</a></h1>
+<p>Durante este sprint se ha realizado una <strong>migración completa del proyecto a Laravel</strong>, adoptando una arquitectura <strong>MVC (Modelo-Vista-Controlador)</strong> y sustituyendo progresivamente la estructura anterior basada en PHP procedural y JSON Server.</p>
+<p>El objetivo principal ha sido profesionalizar la aplicación, integrando base de datos MySQL, autenticación moderna y una API preparada para futuras ampliaciones.</p>
+<hr />
+<h2 id="creacion-del-proyecto-laravel-y-configuracion-del-entorno">🏗️ Creación del proyecto Laravel y configuración del entorno<a class="headerlink" href="#creacion-del-proyecto-laravel-y-configuracion-del-entorno" title="Permanent link">&para;</a></h2>
+<p>Se ha creado la carpeta <code>laravel/</code> dentro del repositorio principal e inicializado el proyecto con Laravel.</p>
+<p>Se ha configurado el archivo <code>.env</code> para conectar con la base de datos MySQL del entorno Docker ya existente, manteniendo la coherencia con el stack anterior.</p>
+<p>El proyecto ahora funciona bajo una estructura MVC clara:</p>
+<ul>
+<li><strong>Modelos</strong> → Gestión de datos con Eloquent  </li>
+<li><strong>Vistas</strong> → Plantillas Blade  </li>
+<li><strong>Controladores</strong> → Lógica de negocio  </li>
+<li><strong>Rutas</strong> → Definición de endpoints web y API  </li>
+</ul>
+<hr />
+<h2 id="creacion-de-base-de-datos-y-migraciones">🗄️ Creación de base de datos y migraciones<a class="headerlink" href="#creacion-de-base-de-datos-y-migraciones" title="Permanent link">&para;</a></h2>
+<p>Se ha trasladado la estructura anterior basada en <code>products.json</code> y <code>users.json</code> a una base de datos MySQL mediante <strong>migraciones de Laravel</strong>. Las tablas generadas son:</p>
+<ul>
+<li><strong>products</strong>: Almacena la información de los productos</li>
+<li><strong>tags</strong>: Almacena la información de las categorías de los productos</li>
+<li><strong>categories</strong>: Almacena la información de las categorías de los productos</li>
+<li><strong>product_tag</strong>: Tabla para la relacion N a N de productos con categorías</li>
+<li><strong>platform_product</strong>: Tabla para la relacion N a N de productos con plataformas </li>
+<li><strong>users</strong>: Almacena la información de los usuarios</li>
+<li><strong>credit_cards</strong>: Almacena la información de las tarjetas de crédito de los usuarios</li>
+<li><strong>roles</strong>: Almacena la información de los roles definidos</li>
+<li><strong>comments</strong>: Almacena la información de los comentarios de los productos</li>
+<li><strong>shopping_carts</strong>: Almacena la información de los carritos de la compra generados</li>
+<li><strong>shopping_cart_items</strong>: Almacena la información de cada linea del carrito de la compra</li>
+<li><strong>orders</strong>: Almacena los pedidos realizados</li>
+<li><strong>order_items</strong>: Almacena la información de cada linea de las órdenes de compra</li>
+<li><strong>order_payments</strong>: Almacena la información del pago de cada orden de compra.</li>
+</ul>
+<p>Para la mayoría de tablas se han generado seedes y factories para poder generar datos aleatorios y poder poblar la web para realizar pruebas sobre la integridad y las relaciones entre tablas.</p>
+<p>A la base de datos se puede acceder desde las vistas blade por los controladores web tanto por la API por los controladores de api.</p>
+<hr />
+<h2 id="gestion-de-login-con-laravel-breeze">🔐 Gestión de login con Laravel Breeze<a class="headerlink" href="#gestion-de-login-con-laravel-breeze" title="Permanent link">&para;</a></h2>
+<p>Se ha sustituido el sistema manual de autenticación del Sprint 2 por <strong>Laravel Breeze</strong>, utilizando la versión con vistas Blade.</p>
+<p>Esto permite:</p>
+<ul>
+<li>Registro de usuarios</li>
+<li>Inicio y cierre de sesión</li>
+<li>Protección de rutas mediante middleware</li>
+<li>Hash automático de contraseñas</li>
+<li>Gestión segura de sesiones</li>
+</ul>
+<p>La autenticación ahora se gestiona mediante:</p>
+<ul>
+<li>Middleware de Laravel</li>
+<li>Eloquent ORM</li>
+<li>Sistema de sesiones integrado</li>
+</ul>
+<p>Este cambio mejora significativamente la seguridad y escalabilidad frente al sistema anterior basado en cookies manuales.</p>
+<hr />
+<h2 id="importacion-de-productos-desde-excel-a-mysql">📥 Importación de productos desde Excel a MySQL<a class="headerlink" href="#importacion-de-productos-desde-excel-a-mysql" title="Permanent link">&para;</a></h2>
+<p>Se ha reutilizado la lógica de importación de Excel del Sprint 2, adaptándola al nuevo entorno Laravel.</p>
+<p>En lugar de generar un archivo JSON, ahora los productos se insertan o actualizan directamente en la base de datos MySQL mediante:</p>
+<ul>
+<li>Command personalizado o controlador de importación</li>
+<li>Validación de campos obligatorios (<code>sku</code>, <code>name</code>, <code>price</code>, <code>stock</code>)</li>
+<li>Gestión de errores con mensajes claros</li>
+<li>Registro del número de productos importados y líneas inválidas</li>
+</ul>
+<p>La importación permite actualizar productos existentes utilizando el <code>sku</code> como identificador único.</p>
+<hr />
+<h2 id="creacion-de-api-basica-de-productos">🌐 Creación de API básica de productos<a class="headerlink" href="#creacion-de-api-basica-de-productos" title="Permanent link">&para;</a></h2>
+<p>Se ha implementado una API REST preparada para el Sprint 4.</p>
+<h3 id="endpoints-creados">Endpoints creados:<a class="headerlink" href="#endpoints-creados" title="Permanent link">&para;</a></h3>
+<h4 id="publicos">🔓 Públicos<a class="headerlink" href="#publicos" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>POST /api/login</code></li>
+<li><code>POST /api/register</code></li>
+<li><code>GET /api/products</code></li>
+<li><code>GET /api/products/{product}</code></li>
+<li><code>GET /api/home</code></li>
+</ul>
+<h4 id="protegidos-authsanctum">🔒 Protegidos (auth:sanctum)<a class="headerlink" href="#protegidos-authsanctum" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>POST /api/logout</code></li>
+<li><code>GET /api/user</code></li>
+</ul>
+<h5 id="productos-crud">📦 Productos (CRUD)<a class="headerlink" href="#productos-crud" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>POST /api/products</code></li>
+<li><code>PUT /api/products/{product}</code></li>
+<li><code>DELETE /api/products/{product}</code></li>
+<li><code>POST /api/products/import</code></li>
+</ul>
+<h5 id="tags">🏷️ Tags<a class="headerlink" href="#tags" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>GET /api/tags</code></li>
+</ul>
+<h5 id="carrito">🛒 Carrito<a class="headerlink" href="#carrito" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>POST /api/cart/sync</code></li>
+</ul>
+<h5 id="pedidos">🧾 Pedidos<a class="headerlink" href="#pedidos" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>GET /api/orders/{id}</code></li>
+</ul>
+<h5 id="checkout">💳 Checkout<a class="headerlink" href="#checkout" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>GET /api/checkout</code></li>
+<li><code>POST /api/checkout</code></li>
+</ul>
+<h5 id="perfil">👤 Perfil<a class="headerlink" href="#perfil" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>PATCH /api/profile</code></li>
+<li><code>PUT /api/password</code></li>
+<li><code>DELETE /api/profile</code></li>
+</ul>
+<h5 id="comentarios">💬 Comentarios<a class="headerlink" href="#comentarios" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>POST /api/products/{product}/comments</code></li>
+<li><code>PUT /api/comments/{comment}</code></li>
+<li><code>DELETE /api/comments/{comment}</code></li>
+</ul>
+<p>Se han utilizado <strong>Resources de Laravel</strong> para normalizar la salida JSON y mantener una estructura consistente en las respuestas.</p>
+<p>Esta API será consumida posteriormente por la SPA desarrollada en el siguiente sprint.</p>
+<hr />
+<h2 id="crud-de-administracion-de-productos">🛠️ CRUD de administración de productos<a class="headerlink" href="#crud-de-administracion-de-productos" title="Permanent link">&para;</a></h2>
+<p>Se ha desarrollado una sección interna de administración que permite:</p>
+<ul>
+<li>Listar productos</li>
+<li>Editar productos importados</li>
+<li>Actualizar información (precio, stock, descripción, etc.)</li>
+</ul>
+<p>El acceso está restringido a <strong>usuarios autenticados con rol administrador</strong>, utilizando middleware o políticas de acceso.</p>
+<p>La gestión se realiza mediante vistas Blade sencillas, sin necesidad de JavaScript adicional.</p>
+<hr />
+<h2 id="estructura-del-proyecto-directorios-relevantes">🗂️ Estructura del proyecto (Directorios relevantes)<a class="headerlink" href="#estructura-del-proyecto-directorios-relevantes" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span>PI-Laravel/
+<span class="linenos" data-linenos=" 2 "></span>├── app/
+<span class="linenos" data-linenos=" 3 "></span>│   ├── Helpers/
+<span class="linenos" data-linenos=" 4 "></span>│   ├── Http/
+<span class="linenos" data-linenos=" 5 "></span>│   │   ├── Controllers/
+<span class="linenos" data-linenos=" 6 "></span>│   │   ├── Middleware/
+<span class="linenos" data-linenos=" 7 "></span>│   │   ├── Requests/
+<span class="linenos" data-linenos=" 8 "></span>│   │   └── Resources/
+<span class="linenos" data-linenos=" 9 "></span>│   ├── Models/
+<span class="linenos" data-linenos="10 "></span>│   ├── Policies/
+<span class="linenos" data-linenos="11 "></span>│   ├── Providers/
+<span class="linenos" data-linenos="12 "></span>│   ├── Services/
+<span class="linenos" data-linenos="13 "></span>│   └── View/
+<span class="linenos" data-linenos="14 "></span>│       └── Components/
+<span class="linenos" data-linenos="15 "></span>│
+<span class="linenos" data-linenos="16 "></span>├── bootstrap/
+<span class="linenos" data-linenos="17 "></span>│
+<span class="linenos" data-linenos="18 "></span>├── config/
+<span class="linenos" data-linenos="19 "></span>│
+<span class="linenos" data-linenos="20 "></span>├── database/
+<span class="linenos" data-linenos="21 "></span>│   ├── factories/
+<span class="linenos" data-linenos="22 "></span>│   ├── migrations/
+<span class="linenos" data-linenos="23 "></span>│   └── seeders/
+<span class="linenos" data-linenos="24 "></span>│
+<span class="linenos" data-linenos="25 "></span>├── docs/
+<span class="linenos" data-linenos="26 "></span>│   ├── imagenes/
+<span class="linenos" data-linenos="27 "></span>│   ├── recursos/
+<span class="linenos" data-linenos="28 "></span>│   ├── riesgos/
+<span class="linenos" data-linenos="29 "></span>│   ├── sostenibilidad/
+<span class="linenos" data-linenos="30 "></span>│   └── sprints/
+<span class="linenos" data-linenos="31 "></span>│
+<span class="linenos" data-linenos="32 "></span>├── nginx/
+<span class="linenos" data-linenos="33 "></span>│
+<span class="linenos" data-linenos="34 "></span>├── public/
+<span class="linenos" data-linenos="35 "></span>│   ├── build/
+<span class="linenos" data-linenos="36 "></span>│   ├── images/
+<span class="linenos" data-linenos="37 "></span>│   └── video/
+<span class="linenos" data-linenos="38 "></span>│
+<span class="linenos" data-linenos="39 "></span>├── resources/
+<span class="linenos" data-linenos="40 "></span>│   ├── css/
+<span class="linenos" data-linenos="41 "></span>│   ├── js/
+<span class="linenos" data-linenos="42 "></span>│   ├── scss/
+<span class="linenos" data-linenos="43 "></span>│   │   ├── base/
+<span class="linenos" data-linenos="44 "></span>│   │   ├── components/
+<span class="linenos" data-linenos="45 "></span>│   │   ├── pages/
+<span class="linenos" data-linenos="46 "></span>│   │   └── utils/
+<span class="linenos" data-linenos="47 "></span>│   └── views/
+<span class="linenos" data-linenos="48 "></span>│       ├── auth/
+<span class="linenos" data-linenos="49 "></span>│       ├── cart/
+<span class="linenos" data-linenos="50 "></span>│       ├── checkout/
+<span class="linenos" data-linenos="51 "></span>│       ├── components/
+<span class="linenos" data-linenos="52 "></span>│       ├── layouts/
+<span class="linenos" data-linenos="53 "></span>│       ├── partials/
+<span class="linenos" data-linenos="54 "></span>│       ├── products/
+<span class="linenos" data-linenos="55 "></span>│       └── profile/
+<span class="linenos" data-linenos="56 "></span>│
+<span class="linenos" data-linenos="57 "></span>├── routes/
+<span class="linenos" data-linenos="58 "></span>│
+<span class="linenos" data-linenos="59 "></span>├── site/
+<span class="linenos" data-linenos="60 "></span>│   ├── assets/
+<span class="linenos" data-linenos="61 "></span>│   ├── imagenes/
+<span class="linenos" data-linenos="62 "></span>│   ├── recursos/
+<span class="linenos" data-linenos="63 "></span>│   ├── riesgos/
+<span class="linenos" data-linenos="64 "></span>│   ├── search/
+<span class="linenos" data-linenos="65 "></span>│   ├── sostenibilidad/
+<span class="linenos" data-linenos="66 "></span>│   └── sprints/
+<span class="linenos" data-linenos="67 "></span>│
+<span class="linenos" data-linenos="68 "></span>├── storage/
+<span class="linenos" data-linenos="69 "></span>│   ├── app/
+<span class="linenos" data-linenos="70 "></span>│   ├── framework/
+<span class="linenos" data-linenos="71 "></span>│   └── logs/
+<span class="linenos" data-linenos="72 "></span>│
+<span class="linenos" data-linenos="73 "></span>├── tests/
+<span class="linenos" data-linenos="74 "></span>│   ├── Feature/
+<span class="linenos" data-linenos="75 "></span>│   └── Unit/
+<span class="linenos" data-linenos="76 "></span>│
+<span class="linenos" data-linenos="77 "></span>└── uploads/
+</code></pre></div>
+<hr />
+<h2 id="conclusion-del-sprint-3">✅ Conclusión del Sprint 3<a class="headerlink" href="#conclusion-del-sprint-3" title="Permanent link">&para;</a></h2>
+<p>Este sprint marca un <strong>salto arquitectónico importante en el proyecto</strong>.</p>
+<p>Se ha pasado de una aplicación basada en PHP tradicional y JSON Server a un entorno profesional con:</p>
+<ul>
+<li>Arquitectura MVC</li>
+<li>Base de datos MySQL</li>
+<li>ORM Eloquent</li>
+<li>Autenticación integrada con Breeze</li>
+<li>API REST preparada para frontend desacoplado</li>
+<li>Panel de administración interno</li>
+</ul>
+<p>Con esta base sólida, el proyecto queda preparado para evolucionar hacia una <strong>SPA moderna en el Sprint 4</strong>, manteniendo separación clara entre backend y frontend.</p>
 
 
 

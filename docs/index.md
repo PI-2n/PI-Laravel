@@ -18,5 +18,23 @@ A continuación se muestra un resumen de las tareas realizadas en cada Sprint pa
 - Gestión de usuarios, sesiones y cookies
 - Comentarios y valoraciones
 
-## 📈 Sprint 3
-_Pendiente de completar..._
+## 📈 [Sprint 3 (09/01/2026 - 06/02/2026)](sprints/sprint3.md)
+- Migración a Laravel con MVC
+- Creación de base de datos
+- Vistas blade
+- Controladores para API
+- Gestión de login con Breeze
+- Modificación de productos desde la web
+- PhPSpreadsheet para importar productos de excel
+
+
+## <img src="https://vuejs.org/images/logo.png" width="25"> [Sprint 4 (13/02/2026 - 17/02/2026)](sprints/sprint4.md)
+- Migración de frontend de laravel blades a vue
+- Creación de base de datos
+- Vistas blade
+- Controladores para API
+- Gestión de login con Breeze
+- Modificación de productos desde la web
+- PhPSpreadsheet para importar productos de excel
+
+
