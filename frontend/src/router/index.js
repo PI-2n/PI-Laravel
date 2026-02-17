@@ -33,12 +33,6 @@ const router = createRouter({
             component: () => import('../views/ProductDetailView.vue')
         },
         {
-            path: '/admin',
-            name: 'admin',
-            component: () => import('../views/AdminView.vue'),
-            meta: { requiresAuth: true, roles: ['admin'] }
-        },
-        {
             path: '/products/create',
             name: 'product-create',
             component: () => import('../views/ProductForm.vue'),

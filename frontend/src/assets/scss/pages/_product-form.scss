@@ -220,7 +220,7 @@
 // Mensajes de error
 .error-message {
     display: block;
-    color: lighten($color-danger, 10%);
+    color: color.adjust($color-danger, $lightness: 10%);
     font-size: 0.85rem;
     margin-top: 0.3rem;
     font-weight: 500;
@@ -385,7 +385,7 @@
     color: $color-text;
 
     &:hover {
-        background-color: darken($color-danger, 10%);
+        background-color: color.adjust($color-danger, $lightness: -10%);
     }
 }
 

@@ -193,7 +193,7 @@ const formatPrice = (val) => parseFloat(val).toFixed(2);
                         <RouterLink :to="`/products/${product.id}`" class="product-link">
                             <span v-if="product.offer_percentage > 0" class="discount-badge">-{{
                                 parseInt(product.offer_percentage)
-                                }}%</span>
+                            }}%</span>
 
                             <img v-if="product.image_url" :src="product.image_url" :alt="product.name">
 
@@ -202,7 +202,7 @@ const formatPrice = (val) => parseFloat(val).toFixed(2);
                                 <div class="price">
                                     <span v-if="product.offer_percentage > 0" class="old-price">{{
                                         formatPrice(product.price)
-                                        }}€</span>
+                                    }}€</span>
                                     <span>{{ formatPrice(product.final_price || product.price) }}€</span>
                                 </div>
                             </div>
@@ -213,11 +213,3 @@ const formatPrice = (val) => parseFloat(val).toFixed(2);
         </template>
     </div>
 </template>
-
-<style scoped>
-.loading-container {
-    text-align: center;
-    padding: 3rem 0;
-    color: white;
-}
-</style>
