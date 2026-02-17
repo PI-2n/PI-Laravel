@@ -1,13 +1,22 @@
 <script setup>
 import { useAuthStore } from '../stores/auth';
 import { useRouter } from 'vue-router';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 import { useCartStore } from '../stores/cart';
 
 const authStore = useAuthStore();
 const cartStore = useCartStore();
 const router = useRouter();
+
+const searchQuery = ref('');
+
+const handleSearch = () => {
+    if (searchQuery.value.trim()) {
+        router.push({ name: 'products', query: { q: searchQuery.value } });
+        searchQuery.value = ''; // Optional: clear after search
+    }
+};
 
 </script>
 
@@ -22,8 +31,8 @@ const router = useRouter();
 
     <!-- Search Bar -->
     <div class="header_searchBar">
-        <form class="search-form" action="#" method="get" role="search">
-            <input id="q" class="search-input" name="q" type="search" placeholder="Buscar..." required />
+        <form class="search-form" @submit.prevent="handleSearch">
+            <input id="q" class="search-input" v-model="searchQuery" type="search" placeholder="Buscar..." required />
             <button class="search-btn" type="submit">
                 <img src="/images/icons/lupa.png" alt="Buscar" />
             </button>
@@ -33,11 +42,17 @@ const router = useRouter();
     <!-- Buttons Container -->
     <div class="header_btn-container">
         <div class="platform-btn-container">
-            <a href="#"><img src="/images/icons/steam.png" alt="Steam" class="platform-btn" /></a>
-            <a href="#"><img src="/images/icons/ps.png" alt="PlayStation" class="platform-btn" /></a>
-            <a href="#"><img src="/images/icons/xbox.png" alt="Xbox" class="platform-btn" /></a>
-            <a href="#"><img src="/images/icons/switch.png" alt="Nintendo Switch" class="platform-btn" /></a>
-            <a href="#"><img src="/images/icons/pc.png" alt="PC Software" class="platform-btn" /></a>
+            <RouterLink to="/products?platform=steam"><img src="/images/icons/steam.png" alt="Steam"
+                    class="platform-btn" /></RouterLink>
+            <RouterLink to="/products?platform=playstation"><img src="/images/icons/ps.png" alt="PlayStation"
+                    class="platform-btn" /></RouterLink>
+            <RouterLink to="/products?platform=xbox"><img src="/images/icons/xbox.png" alt="Xbox"
+                    class="platform-btn" />
+            </RouterLink>
+            <RouterLink to="/products?platform=switch"><img src="/images/icons/switch.png" alt="Nintendo Switch"
+                    class="platform-btn" /></RouterLink>
+            <RouterLink to="/products?platform=pc"><img src="/images/icons/pc.png" alt="PC Software"
+                    class="platform-btn" /></RouterLink>
         </div>
         <div class="separator"></div>
         <div class="user-btn-container">
@@ -69,10 +84,15 @@ const router = useRouter();
 
     <!-- Mobile Platform Buttons -->
     <div class="platform-btn-mobile">
-        <a href="#"><img src="/images/icons/steam.png" alt="Steam" class="platform-btn" /></a>
-        <a href="#"><img src="/images/icons/ps.png" alt="PlayStation" class="platform-btn" /></a>
-        <a href="#"><img src="/images/icons/xbox.png" alt="Xbox" class="platform-btn" /></a>
-        <a href="#"><img src="/images/icons/switch.png" alt="Nintendo Switch" class="platform-btn" /></a>
-        <a href="#"><img src="/images/icons/pc.png" alt="PC Software" class="platform-btn" /></a>
+        <RouterLink to="/products?platform=steam"><img src="/images/icons/steam.png" alt="Steam" class="platform-btn" />
+        </RouterLink>
+        <RouterLink to="/products?platform=playstation"><img src="/images/icons/ps.png" alt="PlayStation"
+                class="platform-btn" /></RouterLink>
+        <RouterLink to="/products?platform=xbox"><img src="/images/icons/xbox.png" alt="Xbox" class="platform-btn" />
+        </RouterLink>
+        <RouterLink to="/products?platform=switch"><img src="/images/icons/switch.png" alt="Nintendo Switch"
+                class="platform-btn" /></RouterLink>
+        <RouterLink to="/products?platform=pc"><img src="/images/icons/pc.png" alt="PC Software" class="platform-btn" />
+        </RouterLink>
     </div>
 </template>

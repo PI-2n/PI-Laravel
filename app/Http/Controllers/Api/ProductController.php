@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
@@ -17,9 +18,29 @@ class ProductController extends Controller
         $this->productService = $productService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return ProductResource::collection(Product::query()->paginate(10));
+        $platform = $request->query('platform');
+        $search = $request->query('q');
+
+        // If no filter is provided, return empty collection (as requested)
+        if (!$platform && !$search) {
+            return ProductResource::collection(collect());
+        }
+
+        $query = Product::query()->where('active', true);
+
+        if ($platform) {
+            $query->whereHas('platforms', function ($q) use ($platform) {
+                $q->where('name', 'like', "%{$platform}%");
+            });
+        }
+
+        if ($search) {
+            $query->where('name', 'like', "%{$search}%");
+        }
+
+        return ProductResource::collection($query->paginate(10));
     }
 
     public function home()
