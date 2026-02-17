@@ -16,10 +16,26 @@ const selectedPlatform = ref('steam'); // Default
 const toast = ref(null);
 const toastMessage = ref('Producto añadido al carrito');
 
+const relatedProducts = ref([]);
+
 const fetchProduct = async () => {
     try {
         const response = await api.get(`/products/${route.params.id}`);
-        product.value = response.data.data; // generic API resource wrap 'data'
+        product.value = response.data.data;
+
+        const related = response.data.related_products || [];
+        // Initialize default platform for each related product
+        relatedProducts.value = related.map(p => {
+            let defaultPlatform = 'pc'; // Fallback
+            if (p.platforms && p.platforms.length > 0) {
+                defaultPlatform = p.platforms[0].name.toLowerCase();
+            }
+            return {
+                ...p,
+                selected_platform: defaultPlatform
+            };
+        });
+
     } catch (error) {
         console.error('Error fetching product:', error);
     } finally {
@@ -61,6 +77,22 @@ const handleAddToCart = () => {
     cartStore.addToCart(product.value, selectedPlatformObj);
 
     toastMessage.value = 'Producto añadido al carrito';
+    toast.value.show();
+};
+
+const addToCartRelated = (relatedProduct) => {
+    if (!relatedProduct) return;
+
+    // Find platform object based on selected_platform string
+    let platform = null;
+    if (relatedProduct.platforms && relatedProduct.platforms.length > 0) {
+        platform = relatedProduct.platforms.find(p => p.name.toLowerCase() === relatedProduct.selected_platform);
+        // Fallback to first if not found (shouldn't happen if initialized correctly)
+        if (!platform) platform = relatedProduct.platforms[0];
+    }
+
+    cartStore.addToCart(relatedProduct, platform);
+    toastMessage.value = `${relatedProduct.name} añadido al carrito`;
     toast.value.show();
 };
 </script>
@@ -123,6 +155,46 @@ const handleAddToCart = () => {
                             <img src="/images/icons/fast-buy.png" alt="Fast Buy">
                         </button>
                     </div>
+                </div>
+            </div>
+
+            <!-- Related Products Section -->
+            <div v-if="relatedProducts.length > 0" class="related-products-section">
+                <h2>Productos relacionados</h2>
+                <div class="related-grid">
+                    <router-link v-for="related in relatedProducts" :key="related.id" :to="`/products/${related.id}`"
+                        class="related-card">
+                        <div class="related-image">
+                            <img :src="related.image_url" :alt="related.name">
+                        </div>
+                        <div class="related-info">
+                            <h3>{{ related.name }}</h3>
+                            <div class="price">
+                                <span v-if="related.offer_percentage > 0" class="old-price">
+                                    {{ parseFloat(related.price).toFixed(2) }}€
+                                </span>
+                                <span class="current-price" :class="{ 'is-offer': related.offer_percentage > 0 }">
+                                    {{ parseFloat(related.final_price || related.price).toFixed(2) }}€
+                                </span>
+                            </div>
+
+                            <!-- Related Platform Selector -->
+                            <div class="related-platforms" v-if="related.platforms && related.platforms.length > 0"
+                                @click.prevent>
+                                <div v-for="platform in related.platforms" :key="platform.id"
+                                    class="related-platform-icon"
+                                    :class="{ 'active': related.selected_platform === platform.name.toLowerCase() }"
+                                    @click="related.selected_platform = platform.name.toLowerCase()">
+                                    <img :src="`/images/icons/${getPlatformIcon(platform.name)}.png`"
+                                        :alt="platform.name" :title="platform.name">
+                                </div>
+                            </div>
+
+                            <button class="btn-view" @click.prevent="addToCartRelated(related)">
+                                <img src="/images/icons/carrito.png" alt="Añadir al carrito">
+                            </button>
+                        </div>
+                    </router-link>
                 </div>
             </div>
 

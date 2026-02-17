@@ -26,7 +26,7 @@ class ProductController extends Controller
     {
         $featured = Product::where('active', true)
             ->where('is_new', true)
-            ->where('sku',"P00010")
+            ->where('sku', "P00010")
             ->whereNotNull('video_url')
             ->first();
 
@@ -51,8 +51,34 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        $product->load(['platforms', 'comments.user']);
-        return new ProductResource($product);
+        $product->load(['platforms', 'comments.user', 'tags']);
+
+        // Get tags of the current product
+        $tagIds = $product->tags->pluck('id');
+
+        $related = collect();
+
+        if ($tagIds->isNotEmpty()) {
+            $related = Product::where('id', '!=', $product->id)
+                ->where('active', true)
+                ->whereHas('tags', function ($query) use ($tagIds) {
+                    $query->whereIn('tags.id', $tagIds);
+                })
+                ->withCount([
+                    'tags' => function ($query) use ($tagIds) {
+                        $query->whereIn('tags.id', $tagIds);
+                    }
+                ])
+                ->with('platforms')
+                ->orderByDesc('tags_count')
+                ->take(5)
+                ->get();
+        }
+
+        return (new ProductResource($product))
+            ->additional([
+                'related_products' => ProductResource::collection($related)
+            ]);
     }
 
     public function store(ProductRequest $request)
