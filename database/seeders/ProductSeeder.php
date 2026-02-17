@@ -166,6 +166,23 @@ class ProductSeeder extends Seeder
                 'tags' => ['Productividad'],
                 'platforms' => ['PC'],
             ],
+            [
+                'sku' => 'P00010',
+                'name' => 'Mewgenics',
+                'description' => '¡ALERTA DE LABORATORIO! \n\n¿Cansado de la genética aburrida? ¡Mewgenics es la solución! Conviértete en el Arquitecto del ADN Gatuno.\n\nEn este laboratorio de bolsillo, cruza 150+ razas, manipula la herencia de pelajes y gestiona un ecosistema de ronroneos. ¿El objetivo? Sobrevivir a mazmorras roguelike usando un mazo de cartas táctico.\n\n⚠️ ADVERTENCIA ACADÉMICA: Este software puede causar olvido temporal de exámenes y deseos incontrolables de adoptar 47 gatos. ¡Matricúlate en la escuela de la vida... gatuna!',                'image_url' => 'mewgenics.jpg',
+                'image_url' => 'cover_mewgenics.jpg',
+                'video_url' => 'mewgenics.mp4',
+                'price' => 26,
+                'is_new' => true,
+                'is_offer' => false,
+                'offer_percentage' => 10,
+                'offer_start_date' => Carbon::now()->subDays(1),
+                'offer_end_date' => Carbon::now()->addDays(60),
+                'release_date' => Carbon::now()->subMonths(18),
+                'active' => true,
+                'tags' => ['Aventura', 'Indie', 'Estrategia'],
+                'platforms' => ['PC'],
+            ],
         ];
 
         foreach ($products as $productData) {

@@ -26,8 +26,8 @@ class ProductController extends Controller
     {
         $featured = Product::where('active', true)
             ->where('is_new', true)
+            ->where('sku',"P00010")
             ->whereNotNull('video_url')
-            ->latest('release_date')
             ->first();
 
         $news = Product::where('active', true)
