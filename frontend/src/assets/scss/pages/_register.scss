@@ -47,7 +47,7 @@
             left: 100%;
             margin-left: 0.75rem;
             margin-top: 2.5rem;
-            color: #ff4d4d;
+            color: $color-danger;
             font-size: 0.85rem;
             $color-text-space: nowrap;
             display: none;
@@ -90,7 +90,7 @@
     }
 
     h1 {
-        color: white;
+        color: $color-text;
         font-size: 1.5rem;
         margin-bottom: 1rem;
         font-weight: bold;
@@ -98,7 +98,7 @@
 
     .error-general {
         margin-bottom: 1rem;
-        color: #ff4d4d;
+        color: $color-danger;
         text-align: center;
     }
 
@@ -108,7 +108,7 @@
     }
 
     .error-text {
-        color: #ff4d4d;
+        color: $color-danger;
         font-size: 0.85rem;
         display: block;
         margin-top: -0.5rem;

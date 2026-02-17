@@ -1,5 +1,6 @@
 @use "../base/variables" as *;
 @use "../utils/mixins" as mixins;
+@use "sass:color";
 
 .page-products {
     display: block;
@@ -23,7 +24,7 @@
 
 .loading-container {
     text-align: center;
-    color: white;
+    color: $color-text;
     padding: 2rem;
 }
 
@@ -52,7 +53,7 @@
             top: 10px;
             left: 10px;
             background-color: $color-accent;
-            color: white;
+            color: $color-text;
             padding: 0.5rem 0.8rem;
             border-radius: 8px;
             font-weight: bold;
@@ -63,7 +64,7 @@
             width: 100%;
             aspect-ratio: 3/4;
             object-fit: cover;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid $color-border;
         }
 
         .product-info {
@@ -111,15 +112,15 @@
 
     .btn-nav {
         padding: 0.5rem 1rem;
-        background-color: #333;
-        color: white;
+        background-color: $color-bg-input;
+        color: $color-text;
         border: none;
         border-radius: 4px;
         cursor: pointer;
         transition: background-color 0.2s;
 
         &:hover:not(:disabled) {
-            background-color: #444;
+            background-color: color.scale($color-bg-input, $lightness: 10%);
         }
 
         &:disabled {
@@ -129,6 +130,6 @@
     }
 
     .page-info {
-        color: white;
+        color: $color-text;
     }
 }

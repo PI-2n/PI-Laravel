@@ -86,7 +86,7 @@
 
                     &:checked+.platform-badge {
                         background-color: $color-accent;
-                        color: white;
+                        color: $color-text;
                         border-color: $color-accent;
 
                         img {
@@ -138,7 +138,7 @@
                 display: flex;
                 align-items: center;
                 padding: 15px 25px;
-                color: white;
+                color: $color-text;
                 background-color: $color-accent;
                 white-space: nowrap;
 
@@ -178,8 +178,8 @@
         .btn-secondary {
             display: inline-block;
             padding: 0.8rem 1.5rem;
-            background-color: #333;
-            color: white;
+            background-color: $color-bg-input;
+            color: $color-text;
             border-radius: 4px;
             text-decoration: none;
             font-weight: bold;
@@ -221,13 +221,13 @@
             gap: 20px;
 
             .comment-item {
-                background-color: #1a1a1a; // Darker background
+                background-color: $color-bg-secondary; // Darker background
                 padding: 25px;
                 border-radius: 12px;
                 box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); // Prominent shadow
                 border: 1px solid rgba(255, 255, 255, 0.05);
                 position: relative;
-                color: #fff;
+                color: $color-text;
 
                 .comment-header {
                     display: flex;
@@ -291,7 +291,7 @@
 
                         &:hover {
                             background-color: $color-accent;
-                            color: #fff;
+                            color: $color-text;
                             transform: translateY(-2px);
                         }
                     }
@@ -303,7 +303,7 @@
 
                         &:hover {
                             background-color: #ff6464;
-                            color: #fff;
+                            color: $color-text;
                             transform: translateY(-2px);
                         }
                     }
@@ -339,9 +339,9 @@
 
             select,
             textarea {
-                background-color: #252525; // Slightly lighter than secondary for input
+                background-color: $color-bg-tertiary; // Slightly lighter than secondary for input
                 border: 1px solid #444;
-                color: #fff;
+                color: $color-text;
                 padding: 12px;
                 border-radius: 6px;
                 width: 100%;
@@ -365,7 +365,7 @@
                 background: none;
                 border: none;
                 font-size: 2rem; // Larger stars
-                color: #555; // Default color for unselected stars
+                color: $color-gray; // Default color for unselected stars
                 cursor: pointer;
                 transition: all 0.2s ease;
                 padding: 0 5px;
@@ -414,7 +414,7 @@
             padding: 10px 20px;
             background-color: transparent;
             color: #ccc;
-            border: 1px solid #555;
+            border: 1px solid $color-gray;
             cursor: pointer;
             border-radius: 6px;
             font-weight: 600;
@@ -422,8 +422,8 @@
 
             &:hover {
                 background-color: rgba(255, 255, 255, 0.1);
-                color: #fff;
-                border-color: #fff;
+                color: $color-text;
+                border-color: $color-text;
             }
         }
     }

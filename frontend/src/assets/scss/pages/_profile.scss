@@ -91,7 +91,7 @@
         }
 
         .text-danger {
-            color: #ff4d4d;
+            color: $color-danger;
             font-size: 0.85rem;
             display: block;
             margin-bottom: 0.75rem;
@@ -120,10 +120,10 @@
         .btn-danger {
             width: 100%;
             padding: 1rem;
-            background-color: #e53e3e;
+            background-color: $color-danger;
             border: none;
             border-radius: 5px;
-            color: white;
+            color: $color-text;
             font-weight: bold;
             cursor: pointer;
             transition: background-color 0.3s;
@@ -133,12 +133,12 @@
         }
 
         .btn-danger:hover {
-            background-color: #c53030;
+            background-color: darken($color-danger, 10%);
         }
 
         .unverified-email {
             font-size: 0.9rem;
-            color: #ff9800;
+            color: $color-warning;
             margin: 0.75rem 0;
             line-height: 1.4;
         }
@@ -159,7 +159,7 @@
         }
 
         .success-message {
-            color: #4caf50;
+            color: $color-success;
             font-size: 0.9rem;
             margin-top: 0.5rem;
             display: block;
@@ -206,7 +206,7 @@
         .btn-secondary {
             width: 100%;
             padding: 1rem;
-            background-color: #555;
+            background-color: $color-gray;
             border: none;
             border-radius: 5px;
             color: #ddd;

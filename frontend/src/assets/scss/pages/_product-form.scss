@@ -220,7 +220,7 @@
 // Mensajes de error
 .error-message {
     display: block;
-    color: #ff6b6b;
+    color: lighten($color-danger, 10%);
     font-size: 0.85rem;
     margin-top: 0.3rem;
     font-weight: 500;
@@ -238,7 +238,7 @@
     font-weight: 500;
 
     strong {
-        color: white;
+        color: $color-text;
         font-weight: 700;
         font-size: 1.1rem;
     }
@@ -373,7 +373,7 @@
 
 .btn-primary {
     background-color: $color-accent;
-    color: white;
+    color: $color-text;
 
     &:hover {
         background-color: $color-accent-hover;
@@ -381,11 +381,11 @@
 }
 
 .btn-danger {
-    background-color: #e74c3c;
-    color: white;
+    background-color: $color-danger;
+    color: $color-text;
 
     &:hover {
-        background-color: #c0392b;
+        background-color: darken($color-danger, 10%);
     }
 }
 
@@ -424,12 +424,12 @@
 }
 
 .error-summary {
-    background-color: rgba(220, 53, 69, 0.1);
-    border: 1px solid #dc3545;
+    background-color: rgba($color-danger, 0.1);
+    border: 1px solid $color-danger;
     border-radius: 5px;
     padding: 15px;
     margin-bottom: 20px;
-    color: #dc3545;
+    color: $color-danger;
 
     p {
         font-weight: bold;
