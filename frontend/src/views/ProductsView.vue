@@ -28,24 +28,25 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="page-index" style="display: block; min-height: 80vh;">
-        <section class="offers" style="background: transparent; padding-top: 40px;">
-            <h2 class="text-center mb-8">Catálogo Completo</h2>
+    <div class="page-products">
+        <section class="catalog">
+            <h2>Catálogo Completo</h2>
 
-            <div v-if="loading" class="text-center text-white">Loading...</div>
+            <div v-if="loading" class="loading-container">Loading...</div>
 
-            <div v-else class="products">
-                <div v-for="product in products" :key="product.id" class="product">
+            <div v-else class="products-grid">
+                <div v-for="product in products" :key="product.id" class="product-card">
                     <RouterLink :to="`/products/${product.id}`">
                         <span v-if="product.is_offer" class="discount-badge">-{{ parseInt(product.offer_percentage)
                             }}%</span>
                         <img :src="product.image_url" :alt="product.name">
-                        <div class="product-text">
+                        <div class="product-info">
                             <span class="title">{{ product.name }}</span>
-                            <div class="price">
+                            <div class="price-container">
                                 <span v-if="product.is_offer" class="old-price">{{ parseFloat(product.price).toFixed(2)
                                     }}€</span>
-                                <span>{{ product.is_offer ? (product.price * (1 - product.offer_percentage /
+                                <span class="current-price">{{ product.is_offer ? (product.price * (1 -
+                                    product.offer_percentage /
                                     100)).toFixed(2) : parseFloat(product.price).toFixed(2) }}€</span>
                             </div>
                         </div>
@@ -54,14 +55,12 @@ onMounted(() => {
             </div>
 
             <!-- Simple Pagination -->
-            <div class="flex justify-center mt-8 gap-4" v-if="lastPage > 1">
-                <button @click="fetchProducts(currentPage - 1)" :disabled="currentPage === 1"
-                    class="px-4 py-2 bg-gray-700 text-white rounded disabled:opacity-50">
+            <div class="pagination" v-if="lastPage > 1">
+                <button @click="fetchProducts(currentPage - 1)" :disabled="currentPage === 1" class="btn-nav">
                     Previous
                 </button>
-                <span class="text-white py-2">Page {{ currentPage }} of {{ lastPage }}</span>
-                <button @click="fetchProducts(currentPage + 1)" :disabled="currentPage === lastPage"
-                    class="px-4 py-2 bg-gray-700 text-white rounded disabled:opacity-50">
+                <span class="page-info">Page {{ currentPage }} of {{ lastPage }}</span>
+                <button @click="fetchProducts(currentPage + 1)" :disabled="currentPage === lastPage" class="btn-nav">
                     Next
                 </button>
             </div>

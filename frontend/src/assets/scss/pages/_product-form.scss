@@ -398,11 +398,50 @@
 
 // Responsive para inputs de número
 .product-form input[type="number"].form-input {
+    appearance: textfield;
     -moz-appearance: textfield;
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
+    }
+}
+
+// Styles migrated from ProductForm.vue
+.current-offer-info {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
+    font-size: 0.9em;
+
+    .old-price {
+        text-decoration: line-through;
+        color: #999;
+        font-size: 0.9em;
+    }
+}
+
+.error-summary {
+    background-color: rgba(220, 53, 69, 0.1);
+    border: 1px solid #dc3545;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+    color: #dc3545;
+
+    p {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    ul {
+        padding-left: 20px;
+        margin: 0;
+
+        li {
+            list-style-type: disc;
+        }
     }
 }

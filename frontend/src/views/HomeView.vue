@@ -134,7 +134,7 @@ const formatPrice = (val) => parseFloat(val).toFixed(2);
 
 <template>
     <div class="page-index">
-        <div v-if="loading" class="text-center py-12 text-white">Loading...</div>
+        <div v-if="loading" class="loading-container">Loading...</div>
         <template v-else>
             <!-- Featured Section -->
             <section v-if="featured" class="featured">
@@ -213,3 +213,11 @@ const formatPrice = (val) => parseFloat(val).toFixed(2);
         </template>
     </div>
 </template>
+
+<style scoped>
+.loading-container {
+    text-align: center;
+    padding: 3rem 0;
+    color: white;
+}
+</style>

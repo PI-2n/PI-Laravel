@@ -199,7 +199,7 @@ const formatPrice = (value) => {
                                     class="form-control" placeholder="JUAN PÉREZ"
                                     :class="{ 'is-invalid': errors.card_holder_name }">
                                 <span v-if="errors.card_holder_name" class="error-text">{{ errors.card_holder_name[0]
-                                }}</span>
+                                    }}</span>
                             </div>
 
                             <div class="form-row">
@@ -209,7 +209,7 @@ const formatPrice = (value) => {
                                         class="form-control" placeholder="MM/AA"
                                         :class="{ 'is-invalid': errors.expiration_date }">
                                     <span v-if="errors.expiration_date" class="error-text">{{ errors.expiration_date[0]
-                                    }}</span>
+                                        }}</span>
                                 </div>
 
                                 <div class="form-group">
@@ -241,7 +241,3 @@ const formatPrice = (value) => {
         <ToastNotification ref="toast" :message="toastMessage" />
     </div>
 </template>
-
-<style scoped lang="scss">
-@use "../assets/scss/pages/_checkout.scss";
-</style>

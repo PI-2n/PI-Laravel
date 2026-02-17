@@ -59,10 +59,8 @@ const router = useRouter();
             </template>
 
             <RouterLink to="/cart" custom v-slot="{ href, navigate, isActive: isRouterActive }">
-                <a :href="href" @click="navigate" class="cart-btn-wrapper"
-                    style="position: relative; display: inline-block;">
-                    <img src="/images/icons/carrito.png" alt="Carrito" class="user-btn"
-                        :class="{ 'is-active': isRouterActive }" />
+                <a :href="href" @click="navigate" class="cart-btn-wrapper" :class="{ 'is-active': isRouterActive }">
+                    <img src="/images/icons/carrito.png" alt="Carrito" class="user-btn" />
                     <span v-if="cartStore.cartCount > 0" class="cart-badge">{{ cartStore.cartCount }}</span>
                 </a>
             </RouterLink>

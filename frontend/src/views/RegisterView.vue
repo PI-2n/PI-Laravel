@@ -41,38 +41,49 @@ const handleRegister = async () => {
 </script>
 
 <template>
-    <div class="login-page">
-        <!-- Reusing login-page class for styling as it shares structure -->
-        <h1 class="text-white text-2xl mb-4 font-bold">Registro</h1>
+    <div class="register-page">
+        <h1>Registro</h1>
 
         <form @submit.prevent="handleRegister">
-            <div v-if="errors.general" class="mb-4 text-red-500">
+            <div v-if="errors.general" class="error-general">
                 {{ errors.general[0] }}
             </div>
 
-            <label for="name">Nombre*:</label>
-            <input type="text" id="name" v-model="form.name" required>
-            <span v-if="errors.name" class="text-red-500 text-sm">{{ errors.name[0] }}</span>
+            <div class="form-group">
+                <label for="name">Nombre*:</label>
+                <input type="text" id="name" v-model="form.name" required>
+                <span v-if="errors.name" class="error-text">{{ errors.name[0] }}</span>
+            </div>
 
-            <label for="last_name">Apellidos*:</label>
-            <input type="text" id="last_name" v-model="form.last_name" required>
-            <span v-if="errors.last_name" class="text-red-500 text-sm">{{ errors.last_name[0] }}</span>
+            <div class="form-group">
+                <label for="last_name">Apellidos*:</label>
+                <input type="text" id="last_name" v-model="form.last_name" required>
+                <span v-if="errors.last_name" class="error-text">{{ errors.last_name[0] }}</span>
+            </div>
 
-            <label for="email">Email*:</label>
-            <input type="email" id="email" v-model="form.email" required>
-            <span v-if="errors.email" class="text-red-500 text-sm">{{ errors.email[0] }}</span>
+            <div class="form-group">
+                <label for="email">Email*:</label>
+                <input type="email" id="email" v-model="form.email" required>
+                <span v-if="errors.email" class="error-text">{{ errors.email[0] }}</span>
+            </div>
 
-            <label for="username">Nick*:</label>
-            <input type="text" id="username" v-model="form.username" required>
-            <span v-if="errors.username" class="text-red-500 text-sm">{{ errors.username[0] }}</span>
+            <div class="form-group">
+                <label for="username">Nick*:</label>
+                <input type="text" id="username" v-model="form.username" required>
+                <span v-if="errors.username" class="error-text">{{ errors.username[0] }}</span>
+            </div>
 
-            <label for="password">Contraseña*:</label>
-            <input type="password" id="password" v-model="form.password" required>
-            <span v-if="errors.password" class="text-red-500 text-sm">{{ errors.password[0] }}</span>
+            <div class="form-group">
+                <label for="password">Contraseña*:</label>
+                <input type="password" id="password" v-model="form.password" required>
+                <span v-if="errors.password" class="error-text">{{ errors.password[0] }}</span>
+            </div>
 
-            <label for="confirm_password">Repetir contraseña*:</label>
-            <input type="password" id="confirm_password" v-model="form.confirm_password" required>
-            <span v-if="errors.confirm_password" class="text-red-500 text-sm">{{ errors.confirm_password[0] }}</span>
+            <div class="form-group">
+                <label for="confirm_password">Repetir contraseña*:</label>
+                <input type="password" id="confirm_password" v-model="form.confirm_password" required>
+                <span v-if="errors.confirm_password" class="error-text">{{ errors.confirm_password[0] }}</span>
+            </div>
 
             <button type="submit" :disabled="isLoading">
                 {{ isLoading ? 'Registrando...' : 'Registrarse' }}

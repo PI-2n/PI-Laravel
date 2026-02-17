@@ -5,6 +5,7 @@ import api from '../services/api';
 import { useCartStore } from '../stores/cart';
 import { useAuthStore } from '../stores/auth'; // Import Auth Store
 import ToastNotification from '../components/ToastNotification.vue';
+import CommentList from '../components/comments/CommentList.vue';
 
 const route = useRoute();
 const product = ref(null);
@@ -66,7 +67,7 @@ const handleAddToCart = () => {
 
 <template>
     <div class="product-page-main">
-        <div v-if="loading" class="text-center py-12 text-white">Loading...</div>
+        <div v-if="loading" class="loading-container">Loading...</div>
 
         <div v-else-if="product" class="product-page-container">
             <div class="product-detail">
@@ -74,9 +75,8 @@ const handleAddToCart = () => {
                 <div class="product-image">
                     <img :src="product.image_url" :alt="product.name">
 
-                    <div v-if="authStore.isAdmin" class="edit-container" style="margin-top: 1rem; text-align: center;">
-                        <router-link :to="`/products/${product.id}/edit`" class="btn-secondary"
-                            style="display: inline-block; padding: 0.5rem 1rem; background: #666; color: white; text-decoration: none; border-radius: 5px;">
+                    <div v-if="authStore.isAdmin" class="edit-container">
+                        <router-link :to="`/products/${product.id}/edit`" class="btn-secondary">
                             Editar Producto
                         </router-link>
                     </div>
@@ -127,51 +127,12 @@ const handleAddToCart = () => {
             </div>
 
             <!-- Comments Section -->
-            <div class="comments-section">
-                <h2>Comentarios</h2>
-                <p v-if="!product.comments || product.comments.length === 0" class="text-gray-400">No hay comentarios
-                    aún.</p>
-                <div v-for="comment in product.comments" :key="comment.id" class="comment-item">
-                    <div class="comment-header">
-                        <span>{{ comment.user.name }}</span>
-                        <span class="rating">★ {{ comment.rating }}</span>
-                    </div>
-                    <p>{{ comment.content }}</p>
-                </div>
-            </div>
+            <CommentList v-if="product" :comments="product.comments || []" :product-id="product.id"
+                @refresh="fetchProduct" />
 
             <ToastNotification ref="toast" :message="toastMessage" />
         </div>
 
-        <div v-else class="text-center py-12 text-white">Product not found.</div>
+        <div v-else class="loading-container">Product not found.</div>
     </div>
 </template>
-
-<style scoped>
-.product-image img {
-    width: 100%;
-    max-width: 500px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.price {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 1rem 0;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.old-price {
-    text-decoration: line-through;
-    color: #cecece;
-    font-size: 1.5rem;
-}
-
-.current-price {
-    color: #e58e27;
-    font-size: 2.5rem;
-}
-</style>

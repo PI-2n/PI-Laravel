@@ -284,7 +284,7 @@ const submitButtonText = computed(() => {
                         <input type="date" id="offer_start_date" v-model="form.offer_start_date" class="form-input">
                         <p class="form-hint">Deja vacío si no quieres programar una oferta futura</p>
                         <span v-if="errors.offer_start_date" class="error-message">{{ errors.offer_start_date[0]
-                            }}</span>
+                        }}</span>
                     </div>
 
                     <div class="form-group">
@@ -303,7 +303,7 @@ const submitButtonText = computed(() => {
 
                     <div v-if="isEditing && form.offer_percentage && form.price" class="current-offer-info">
                         Precio actual con oferta: <strong>{{ (form.price * (1 - form.offer_percentage / 100)).toFixed(2)
-                            }}€</strong>
+                        }}€</strong>
                         <br>
                         <span class="old-price">Precio original: {{ parseFloat(form.price).toFixed(2) }}€</span>
                     </div>
@@ -335,45 +335,3 @@ const submitButtonText = computed(() => {
         </form>
     </div>
 </template>
-
-<style scoped lang="scss">
-@use "../assets/scss/pages/_product-form.scss";
-
-// Corrections to match Blade's behavior or missing styles
-.current-offer-info {
-    margin-top: 10px;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 5px;
-    font-size: 0.9em;
-
-    .old-price {
-        text-decoration: line-through;
-        color: #999;
-        font-size: 0.9em;
-    }
-}
-
-.error-summary {
-    background-color: rgba(220, 53, 69, 0.1);
-    border: 1px solid #dc3545;
-    border-radius: 5px;
-    padding: 15px;
-    margin-bottom: 20px;
-    color: #dc3545;
-
-    p {
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
-
-    ul {
-        padding-left: 20px;
-        margin: 0;
-
-        li {
-            list-style-type: disc;
-        }
-    }
-}
-</style>

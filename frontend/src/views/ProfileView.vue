@@ -141,7 +141,7 @@ const importProducts = async () => {
                             electrónico.</p>
                     </header>
 
-                    <form @submit.prevent="updateProfile" class="mt-6 space-y-6">
+                    <form @submit.prevent="updateProfile" class="profile-form">
                         <div class="form-group">
                             <label for="name">Nombre</label>
                             <input id="name" type="text" v-model="user.name" class="form-control" required autofocus
@@ -172,7 +172,7 @@ const importProducts = async () => {
                             para mantenerla segura.</p>
                     </header>
 
-                    <form @submit.prevent="updatePassword" class="mt-6 space-y-6">
+                    <form @submit.prevent="updatePassword" class="profile-form">
                         <div class="form-group">
                             <label for="current_password">Contraseña Actual</label>
                             <input id="current_password" type="password" v-model="passwordForm.current_password"
@@ -215,7 +215,7 @@ const importProducts = async () => {
                             eliminarán permanentemente.</p>
                     </header>
 
-                    <form @submit.prevent="deleteAccount" class="mt-6 space-y-6">
+                    <form @submit.prevent="deleteAccount" class="profile-form">
                         <div class="form-group">
                             <label for="delete_password">Contraseña</label>
                             <input id="delete_password" type="password" v-model="deleteForm.password"
@@ -233,30 +233,29 @@ const importProducts = async () => {
 
         <!-- Sidebar -->
         <div class="profile-sidebar">
-            <div class="profile-container">
+            <div class="profile-container sidebar-item">
                 <h3>Cerrar Sesión</h3>
-                <button @click="logout" class="btn-secondary w-full">Cerrar sesión</button>
+                <button @click="logout" class="btn-secondary btn-block">Cerrar sesión</button>
             </div>
 
             <template v-if="authStore.isAdmin">
-                <div class="profile-container">
-                    <h3 class="add-product">Añadir producto</h3>
+                <div class="profile-container sidebar-item">
+                    <h3 class="add-product-title">Añadir producto</h3>
                     <div class="product-actions">
-                        <RouterLink to="/products/create" class="btn-secondary w-full text-center d-block"
-                            style="text-decoration: none; display: block;">
+                        <RouterLink to="/products/create" class="btn-secondary btn-block">
                             Añadir Producto
                         </RouterLink>
                     </div>
                 </div>
 
-                <div class="profile-container">
+                <div class="profile-container sidebar-item">
                     <h3>Importar productos desde Excel</h3>
-                    <div class="product-actions" style="margin-top: 10px;">
+                    <div class="product-actions mt-2">
                         <form @submit.prevent="importProducts">
-                            <input type="file" @change="handleFileChange" required class="file-input w-full"
+                            <input type="file" @change="handleFileChange" required class="file-input btn-block"
                                 accept=".xlsx, .csv, .xls">
-                            <span v-if="importError" class="error-text d-block mt-2">{{ importError }}</span>
-                            <button type="submit" class="btn-secondary w-full mt-2" style="margin-top: 10px;">
+                            <span v-if="importError" class="error-text block-display mt-2">{{ importError }}</span>
+                            <button type="submit" class="btn-secondary btn-block mt-2">
                                 Importar
                             </button>
                         </form>
@@ -268,40 +267,3 @@ const importProducts = async () => {
         <ToastNotification ref="toast" :message="toastMessage" :type="toastType" />
     </div>
 </template>
-
-<style scoped lang="scss">
-@use "../assets/scss/pages/_profile.scss";
-
-// Additional scoped styles if needed to override or polyfill missing styles
-.w-full {
-    width: 100%;
-}
-
-.mt-6 {
-    margin-top: 1.5rem;
-}
-
-.space-y-6>*+* {
-    margin-top: 1.5rem;
-}
-
-.description {
-    font-size: 0.9rem;
-    color: #cbd5e0;
-    margin-bottom: 1rem;
-}
-
-.btn-danger {
-    background-color: #e53e3e;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-
-    &:hover {
-        background-color: #c53030;
-    }
-}
-</style>

@@ -21,7 +21,8 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: bold;
-            position: relative; /* necesario para posición absoluta del error */
+            position: relative;
+            /* necesario para posición absoluta del error */
         }
 
         input {
@@ -86,5 +87,31 @@
 
     p a:hover {
         text-decoration: underline;
+    }
+
+    h1 {
+        color: white;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        font-weight: bold;
+    }
+
+    .error-general {
+        margin-bottom: 1rem;
+        color: #ff4d4d;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+        position: relative;
+    }
+
+    .error-text {
+        color: #ff4d4d;
+        font-size: 0.85rem;
+        display: block;
+        margin-top: -0.5rem;
+        margin-bottom: 0.5rem;
     }
 }

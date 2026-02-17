@@ -26,7 +26,7 @@ const handleLogin = async () => {
 
 <template>
     <div class="login-page">
-        <div v-if="errorMessage" style="color: red; margin-bottom: 1rem;">
+        <div v-if="errorMessage" class="error-message">
             {{ errorMessage }}
         </div>
 

@@ -43,4 +43,9 @@ Route::middleware('auth:sanctum')->group(function () {
     // Admin routes
     Route::post('/products/import', [App\Http\Controllers\ProductImportController::class, 'import']);
     Route::get('/tags', [App\Http\Controllers\Api\TagController::class, 'index']);
+
+    // Comments
+    Route::post('products/{product}/comments', [App\Http\Controllers\Api\CommentController::class, 'store']);
+    Route::put('comments/{comment}', [App\Http\Controllers\Api\CommentController::class, 'update']);
+    Route::delete('comments/{comment}', [App\Http\Controllers\Api\CommentController::class, 'destroy']);
 });

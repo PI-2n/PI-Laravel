@@ -1,0 +1,134 @@
+@use "../base/variables" as *;
+@use "../utils/mixins" as mixins;
+
+.page-products {
+    display: block;
+    min-height: 80vh;
+    background-color: $color-bg-secondary;
+}
+
+.catalog {
+    padding-top: 40px;
+    padding-bottom: 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+
+    h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: $color-text;
+        font-size: 2rem;
+    }
+}
+
+.loading-container {
+    text-align: center;
+    color: white;
+    padding: 2rem;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    padding: 0 1rem;
+}
+
+.product-card {
+    position: relative;
+    background-color: $color-card;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    @include mixins.hover-shadow($color-accent-hover);
+
+    a {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: $color-accent;
+            color: white;
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            border-bottom: 1px solid #333;
+        }
+
+        .product-info {
+            padding: 1rem;
+            text-align: center;
+
+            .title {
+                display: block;
+                font-weight: bold;
+                margin-bottom: 0.5rem;
+                color: $color-text;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .price-container {
+                display: flex;
+                justify-content: center;
+                gap: 0.5rem;
+                align-items: center;
+
+                .old-price {
+                    text-decoration: line-through;
+                    color: $color-separator;
+                    font-size: 0.9rem;
+                }
+
+                .current-price {
+                    color: $color-accent;
+                    font-weight: bold;
+                    font-size: 1.1rem;
+                }
+            }
+        }
+    }
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    gap: 1rem;
+    align-items: center;
+
+    .btn-nav {
+        padding: 0.5rem 1rem;
+        background-color: #333;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+
+        &:hover:not(:disabled) {
+            background-color: #444;
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+
+    .page-info {
+        color: white;
+    }
+}
