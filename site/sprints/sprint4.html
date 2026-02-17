@@ -83,6 +83,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#sprint-4-desarrollo-del-frontend-spa-con-vuejs" class="md-skip">
+          Saltar a contenido
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -375,6 +380,19 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Sprint 4
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="sprint4.html" class="md-nav__link md-nav__link--active">
         
   
@@ -386,6 +404,164 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sprint-4-desarrollo-del-frontend-spa-con-vuejs" class="md-nav__link">
+    <span class="md-ellipsis">
+      🟢 Sprint 4 – Desarrollo del Frontend SPA con Vue.js
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c1-interfaz-de-usuario-avanzada-con-vuejs" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚡ C1. Interfaz de usuario avanzada con Vue.js
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚡ C1. Interfaz de usuario avanzada con Vue.js">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Objetivo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funcionalidades-implementadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Funcionalidades implementadas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estructura-final-del-frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      📂 Estructura final del Frontend
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#experiencia-de-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎨 Experiencia de usuario
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c2-integracion-de-autenticacion-mediante-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔐 C2. Integración de autenticación mediante API
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔐 C2. Integración de autenticación mediante API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementado" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Implementado
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c3-gestion-de-roles-y-permisos" class="md-nav__link">
+    <span class="md-ellipsis">
+      👥 C3. Gestión de roles y permisos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="👥 C3. Gestión de roles y permisos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementado_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Implementado
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estado-del-sprint-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Estado del Sprint 4
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Estado del Sprint 4">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finalizado" class="md-nav__link">
+    <span class="md-ellipsis">
+      🟩 Finalizado
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resultado-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Resultado final
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -461,9 +637,133 @@
 
 
 
-  <h1>Sprint 4</h1>
-
-
+<h2 id="sprint-4-desarrollo-del-frontend-spa-con-vuejs">🟢 Sprint 4 – Desarrollo del Frontend SPA con Vue.js<a class="headerlink" href="#sprint-4-desarrollo-del-frontend-spa-con-vuejs" title="Permanent link">&para;</a></h2>
+<p>Durante este srint, se han instalado las dependencias necesarias en el proyecto para pdoer trabacar con vue.
+Hemos decidido mantener las vistas blades que nos sirve el proyecto con nginx por el puerto 8000 (que ya no recibirán actualizaciones) y se ha creado el directorio de frontend que contiene todas las vistas que estaban contenidas en la carpeta de resources de laravel para poder tener una SPA de vue. Se han añadido además los archivos necesarios para la gestión de usuarios, roles y tokens.</p>
+<p>El frontend hará uso de los controladores de api creados en el sprint anterior para poder realizar la carga de datos y envar las modificaciones de los productos, comentarios y usuarios.</p>
+<hr />
+<h1 id="c1-interfaz-de-usuario-avanzada-con-vuejs">⚡ C1. Interfaz de usuario avanzada con Vue.js<a class="headerlink" href="#c1-interfaz-de-usuario-avanzada-con-vuejs" title="Permanent link">&para;</a></h1>
+<h2 id="objetivo">🎯 Objetivo<a class="headerlink" href="#objetivo" title="Permanent link">&para;</a></h2>
+<p>Durante este sprint se ha consolidado completamente la parte cliente del proyecto mediante el desarrollo de una SPA (Single Page Application) con Vue 3 y Vite.</p>
+<p>La aplicación permite una navegación fluida sin recargas de página, con actualización reactiva de datos y una separación clara entre componentes, vistas y servicios.</p>
+<hr />
+<h2 id="funcionalidades-implementadas">✅ Funcionalidades implementadas<a class="headerlink" href="#funcionalidades-implementadas" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Navegación SPA mediante Vue Router.</li>
+<li>Componentes reutilizables (Navbar, Footer, ToastNotification).</li>
+<li>Sistema completo de vistas: Inicio, Productos, Detalle de producto, Carrito, Checkout, Perfil, Login y Registro.</li>
+<li>Integración completa con la API REST de Laravel.</li>
+<li>Gestión reactiva del estado con Pinia.</li>
+<li>Sistema de comentarios asociado a los productos.</li>
+<li>Notificaciones visuales mediante sistema de toast.</li>
+<li>Compilación optimizada para producción con Vite.</li>
+</ul>
+<hr />
+<h2 id="estructura-final-del-frontend">📂 Estructura final del Frontend<a class="headerlink" href="#estructura-final-del-frontend" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span>frontend/
+<span class="linenos" data-linenos=" 2 "></span>├── dist/
+<span class="linenos" data-linenos=" 3 "></span>│   ├── assets/
+<span class="linenos" data-linenos=" 4 "></span>│   ├── images/
+<span class="linenos" data-linenos=" 5 "></span>│   ├── video/
+<span class="linenos" data-linenos=" 6 "></span>│   └── index.html
+<span class="linenos" data-linenos=" 7 "></span>│
+<span class="linenos" data-linenos=" 8 "></span>├── public/
+<span class="linenos" data-linenos=" 9 "></span>│   ├── images/
+<span class="linenos" data-linenos="10 "></span>│   └── video/
+<span class="linenos" data-linenos="11 "></span>│
+<span class="linenos" data-linenos="12 "></span>├── src/
+<span class="linenos" data-linenos="13 "></span>│   ├── assets/
+<span class="linenos" data-linenos="14 "></span>│   │   └── scss/
+<span class="linenos" data-linenos="15 "></span>│   │       ├── base/
+<span class="linenos" data-linenos="16 "></span>│   │       ├── components/
+<span class="linenos" data-linenos="17 "></span>│   │       ├── pages/
+<span class="linenos" data-linenos="18 "></span>│   │       └── utils/
+<span class="linenos" data-linenos="19 "></span>│   │
+<span class="linenos" data-linenos="20 "></span>│   ├── components/
+<span class="linenos" data-linenos="21 "></span>│   │   ├── comments/
+<span class="linenos" data-linenos="22 "></span>│   │   ├── Navbar.vue
+<span class="linenos" data-linenos="23 "></span>│   │   ├── Footer.vue
+<span class="linenos" data-linenos="24 "></span>│   │   ├── RoleGuard.vue
+<span class="linenos" data-linenos="25 "></span>│   │   └── ToastNotification.vue
+<span class="linenos" data-linenos="26 "></span>│   │
+<span class="linenos" data-linenos="27 "></span>│   ├── composables/
+<span class="linenos" data-linenos="28 "></span>│   │
+<span class="linenos" data-linenos="29 "></span>│   ├── router/
+<span class="linenos" data-linenos="30 "></span>│   │
+<span class="linenos" data-linenos="31 "></span>│   ├── services/
+<span class="linenos" data-linenos="32 "></span>│   │
+<span class="linenos" data-linenos="33 "></span>│   ├── stores/
+<span class="linenos" data-linenos="34 "></span>│   │
+<span class="linenos" data-linenos="35 "></span>│   ├── views/
+<span class="linenos" data-linenos="36 "></span>│   │   ├── HomeView.vue
+<span class="linenos" data-linenos="37 "></span>│   │   ├── ProductsView.vue
+<span class="linenos" data-linenos="38 "></span>│   │   ├── ProductDetailView.vue
+<span class="linenos" data-linenos="39 "></span>│   │   ├── CartView.vue
+<span class="linenos" data-linenos="40 "></span>│   │   ├── CheckoutView.vue
+<span class="linenos" data-linenos="41 "></span>│   │   ├── SuccessView.vue
+<span class="linenos" data-linenos="42 "></span>│   │   ├── LoginView.vue
+<span class="linenos" data-linenos="43 "></span>│   │   ├── RegisterView.vue
+<span class="linenos" data-linenos="44 "></span>│   │   └── ProfileView.vue
+<span class="linenos" data-linenos="45 "></span>│   │
+<span class="linenos" data-linenos="46 "></span>│   ├── App.vue
+<span class="linenos" data-linenos="47 "></span>│   └── main.js
+<span class="linenos" data-linenos="48 "></span>│
+<span class="linenos" data-linenos="49 "></span>├── package.json
+<span class="linenos" data-linenos="50 "></span>├── vite.config.js
+<span class="linenos" data-linenos="51 "></span>└── index.html
+</code></pre></div>
+<hr />
+<h2 id="experiencia-de-usuario">🎨 Experiencia de usuario<a class="headerlink" href="#experiencia-de-usuario" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Navegación sin recargas de página.</li>
+<li>Interfaz moderna y coherente.</li>
+<li>Feedback visual mediante notificaciones.</li>
+<li>Diseño responsive.</li>
+<li>Transiciones suaves entre vistas.</li>
+<li>Adaptación dinámica del contenido según autenticación y rol.</li>
+</ul>
+<hr />
+<h1 id="c2-integracion-de-autenticacion-mediante-api">🔐 C2. Integración de autenticación mediante API<a class="headerlink" href="#c2-integracion-de-autenticacion-mediante-api" title="Permanent link">&para;</a></h1>
+<h2 id="implementado">✅ Implementado<a class="headerlink" href="#implementado" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Login y registro mediante API REST.</li>
+<li>Gestión de token de autenticación.</li>
+<li>Persistencia de sesión.</li>
+<li>Protección de rutas privadas.</li>
+<li>Logout con invalidación de sesión.</li>
+<li>Actualización automática de la interfaz según estado del usuario.</li>
+</ul>
+<p>La interfaz reacciona dinámicamente al estado de autenticación (navbar, acceso al perfil, carrito, etc.).</p>
+<hr />
+<h1 id="c3-gestion-de-roles-y-permisos">👥 C3. Gestión de roles y permisos<a class="headerlink" href="#c3-gestion-de-roles-y-permisos" title="Permanent link">&para;</a></h1>
+<h2 id="implementado_1">✅ Implementado<a class="headerlink" href="#implementado_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Control visual de acceso según rol.</li>
+<li>Componente <code>RoleGuard</code> para proteger funcionalidades.</li>
+<li>Composable <code>useRole</code> para verificar permisos.</li>
+<li>Restricción de acciones según tipo de usuario.</li>
+<li>Coordinación con políticas y middleware del backend Laravel.</li>
+</ul>
+<p>Esto garantiza coherencia entre:</p>
+<ul>
+<li>🔒 Seguridad en el backend  </li>
+<li>🖥️ Control de acceso en el frontend  </li>
+</ul>
+<hr />
+<h1 id="estado-del-sprint-4">📊 Estado del Sprint 4<a class="headerlink" href="#estado-del-sprint-4" title="Permanent link">&para;</a></h1>
+<h2 id="finalizado">🟩 Finalizado<a class="headerlink" href="#finalizado" title="Permanent link">&para;</a></h2>
+<ul>
+<li>SPA completamente funcional.</li>
+<li>Integración con backend operativa.</li>
+<li>Autenticación y roles implementados.</li>
+<li>Sistema de comentarios activo.</li>
+<li>Build optimizado para producción.</li>
+<li>Estructura modular y escalable.</li>
+</ul>
+<hr />
+<h1 id="resultado-final">🎯 Resultado final<a class="headerlink" href="#resultado-final" title="Permanent link">&para;</a></h1>
+<p>El frontend ha evolucionado hacia una aplicación SPA moderna, reactiva y segura, completamente integrada con la API Laravel y preparada para su despliegue en entorno Docker con Nginx.</p>
+<p>Este sprint consolida la capa cliente del proyecto siguiendo criterios profesionales de modularidad, escalabilidad y buenas prácticas de desarrollo web.</p>
 
 
 
