@@ -24,9 +24,8 @@ const fetchProduct = async () => {
         product.value = response.data.data;
 
         const related = response.data.related_products || [];
-        // Initialize default platform for each related product
         relatedProducts.value = related.map(p => {
-            let defaultPlatform = 'pc'; // Fallback
+            let defaultPlatform = 'pc';
             if (p.platforms && p.platforms.length > 0) {
                 defaultPlatform = p.platforms[0].name.toLowerCase();
             }
@@ -50,7 +49,6 @@ onMounted(async () => {
     }
 });
 
-// Helper to calculate discount
 const discountedPrice = computed(() => {
     if (product.value && product.value.offer_percentage > 0) {
         return (product.value.price * (1 - product.value.offer_percentage / 100)).toFixed(2);
@@ -70,10 +68,8 @@ const getPlatformIcon = (name) => {
 const handleAddToCart = () => {
     if (!product.value) return;
 
-    // Use full platform object from product data if possible, or construct it
     const selectedPlatformObj = product.value.platforms.find(p => p.name.toLowerCase() === selectedPlatform.value);
 
-    // If no platform is selected (or product has no platforms), we might send null or handle it
     cartStore.addToCart(product.value, selectedPlatformObj);
 
     toastMessage.value = 'Producto añadido al carrito';
@@ -83,11 +79,9 @@ const handleAddToCart = () => {
 const addToCartRelated = (relatedProduct) => {
     if (!relatedProduct) return;
 
-    // Find platform object based on selected_platform string
     let platform = null;
     if (relatedProduct.platforms && relatedProduct.platforms.length > 0) {
         platform = relatedProduct.platforms.find(p => p.name.toLowerCase() === relatedProduct.selected_platform);
-        // Fallback to first if not found (shouldn't happen if initialized correctly)
         if (!platform) platform = relatedProduct.platforms[0];
     }
 
@@ -103,7 +97,6 @@ const addToCartRelated = (relatedProduct) => {
 
         <div v-else-if="product" class="product-page-container">
             <div class="product-detail">
-                <!-- Image Section -->
                 <div class="product-image">
                     <img :src="product.image_url" :alt="product.name">
 
@@ -114,7 +107,6 @@ const addToCartRelated = (relatedProduct) => {
                     </div>
                 </div>
 
-                <!-- Info Section -->
                 <div class="product-info">
                     <h1>{{ product.name }}</h1>
 
@@ -128,7 +120,6 @@ const addToCartRelated = (relatedProduct) => {
                         {{ product.description }}
                     </div>
 
-                    <!-- Platform Selector -->
                     <div v-if="product.platforms && product.platforms.length > 0" class="platform-selector">
                         <span class="selector-label">Plataforma:</span>
                         <div class="platforms-grid">
@@ -142,7 +133,6 @@ const addToCartRelated = (relatedProduct) => {
                         </div>
                     </div>
 
-                    <!-- Actions -->
                     <div class="product-actions">
                         <form @submit.prevent="handleAddToCart">
                             <button type="submit" class="btn-add-cart">
@@ -158,7 +148,6 @@ const addToCartRelated = (relatedProduct) => {
                 </div>
             </div>
 
-            <!-- Related Products Section -->
             <div v-if="relatedProducts.length > 0" class="related-products-section">
                 <h2>Productos relacionados</h2>
                 <div class="related-grid">
@@ -178,7 +167,6 @@ const addToCartRelated = (relatedProduct) => {
                                 </span>
                             </div>
 
-                            <!-- Related Platform Selector -->
                             <div class="related-platforms" v-if="related.platforms && related.platforms.length > 0"
                                 @click.prevent>
                                 <div v-for="platform in related.platforms" :key="platform.id"
@@ -198,7 +186,6 @@ const addToCartRelated = (relatedProduct) => {
                 </div>
             </div>
 
-            <!-- Comments Section -->
             <CommentList v-if="product" :comments="product.comments || []" :product-id="product.id"
                 @refresh="fetchProduct" />
 

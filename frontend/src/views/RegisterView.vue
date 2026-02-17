@@ -25,7 +25,6 @@ const handleRegister = async () => {
         await authStore.register(form);
     } catch (error) {
         if (error.response && error.response.data && error.response.data.message) {
-            // Handle validation errors from BaseController: { success: false, message: "Error validation", info: { field: [error] } }
             if (error.response.data.info) {
                 errors.value = error.response.data.info;
             } else {

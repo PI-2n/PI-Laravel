@@ -14,7 +14,7 @@ const cartItems = computed(() => cartStore.items);
 const total = computed(() => cartStore.cartTotal);
 
 const savedCards = ref([]);
-const paymentMethod = ref('new_card'); // 'new_card' or 'saved_card'
+const paymentMethod = ref('new_card');
 const selectedCardId = ref(null);
 const newCard = ref({
     card_number: '',
@@ -30,21 +30,16 @@ const toastMessage = ref('');
 
 const fetchCheckoutData = async () => {
     try {
-        // Sync cart first
         if (cartStore.items.length > 0) {
             try {
                 await api.post('/cart/sync', { items: cartStore.items });
-                // Small delay to ensure DB transaction is committed before read? 
-                // Should not be needed if API awaits, but let's be safe for debugging.
+                await new Promise(resolve => setTimeout(resolve, 500));
                 await new Promise(resolve => setTimeout(resolve, 500));
             } catch (syncError) {
                 console.error('Cart Sync Failed:', syncError);
-                // Continue to checkout anyway to see if backend has data? 
-                // Or maybe show error?
             }
         }
 
-        // Fetch saved cards and validate cart state from backend perspective
         const response = await api.get('/checkout');
         savedCards.value = response.data.data.saved_cards || [];
         if (savedCards.value.length > 0) {
@@ -88,7 +83,6 @@ const handlePayment = async () => {
     }
 
     try {
-        // Single payment call
         const response = await api.post('/checkout', payload);
 
         cartStore.clearCart();
@@ -96,7 +90,6 @@ const handlePayment = async () => {
         if (response.data && response.data.data && response.data.data.order_id) {
             router.push(`/checkout/success/${response.data.data.order_id}`);
         } else {
-            // Fallback if no order ID
             toastMessage.value = '¡Pago realizado con éxito!';
             toast.value.show();
             setTimeout(() => {
@@ -131,7 +124,6 @@ const formatPrice = (value) => {
             <h1>Finalizar Compra</h1>
 
             <div class="checkout-grid">
-                <!-- Order Summary -->
                 <div class="order-summary">
                     <h2>Resumen del Pedido</h2>
 
@@ -152,12 +144,10 @@ const formatPrice = (value) => {
                     </div>
                 </div>
 
-                <!-- Payment Form -->
                 <div class="payment-section">
                     <h2>Método de Pago</h2>
 
                     <form @submit.prevent="handlePayment">
-                        <!-- Payment Method Selection -->
                         <div class="payment-methods">
                             <label>
                                 <input type="radio" value="saved_card" v-model="paymentMethod"
@@ -171,7 +161,6 @@ const formatPrice = (value) => {
                             </label>
                         </div>
 
-                        <!-- Saved Cards -->
                         <div v-if="paymentMethod === 'saved_card'" class="saved-cards">
                             <div class="form-group">
                                 <label for="card_id">Selecciona tu tarjeta</label>
@@ -184,7 +173,6 @@ const formatPrice = (value) => {
                             </div>
                         </div>
 
-                        <!-- New Card -->
                         <div v-if="paymentMethod === 'new_card'" class="new-card-form">
                             <div class="form-group">
                                 <label for="card_number">Número de tarjeta *</label>
@@ -199,7 +187,7 @@ const formatPrice = (value) => {
                                     class="form-control" placeholder="JUAN PÉREZ"
                                     :class="{ 'is-invalid': errors.card_holder_name }">
                                 <span v-if="errors.card_holder_name" class="error-text">{{ errors.card_holder_name[0]
-                                    }}</span>
+                                }}</span>
                             </div>
 
                             <div class="form-row">
@@ -209,7 +197,7 @@ const formatPrice = (value) => {
                                         class="form-control" placeholder="MM/AA"
                                         :class="{ 'is-invalid': errors.expiration_date }">
                                     <span v-if="errors.expiration_date" class="error-text">{{ errors.expiration_date[0]
-                                        }}</span>
+                                    }}</span>
                                 </div>
 
                                 <div class="form-group">

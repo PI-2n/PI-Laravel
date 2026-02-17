@@ -5,7 +5,7 @@ import Footer from './components/Footer.vue'
 </script>
 
 <template>
-    <div class="body"> <!-- Wrapper class from Laravel layout -->
+    <div class="body">
         <header class="header">
             <Navbar />
         </header>
@@ -14,8 +14,6 @@ import Footer from './components/Footer.vue'
             <RouterView />
         </main>
 
-        <Footer /> <!-- Footer component contains the <footer> tag -->
-
-        <!-- Toast Notification Logic can be added here later -->
+        <Footer />
     </div>
 </template>

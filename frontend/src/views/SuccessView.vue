@@ -82,13 +82,6 @@ const padId = (id) => {
                 <div v-for="item in order.items" :key="item.id" class="product-item">
                     <div class="product-info">
                         <h4>{{ item.product_name }}</h4>
-                        <!-- <p class="quantity">Cantidad: {{ item.quantity }}</p> -->
-                        <!-- Laravel view shows quantity and unit price in one line in p.quantity or similar? 
-                              Let's match the screenshot or blade logic.
-                              Blade: <p class="quantity">Cantidad: {{ $item->quantity }}</p>
-                                     <p class="price">Precio unitario: {{ number_format($item->price, 2) }} €</p>
-                              Vue logic below:
-                         -->
                         <p class="quantity">Cantidad: {{ item.quantity }}</p>
                         <p class="price">Precio unitario: {{ formatPrice(item.price) }}</p>
                     </div>

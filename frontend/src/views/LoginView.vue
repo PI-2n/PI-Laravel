@@ -13,8 +13,6 @@ const errorMessage = ref('');
 const handleLogin = async () => {
     try {
         await authStore.login({ email: email.value, password: password.value });
-        // Redirect is handled in store or here
-        // router.push('/'); 
     } catch (error) {
         errorMessage.value = 'Invalid credentials. Please try again.';
         if (error.response && error.response.data.message) {

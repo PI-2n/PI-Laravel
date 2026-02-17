@@ -30,7 +30,7 @@ const canDelete = computed(() => {
     return authStore.user && (
         authStore.user.id === props.comment.user.id ||
         authStore.isAdmin ||
-        (authStore.user.role_id === 2) // Assuming role_id 2 is moderator, adjust if necessary based on DB
+        (authStore.user.role_id === 2)
     );
 });
 

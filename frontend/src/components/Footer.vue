@@ -1,5 +1,5 @@
 <template>
     <footer>
-        <p>&copy; {{ new Date().getFullYear() }} BitKeys. Todos los derechos reservados.</p>
+        <p>&copy; 2026 BitKeys. Todos los derechos reservados.</p>
     </footer>
 </template>

@@ -14,22 +14,19 @@ const searchQuery = ref('');
 const handleSearch = () => {
     if (searchQuery.value.trim()) {
         router.push({ name: 'products', query: { q: searchQuery.value } });
-        searchQuery.value = ''; // Optional: clear after search
+        searchQuery.value = '';
     }
 };
 
 </script>
 
 <template>
-    <!-- Navbar content -->
-    <!-- Header Image / Logo -->
     <div class="header_image">
         <RouterLink to="/">
             <img src="/images/logo.png" alt="Logo" />
         </RouterLink>
     </div>
 
-    <!-- Search Bar -->
     <div class="header_searchBar">
         <form class="search-form" @submit.prevent="handleSearch">
             <input id="q" class="search-input" v-model="searchQuery" type="search" placeholder="Buscar..." required />
@@ -39,7 +36,6 @@ const handleSearch = () => {
         </form>
     </div>
 
-    <!-- Buttons Container -->
     <div class="header_btn-container">
         <div class="platform-btn-container">
             <RouterLink to="/products?platform=steam"><img src="/images/icons/steam.png" alt="Steam"
@@ -82,7 +78,6 @@ const handleSearch = () => {
         </div>
     </div>
 
-    <!-- Mobile Platform Buttons -->
     <div class="platform-btn-mobile">
         <RouterLink to="/products?platform=steam"><img src="/images/icons/steam.png" alt="Steam" class="platform-btn" />
         </RouterLink>

@@ -26,7 +26,7 @@ const updateProfile = async () => {
     errors.value = {};
     try {
         const response = await api.patch('/profile', user.value);
-        authStore.setUser(response.data.data); // Update store and localStorage
+        authStore.setUser(response.data.data);
         toastMessage.value = 'Perfil actualizado correctamente.';
         toastType.value = 'success';
         toast.value.show();
@@ -66,7 +66,7 @@ const deleteAccount = async () => {
     deleteErrors.value = {};
     try {
         await api.delete('/profile', { data: deleteForm.value });
-        await authStore.logout(false); // Local logout
+        await authStore.logout(false);
     } catch (error) {
         if (error.response && error.response.data.errors) {
             deleteErrors.value = error.response.data.errors;
@@ -82,7 +82,6 @@ const logout = async () => {
     await authStore.logout();
 };
 
-// Admin Import Logic
 const importFile = ref(null);
 const importError = ref('');
 
@@ -109,8 +108,7 @@ const importProducts = async () => {
         toastMessage.value = 'Productos importados correctamente.';
         toastType.value = 'success';
         toast.value.show();
-        importFile.value = null; // Reset file input
-        // Reset file input in DOM
+        importFile.value = null;
         const fileInput = document.querySelector('.file-input');
         if (fileInput) fileInput.value = '';
     } catch (error) {
@@ -133,7 +131,6 @@ const importProducts = async () => {
             <div class="profile-container">
                 <h2>Editar Perfil</h2>
 
-                <!-- Update User Info -->
                 <section>
                     <header>
                         <h3>Información del Perfil</h3>
@@ -164,7 +161,6 @@ const importProducts = async () => {
 
                 <div class="section-divider"></div>
 
-                <!-- Update Password -->
                 <section>
                     <header>
                         <h3>Actualizar Contraseña</h3>
@@ -186,7 +182,7 @@ const importProducts = async () => {
                             <input id="password" type="password" v-model="passwordForm.password" class="form-control"
                                 autocomplete="new-password">
                             <span v-if="passwordErrors.password" class="error-text">{{ passwordErrors.password[0]
-                            }}</span>
+                                }}</span>
                         </div>
 
                         <div class="form-group">
@@ -207,7 +203,6 @@ const importProducts = async () => {
 
                 <div class="section-divider"></div>
 
-                <!-- Delete Account -->
                 <section>
                     <header>
                         <h3>Borrar Cuenta</h3>
@@ -231,7 +226,6 @@ const importProducts = async () => {
             </div>
         </div>
 
-        <!-- Sidebar -->
         <div class="profile-sidebar">
             <div class="profile-container sidebar-item">
                 <h3>Cerrar Sesión</h3>

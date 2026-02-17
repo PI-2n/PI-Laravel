@@ -1,7 +1,6 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { useCommentStore } from '../../stores/comment';
-// import { useToast } from 'vue-toast-notification';
 
 const props = defineProps({
     productId: {
@@ -29,7 +28,7 @@ const error = ref(null);
 watch(() => props.comment, (newComment) => {
     if (newComment) {
         rating.value = newComment.rating;
-        message.value = newComment.message || newComment.content; // Handle both fields
+        message.value = newComment.message || newComment.content;
     }
 }, { immediate: true });
 
@@ -48,7 +47,6 @@ const submitComment = async () => {
                 rating: rating.value,
                 message: message.value
             });
-            // Reset form
             rating.value = 5;
             message.value = '';
         }

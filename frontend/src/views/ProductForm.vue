@@ -33,7 +33,6 @@ const isLoading = ref(false);
 const currentImage = ref(null);
 const currentVideo = ref(null);
 
-// Fetch tags on mount
 onMounted(async () => {
     try {
         const response = await api.get('/tags');
@@ -64,7 +63,6 @@ const fetchProduct = async () => {
         form.value.active = !!product.active;
         form.value.featured = !!product.featured;
 
-        // Handle tags
         if (product.tags) {
             form.value.tag_ids = product.tags.map(tag => tag.id);
         }
@@ -90,7 +88,6 @@ const submitForm = async () => {
 
     const formData = new FormData();
 
-    // Append standard fields
     formData.append('sku', form.value.sku);
     formData.append('name', form.value.name);
     formData.append('price', form.value.price);
@@ -103,10 +100,8 @@ const submitForm = async () => {
     if (form.value.offer_start_date) formData.append('offer_start_date', form.value.offer_start_date);
     if (form.value.offer_end_date) formData.append('offer_end_date', form.value.offer_end_date);
 
-    // Append tags
     form.value.tag_ids.forEach(id => formData.append('tag_ids[]', id));
 
-    // Append files only if they exist
     if (form.value.image_url instanceof File) {
         formData.append('image_url', form.value.image_url);
     }
@@ -116,7 +111,7 @@ const submitForm = async () => {
 
     try {
         if (isEditing.value) {
-            formData.append('_method', 'PUT'); // Fake PUT for Laravel file upload
+            formData.append('_method', 'PUT');
             await api.post(`/products/${productId}`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
@@ -134,7 +129,6 @@ const submitForm = async () => {
             console.log('Validation errors:', errors.value);
         } else {
             console.error('Error saving product:', error);
-            // Show detailed error for debugging
             alert('Error al guardar: ' + JSON.stringify(error.response?.data || error.message));
         }
     } finally {
@@ -142,10 +136,8 @@ const submitForm = async () => {
     }
 };
 
-// Offer logic
 watch(() => form.value.is_offer, (newValue) => {
     if (newValue) {
-        // If offer is checked, clear dates and require percentage logic (handled in UI via v-if)
         form.value.offer_start_date = new Date().toISOString().split('T')[0];
         form.value.offer_end_date = '';
     } else {
@@ -153,7 +145,6 @@ watch(() => form.value.is_offer, (newValue) => {
     }
 });
 
-// Computed labels for template
 const formTitle = computed(() => isEditing.value ? 'Editar Producto' : 'Crear Nuevo Producto');
 const formSubtitle = computed(() => isEditing.value ? `Modifica la información del producto "${form.value.name}"` : 'Completa la información del producto');
 const imageLabel = computed(() => isEditing.value ? 'Nueva Imagen (dejar vacío para mantener actual)' : 'Imagen del Producto *');
@@ -284,7 +275,7 @@ const submitButtonText = computed(() => {
                         <input type="date" id="offer_start_date" v-model="form.offer_start_date" class="form-input">
                         <p class="form-hint">Deja vacío si no quieres programar una oferta futura</p>
                         <span v-if="errors.offer_start_date" class="error-message">{{ errors.offer_start_date[0]
-                        }}</span>
+                            }}</span>
                     </div>
 
                     <div class="form-group">
@@ -303,7 +294,7 @@ const submitButtonText = computed(() => {
 
                     <div v-if="isEditing && form.offer_percentage && form.price" class="current-offer-info">
                         Precio actual con oferta: <strong>{{ (form.price * (1 - form.offer_percentage / 100)).toFixed(2)
-                        }}€</strong>
+                            }}€</strong>
                         <br>
                         <span class="old-price">Precio original: {{ parseFloat(form.price).toFixed(2) }}€</span>
                     </div>

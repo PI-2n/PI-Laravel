@@ -10,7 +10,6 @@ const api = axios.create({
     }
 });
 
-// Request interceptor to add token
 api.interceptors.request.use(config => {
     const authStore = useAuthStore();
     if (authStore.token) {
@@ -19,15 +18,13 @@ api.interceptors.request.use(config => {
     return config;
 });
 
-// Response interceptor to handle errors
 api.interceptors.response.use(
     response => response,
     error => {
         const authStore = useAuthStore();
         if (error.response && error.response.status === 401) {
-            // Prevent infinite loop if already logging out or on login page
             if (authStore.user || authStore.token) {
-                authStore.logout(false); // Pass false to avoid calling API logout again
+                authStore.logout(false);
             }
         }
         return Promise.reject(error);

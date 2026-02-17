@@ -19,7 +19,6 @@ const emit = defineEmits(['refresh']);
 
 const authStore = useAuthStore();
 
-// Check if current user has already commented
 const userHasCommented = computed(() => {
     if (!authStore.user || !props.comments) return false;
     return props.comments.some(c => c.user.id === authStore.user.id);
@@ -34,7 +33,6 @@ const handleRefresh = () => {
     <div class="comments-section">
         <h2>Comentarios ({{ comments.length }})</h2>
 
-        <!-- Form to add new comment -->
         <div v-if="authStore.isAuthenticated" class="mb-4">
             <div v-if="!userHasCommented">
                 <CommentForm :product-id="productId" @saved="handleRefresh" />
@@ -50,7 +48,6 @@ const handleRefresh = () => {
             </router-link>
         </div>
 
-        <!-- List of comments -->
         <div v-if="comments.length > 0" class="comments-list">
             <CommentItem v-for="comment in comments" :key="comment.id" :comment="comment" :product-id="productId"
                 @updated="handleRefresh" @deleted="handleRefresh" />

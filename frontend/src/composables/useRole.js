@@ -15,12 +15,10 @@ export function useRole() {
             user: ['read', 'view_user']
         }
 
-        // specific permission check or role check
         if (rules[role]?.includes(permission)) {
             return true;
         }
 
-        // Check if permission is actually a role name (simple role check)
         if (role === permission) {
             return true;
         }

@@ -4,7 +4,6 @@ import { ref, computed } from 'vue';
 export const useCartStore = defineStore('cart', () => {
     const items = ref([]);
 
-    // Initialize from localStorage
     try {
         const storedCart = localStorage.getItem('cart');
         if (storedCart) {
@@ -18,7 +17,6 @@ export const useCartStore = defineStore('cart', () => {
         localStorage.setItem('cart', JSON.stringify(items.value));
     };
 
-    // Getters
     const cartCount = computed(() => items.value.reduce((acc, item) => acc + item.quantity, 0));
 
     const cartTotal = computed(() => {
@@ -28,7 +26,6 @@ export const useCartStore = defineStore('cart', () => {
         }, 0);
     });
 
-    // Actions
     const addToCart = (product, platform = null) => {
         const existingItem = items.value.find(item =>
             item.product.id === product.id &&
@@ -40,8 +37,6 @@ export const useCartStore = defineStore('cart', () => {
                 existingItem.quantity++;
             }
         } else {
-            // Ensure we store necessary product details
-            // Logic to calculate final price if not present
             let finalPrice = parseFloat(product.price);
             if (product.is_offer && product.offer_percentage) {
                 finalPrice = finalPrice * (1 - (product.offer_percentage / 100));
@@ -60,13 +55,6 @@ export const useCartStore = defineStore('cart', () => {
     };
 
     const removeFromCart = (itemId) => {
-        // itemId here serves as an index or we need a unique ID for cart items. 
-        // For simplicity using index if passed, or matching logic. 
-        // Let's assume we pass the item object or match it.
-        // A better way for local cart is generating a temporary ID.
-        // For now, let's filter.
-
-        // If we get an index:
         if (typeof itemId === 'number' && itemId < items.value.length) {
             items.value.splice(itemId, 1);
         }

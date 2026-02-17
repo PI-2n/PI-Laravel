@@ -57,23 +57,22 @@ watch(() => route.query, () => {
                 <div v-for="product in products" :key="product.id" class="product-card">
                     <RouterLink :to="`/products/${product.id}`">
                         <span v-if="product.is_offer" class="discount-badge">-{{ parseInt(product.offer_percentage)
-                        }}%</span>
+                            }}%</span>
                         <img :src="product.image_url" :alt="product.name">
                         <div class="product-info">
                             <span class="title">{{ product.name }}</span>
                             <div class="price-container">
                                 <span v-if="product.is_offer" class="old-price">{{ parseFloat(product.price).toFixed(2)
-                                }}€</span>
+                                    }}€</span>
                                 <span class="current-price">{{ product.is_offer ? (product.price * (1 -
                                     product.offer_percentage / 100)).toFixed(2) : parseFloat(product.price).toFixed(2)
-                                }}€</span>
+                                    }}€</span>
                             </div>
                         </div>
                     </RouterLink>
                 </div>
             </div>
 
-            <!-- Simple Pagination -->
             <div class="pagination" v-if="lastPage > 1">
                 <button @click="fetchProducts(currentPage - 1)" :disabled="currentPage === 1" class="btn-nav">
                     Previous

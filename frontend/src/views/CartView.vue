@@ -22,7 +22,6 @@ const formatPrice = (value) => {
     return parseFloat(value).toFixed(2) + ' €';
 };
 
-// Helper for platform icon name
 const getPlatformIcon = (platformName) => {
     if (!platformName) return 'pc';
     const name = platformName.toLowerCase();
@@ -42,7 +41,6 @@ const getPlatformIcon = (platformName) => {
 
             <div v-if="cartItems.length > 0" class="cart-grid">
 
-                <!-- ITEMS LIST -->
                 <div class="cart-items">
                     <div v-for="(item, index) in cartItems" :key="index" class="cart-item-card">
                         <div class="item-image">
@@ -93,7 +91,6 @@ const getPlatformIcon = (platformName) => {
                     </div>
                 </div>
 
-                <!-- SUMMARY SIDEBAR -->
                 <div class="cart-summary">
                     <h2>Resumen</h2>
                     <div class="summary-row">

@@ -27,7 +27,6 @@ const router = createRouter({
             name: 'products',
             component: () => import('../views/ProductsView.vue'),
             beforeEnter: (to, from, next) => {
-                // If accessing /products directly without query params, redirect to home
                 if (Object.keys(to.query).length === 0 || (!to.query.platform && !to.query.q)) {
                     next({ name: 'home' });
                 } else {
@@ -55,7 +54,7 @@ const router = createRouter({
         {
             path: '/forbidden',
             name: 'forbidden',
-            component: () => import('../views/HomeView.vue'), // Temporary placeholder
+            component: () => import('../views/HomeView.vue'),
         },
         {
             path: '/cart',
@@ -87,7 +86,6 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
     const authStore = useAuthStore()
 
-    // Refresh user if token exists but user is null
     if (authStore.token && !authStore.user) {
         await authStore.fetchUser()
     }
@@ -102,11 +100,10 @@ router.beforeEach(async (to, from, next) => {
         return
     }
 
-    // Role check
     if (to.meta.roles) {
         const userRole = authStore.user?.role_id === 1 ? 'admin' : 'user';
         if (!authStore.user || !to.meta.roles.includes(userRole)) {
-            next({ name: 'home' }) // Redirect to home, forbidden page is placeholder
+            next({ name: 'home' })
             return
         }
     }

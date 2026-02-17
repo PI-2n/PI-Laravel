@@ -8,7 +8,6 @@ const news = ref([]);
 const offers = ref([]);
 const loading = ref(true);
 
-// Carousel state
 const carouselTrack = ref(null);
 const currentIndex = ref(0);
 const visibleSlides = ref(3);
@@ -21,14 +20,13 @@ const fetchHomeData = async () => {
         const response = await api.get('/home');
         featured.value = response.data.featured;
 
-        // Handle potentially wrapped resources (Laravel ResourceCollection)
         const newsData = response.data.news;
         news.value = Array.isArray(newsData) ? newsData : (newsData.data || []);
 
         const offersData = response.data.offers;
         offers.value = Array.isArray(offersData) ? offersData : (offersData.data || []);
 
-        await nextTick(); // Wait for DOM update
+        await nextTick();
         setTimeout(() => {
             initCarousel();
         }, 100);
@@ -39,7 +37,6 @@ const fetchHomeData = async () => {
     }
 };
 
-// Carousel Logic
 const initCarousel = () => {
     updateDimensions();
     window.addEventListener('resize', updateDimensions);
@@ -55,13 +52,12 @@ const updateDimensions = () => {
 
     const firstSlide = carouselTrack.value.children[0];
     if (firstSlide) {
-        const gap = 20; // Assuming 20px gap from CSS, or measure it
+        const gap = 20;
         slideWidth.value = firstSlide.offsetWidth + gap;
     }
 
     const totalSlides = news.value.length;
 
-    // Show/Hide buttons
     if (totalSlides <= visibleSlides.value) {
         showPrev.value = false;
         showNext.value = false;
@@ -70,7 +66,6 @@ const updateDimensions = () => {
         showNext.value = true;
     }
 
-    // Clamp index
     const maxIndex = Math.max(0, totalSlides - visibleSlides.value);
     if (currentIndex.value > maxIndex) currentIndex.value = maxIndex;
 
@@ -95,7 +90,6 @@ const moveCarousel = (direction) => {
     updateTrackPosition();
 };
 
-// Video Hover Logic
 const hoverTimer = ref(null);
 
 const handleMouseEnter = (event) => {
@@ -138,7 +132,6 @@ const formatPrice = (val) => parseFloat(val).toFixed(2);
     <div class="page-index">
         <div v-if="loading" class="loading-container">Loading...</div>
         <template v-else>
-            <!-- Featured Section -->
             <section v-if="featured" class="featured">
                 <video v-if="featured.video_url" :src="featured.video_url" muted loop autoplay
                     class="featured-background-video"></video>
@@ -149,7 +142,6 @@ const formatPrice = (val) => parseFloat(val).toFixed(2);
                 </RouterLink>
             </section>
 
-            <!-- News Section -->
             <section class="news" v-if="news.length > 0">
                 <h2>Últimas novedades</h2>
 
@@ -186,7 +178,6 @@ const formatPrice = (val) => parseFloat(val).toFixed(2);
                 </div>
             </section>
 
-            <!-- Offers Section -->
             <section class="offers" v-if="offers.length > 0">
                 <h2>Ofertas</h2>
 
@@ -195,7 +186,7 @@ const formatPrice = (val) => parseFloat(val).toFixed(2);
                         <RouterLink :to="`/products/${product.id}`" class="product-link">
                             <span v-if="product.offer_percentage > 0" class="discount-badge">-{{
                                 parseInt(product.offer_percentage)
-                                }}%</span>
+                            }}%</span>
 
                             <img v-if="product.image_url" :src="product.image_url" :alt="product.name">
 
@@ -204,7 +195,7 @@ const formatPrice = (val) => parseFloat(val).toFixed(2);
                                 <div class="price">
                                     <span v-if="product.offer_percentage > 0" class="old-price">{{
                                         formatPrice(product.price)
-                                        }}€</span>
+                                    }}€</span>
                                     <span>{{ formatPrice(product.final_price || product.price) }}€</span>
                                 </div>
                             </div>
