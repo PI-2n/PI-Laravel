@@ -51,7 +51,7 @@ const handleSearch = () => {
             </RouterLink>
             <RouterLink to="/products?platform=switch"><img src="/images/icons/switch.png" alt="Nintendo Switch"
                     class="platform-btn" /></RouterLink>
-            <RouterLink to="/products?platform=pc"><img src="/images/icons/pc.png" alt="PC Software"
+            <RouterLink to="/products?platform=software"><img src="/images/icons/pc.png" alt="PC Software"
                     class="platform-btn" /></RouterLink>
         </div>
         <div class="separator"></div>
@@ -92,7 +92,8 @@ const handleSearch = () => {
         </RouterLink>
         <RouterLink to="/products?platform=switch"><img src="/images/icons/switch.png" alt="Nintendo Switch"
                 class="platform-btn" /></RouterLink>
-        <RouterLink to="/products?platform=pc"><img src="/images/icons/pc.png" alt="PC Software" class="platform-btn" />
+        <RouterLink to="/products?platform=software"><img src="/images/icons/pc.png" alt="PC Software"
+                class="platform-btn" />
         </RouterLink>
     </div>
 </template>

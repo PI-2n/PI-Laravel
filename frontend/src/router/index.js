@@ -25,7 +25,15 @@ const router = createRouter({
         {
             path: '/products',
             name: 'products',
-            component: () => import('../views/ProductsView.vue')
+            component: () => import('../views/ProductsView.vue'),
+            beforeEnter: (to, from, next) => {
+                // If accessing /products directly without query params, redirect to home
+                if (Object.keys(to.query).length === 0 || (!to.query.platform && !to.query.q)) {
+                    next({ name: 'home' });
+                } else {
+                    next();
+                }
+            }
         },
         {
             path: '/products/:id',

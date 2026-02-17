@@ -6,29 +6,6 @@
     display: block;
     min-height: 80vh;
     background-color: $color-bg-secondary;
-
-    .empty-state {
-        text-align: center;
-        padding: 4rem 1rem;
-        color: $color-text;
-        min-height: 50vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        p {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            color: $color-separator;
-            font-weight: 400;
-        }
-    }
 }
 
 .catalog {
@@ -42,29 +19,6 @@
         margin-bottom: 2rem;
         color: $color-text;
         font-size: 2rem;
-
-        .empty-state {
-            text-align: center;
-            padding: 4rem 1rem;
-            color: $color-text;
-            min-height: 50vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-            p {
-                font-size: 1.5rem;
-                margin-bottom: 1rem;
-                font-weight: 600;
-            }
-
-            .subtitle {
-                font-size: 1.1rem;
-                color: $color-separator;
-                font-weight: 400;
-            }
-        }
     }
 
     .empty-state {
@@ -95,59 +49,14 @@
     text-align: center;
     color: $color-text;
     padding: 2rem;
-
-    .empty-state {
-        text-align: center;
-        padding: 4rem 1rem;
-        color: $color-text;
-        min-height: 50vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        p {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            color: $color-separator;
-            font-weight: 400;
-        }
-    }
 }
 
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    // Changed to auto-fill to prevent single items from stretching to full width
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 2rem;
     padding: 0 1rem;
-
-    .empty-state {
-        text-align: center;
-        padding: 4rem 1rem;
-        color: $color-text;
-        min-height: 50vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        p {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            color: $color-separator;
-            font-weight: 400;
-        }
-    }
 }
 
 .product-card {
@@ -173,29 +82,6 @@
             border-radius: 8px;
             font-weight: bold;
             z-index: 2;
-
-            .empty-state {
-                text-align: center;
-                padding: 4rem 1rem;
-                color: $color-text;
-                min-height: 50vh;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-
-                p {
-                    font-size: 1.5rem;
-                    margin-bottom: 1rem;
-                    font-weight: 600;
-                }
-
-                .subtitle {
-                    font-size: 1.1rem;
-                    color: $color-separator;
-                    font-weight: 400;
-                }
-            }
         }
 
         img {
@@ -203,29 +89,6 @@
             aspect-ratio: 3/4;
             object-fit: cover;
             border-bottom: 1px solid $color-border;
-
-            .empty-state {
-                text-align: center;
-                padding: 4rem 1rem;
-                color: $color-text;
-                min-height: 50vh;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-
-                p {
-                    font-size: 1.5rem;
-                    margin-bottom: 1rem;
-                    font-weight: 600;
-                }
-
-                .subtitle {
-                    font-size: 1.1rem;
-                    color: $color-separator;
-                    font-weight: 400;
-                }
-            }
         }
 
         .product-info {
@@ -240,29 +103,6 @@
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
-
-                .empty-state {
-                    text-align: center;
-                    padding: 4rem 1rem;
-                    color: $color-text;
-                    min-height: 50vh;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-
-                    p {
-                        font-size: 1.5rem;
-                        margin-bottom: 1rem;
-                        font-weight: 600;
-                    }
-
-                    .subtitle {
-                        font-size: 1.1rem;
-                        color: $color-separator;
-                        font-weight: 400;
-                    }
-                }
             }
 
             .price-container {
@@ -275,152 +115,14 @@
                     text-decoration: line-through;
                     color: $color-separator;
                     font-size: 0.9rem;
-
-                    .empty-state {
-                        text-align: center;
-                        padding: 4rem 1rem;
-                        color: $color-text;
-                        min-height: 50vh;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-items: center;
-
-                        p {
-                            font-size: 1.5rem;
-                            margin-bottom: 1rem;
-                            font-weight: 600;
-                        }
-
-                        .subtitle {
-                            font-size: 1.1rem;
-                            color: $color-separator;
-                            font-weight: 400;
-                        }
-                    }
                 }
 
                 .current-price {
                     color: $color-accent;
                     font-weight: bold;
                     font-size: 1.1rem;
-
-                    .empty-state {
-                        text-align: center;
-                        padding: 4rem 1rem;
-                        color: $color-text;
-                        min-height: 50vh;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-items: center;
-
-                        p {
-                            font-size: 1.5rem;
-                            margin-bottom: 1rem;
-                            font-weight: 600;
-                        }
-
-                        .subtitle {
-                            font-size: 1.1rem;
-                            color: $color-separator;
-                            font-weight: 400;
-                        }
-                    }
-                }
-
-                .empty-state {
-                    text-align: center;
-                    padding: 4rem 1rem;
-                    color: $color-text;
-                    min-height: 50vh;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-
-                    p {
-                        font-size: 1.5rem;
-                        margin-bottom: 1rem;
-                        font-weight: 600;
-                    }
-
-                    .subtitle {
-                        font-size: 1.1rem;
-                        color: $color-separator;
-                        font-weight: 400;
-                    }
                 }
             }
-
-            .empty-state {
-                text-align: center;
-                padding: 4rem 1rem;
-                color: $color-text;
-                min-height: 50vh;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-
-                p {
-                    font-size: 1.5rem;
-                    margin-bottom: 1rem;
-                    font-weight: 600;
-                }
-
-                .subtitle {
-                    font-size: 1.1rem;
-                    color: $color-separator;
-                    font-weight: 400;
-                }
-            }
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 4rem 1rem;
-            color: $color-text;
-            min-height: 50vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-            p {
-                font-size: 1.5rem;
-                margin-bottom: 1rem;
-                font-weight: 600;
-            }
-
-            .subtitle {
-                font-size: 1.1rem;
-                color: $color-separator;
-                font-weight: 400;
-            }
-        }
-    }
-
-    .empty-state {
-        text-align: center;
-        padding: 4rem 1rem;
-        color: $color-text;
-        min-height: 50vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        p {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            color: $color-separator;
-            font-weight: 400;
         }
     }
 }
@@ -443,107 +145,15 @@
 
         &:hover:not(:disabled) {
             background-color: color.scale($color-bg-input, $lightness: 10%);
-
-            .empty-state {
-                text-align: center;
-                padding: 4rem 1rem;
-                color: $color-text;
-                min-height: 50vh;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-
-                p {
-                    font-size: 1.5rem;
-                    margin-bottom: 1rem;
-                    font-weight: 600;
-                }
-
-                .subtitle {
-                    font-size: 1.1rem;
-                    color: $color-separator;
-                    font-weight: 400;
-                }
-            }
         }
 
         &:disabled {
             opacity: 0.5;
             cursor: not-allowed;
-
-            .empty-state {
-                text-align: center;
-                padding: 4rem 1rem;
-                color: $color-text;
-                min-height: 50vh;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-
-                p {
-                    font-size: 1.5rem;
-                    margin-bottom: 1rem;
-                    font-weight: 600;
-                }
-
-                .subtitle {
-                    font-size: 1.1rem;
-                    color: $color-separator;
-                    font-weight: 400;
-                }
-            }
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 4rem 1rem;
-            color: $color-text;
-            min-height: 50vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-            p {
-                font-size: 1.5rem;
-                margin-bottom: 1rem;
-                font-weight: 600;
-            }
-
-            .subtitle {
-                font-size: 1.1rem;
-                color: $color-separator;
-                font-weight: 400;
-            }
         }
     }
 
     .page-info {
         color: $color-text;
-
-        .empty-state {
-            text-align: center;
-            padding: 4rem 1rem;
-            color: $color-text;
-            min-height: 50vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-            p {
-                font-size: 1.5rem;
-                margin-bottom: 1rem;
-                font-weight: 600;
-            }
-
-            .subtitle {
-                font-size: 1.1rem;
-                color: $color-separator;
-                font-weight: 400;
-            }
-        }
     }
 }
