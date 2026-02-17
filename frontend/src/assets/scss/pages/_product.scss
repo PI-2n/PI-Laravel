@@ -216,18 +216,37 @@
         }
 
         .comments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
             .comment-item {
-                border-bottom: 1px solid $color-bg-input;
-                padding: 15px 0;
+                background-color: #1a1a1a; // Darker background
+                padding: 25px;
+                border-radius: 12px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); // Prominent shadow
+                border: 1px solid rgba(255, 255, 255, 0.05);
                 position: relative;
+                color: #fff;
 
                 .comment-header {
                     display: flex;
                     justify-content: space-between;
-                    margin-bottom: 5px;
+                    align-items: center;
+                    margin-bottom: 15px;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                    padding-bottom: 10px;
+
+                    strong {
+                        display: block;
+                        font-size: 1.1rem;
+                        color: $color-accent;
+                    }
 
                     .rating {
-                        color: $color-accent;
+                        color: $color-accent; // Gold/Orange
+                        font-size: 1.2rem;
+                        letter-spacing: 2px;
                     }
                 }
 
@@ -235,38 +254,57 @@
                     display: block;
                     color: $color-separator;
                     font-size: 0.85rem;
+                    margin-top: 4px;
+                }
+
+                .comment-content {
+                    color: #e0e0e0;
+                    white-space: pre-line;
+                    line-height: 1.6;
+                    font-size: 1rem;
                 }
 
                 .comment-actions {
-                    margin-top: 10px;
+                    margin-top: 20px;
                     display: flex;
-                    gap: 10px;
+                    justify-content: flex-end;
+                    gap: 12px;
 
                     .btn-edit-comment,
                     .btn-delete-comment {
-                        padding: 5px 10px;
-                        font-size: 0.85rem;
+                        padding: 8px 16px;
+                        font-size: 0.9rem;
                         border: none;
-                        border-radius: 4px;
+                        border-radius: 6px;
                         cursor: pointer;
-                        transition: all 0.2s ease;
+                        transition: all 0.3s ease;
+                        font-weight: 600;
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 6px;
                     }
 
                     .btn-edit-comment {
-                        background-color: rgba($color-accent, 0.2);
+                        background-color: rgba(221, 119, 16, 0.15);
                         color: $color-accent;
+                        border: 1px solid transparent;
 
                         &:hover {
-                            background-color: rgba($color-accent, 0.4);
+                            background-color: $color-accent;
+                            color: #fff;
+                            transform: translateY(-2px);
                         }
                     }
 
                     .btn-delete-comment {
-                        background-color: rgba(255, 100, 100, 0.2);
+                        background-color: rgba(255, 100, 100, 0.15);
                         color: #ff6464;
+                        border: 1px solid transparent;
 
                         &:hover {
-                            background-color: rgba(255, 100, 100, 0.4);
+                            background-color: #ff6464;
+                            color: #fff;
+                            transform: translateY(-2px);
                         }
                     }
                 }
@@ -276,72 +314,135 @@
 
     .comment-form-container {
         margin-top: 30px;
-        padding: 20px;
+        margin-bottom: 40px; // Added spacing below the form
+        padding: 25px;
         background-color: $color-bg-secondary;
-        border-radius: 8px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 
         h3 {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: $color-accent;
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
 
             label {
                 display: block;
-                margin-bottom: 5px;
+                margin-bottom: 8px;
+                font-weight: 600;
+                color: #e0e0e0;
             }
 
             select,
             textarea {
-                background-color: $color-bg-input;
-                border: 1px solid $color-separator;
-                color: $color-text;
-                padding: 10px;
-                border-radius: 4px;
+                background-color: #252525; // Slightly lighter than secondary for input
+                border: 1px solid #444;
+                color: #fff;
+                padding: 12px;
+                border-radius: 6px;
                 width: 100%;
                 font-family: inherit;
                 font-size: 1rem;
+                transition: border-color 0.3s ease;
 
                 &:focus {
                     outline: none;
                     border-color: $color-accent;
+                    background-color: #2a2a2a;
                 }
             }
         }
 
+        .rating-input {
+            display: flex;
+            gap: 5px;
+
+            button {
+                background: none;
+                border: none;
+                font-size: 2rem; // Larger stars
+                color: #555; // Default color for unselected stars
+                cursor: pointer;
+                transition: all 0.2s ease;
+                padding: 0 5px;
+                line-height: 1;
+
+                &.active,
+                &:hover {
+                    color: $color-accent; // Gold/Orange when active
+                    transform: scale(1.1); // Subtle pop effect
+                }
+            }
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
         .btn-submit {
-            width: auto;
-            padding: 10px 20px;
+            padding: 10px 25px;
             background-color: $color-accent;
             color: white;
             border: none;
             cursor: pointer;
             font-weight: bold;
-            border-radius: 4px;
-            transition: all 0.2s ease;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
 
             &:hover {
                 background-color: $color-accent-hover;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 10px rgba($color-accent, 0.3);
+            }
+
+            &:disabled {
+                opacity: 0.7;
+                cursor: not-allowed;
+                transform: none;
+            }
+        }
+
+        .btn-cancel {
+            padding: 10px 20px;
+            background-color: transparent;
+            color: #ccc;
+            border: 1px solid #555;
+            cursor: pointer;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+                color: #fff;
+                border-color: #fff;
             }
         }
     }
-}
 
-// Extra styles from ProductDetailView
-.loading-container {
-    text-align: center;
-    padding: 3rem 0;
-    color: white;
-}
+    // Extra styles from ProductDetailView
+    .loading-container {
+        text-align: center;
+        padding: 3rem 0;
+        color: white;
+    }
 
-.old-price {
-    text-decoration: line-through;
-    color: #cecece;
-    font-size: 1.5rem;
-}
+    .old-price {
+        text-decoration: line-through;
+        color: #cecece;
+        font-size: 1.5rem;
+    }
 
-.current-price {
-    color: #e58e27;
-    font-size: 2.5rem;
+    .current-price {
+        color: #e58e27;
+        font-size: 2.5rem;
+    }
 }
