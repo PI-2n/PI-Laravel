@@ -3,8 +3,8 @@
 @use "sass:color";
 
 .page-products {
-    display: block;
-    min-height: 80vh;
+    display: block; // Or flex if you want to center content
+    flex: 1; // Grow to fill .main
     background-color: $color-bg-secondary;
 }
 
