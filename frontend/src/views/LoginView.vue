@@ -38,6 +38,15 @@ const handleLogin = async () => {
             </label>
 
             <button type="submit">Iniciar sesión</button>
+
+            <div class="google-login">
+                <a href="http://localhost:8000/api/auth/google/redirect" class="btn-google">
+                    <div class="icon-wrapper">
+                        <img src="/images/icons/google.png" alt="Google">
+                    </div>
+                    <span>Iniciar sesión con Google</span>
+                </a>
+            </div>
         </form>
 
         <p>No tienes cuenta? <a href="register"><b>Regístrate</b></a></p>

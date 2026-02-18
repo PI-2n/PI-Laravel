@@ -9,6 +9,9 @@ Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
 
 // Public routes
+Route::get('auth/google/redirect', [AuthController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [AuthController::class, 'handleGoogleCallback']); // Note: In API, this usually redirects to frontend
+
 Route::get('products', [ProductController::class, 'index'])->name('api.products.index');
 Route::get('home', [ProductController::class, 'home'])->name('api.home'); // New endpoint
 Route::get('products/{product}', [ProductController::class, 'show'])->name('api.products.show');

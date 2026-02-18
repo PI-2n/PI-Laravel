@@ -70,4 +70,39 @@ class AuthController extends BaseController
 
         return $this->sendResponse(['name' => $request->user()->name], 'User successfully signed out', 200);
     }
+
+    public function redirectToGoogle()
+    {
+        return \Laravel\Socialite\Facades\Socialite::driver('google')->stateless()->redirect();
+    }
+
+    public function handleGoogleCallback()
+    {
+        try {
+            $googleUser = \Laravel\Socialite\Facades\Socialite::driver('google')->stateless()->user();
+
+            $user = User::updateOrCreate([
+                'email' => $googleUser->getEmail(),
+            ], [
+                'name' => $googleUser->getName(),
+                'last_name' => '', // Add default or extract from name
+                'username' => 'user_' . str()->random(8), // Generate unique username
+                'google_id' => $googleUser->getId(),
+                'password' => Hash::make(str()->random(24)),
+                'email_verified_at' => now(),
+                'role_id' => 3, // Customer
+            ]);
+
+            $token = $user->createToken('api')->plainTextToken;
+
+            // Redirect to Frontend
+            $frontendUrl = env('FRONTEND_URL', 'http://localhost:5173');
+            return redirect("{$frontendUrl}/auth/callback?token={$token}");
+
+        } catch (\Exception $e) {
+            // Return error as JSON or redirect to frontend with error
+            $frontendUrl = env('FRONTEND_URL', 'http://localhost:5173');
+            return redirect("{$frontendUrl}/login?error=google_auth_failed");
+        }
+    }
 }
