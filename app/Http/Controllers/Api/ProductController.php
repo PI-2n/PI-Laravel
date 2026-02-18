@@ -60,7 +60,6 @@ class ProductController extends Controller
         $offers = Product::where('active', true)
             ->where('is_offer', true)
             ->orderByDesc('offer_percentage')
-            ->take(10) // Limit for API
             ->get();
 
         return response()->json([
