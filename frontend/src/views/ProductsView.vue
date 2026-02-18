@@ -75,11 +75,11 @@ watch(() => route.query, () => {
 
             <div class="pagination" v-if="lastPage > 1">
                 <button @click="fetchProducts(currentPage - 1)" :disabled="currentPage === 1" class="btn-nav">
-                    Previous
+                    Anterior
                 </button>
-                <span class="page-info">Page {{ currentPage }} of {{ lastPage }}</span>
+                <span class="page-info">Página {{ currentPage }} de {{ lastPage }}</span>
                 <button @click="fetchProducts(currentPage + 1)" :disabled="currentPage === lastPage" class="btn-nav">
-                    Next
+                    Siguiente
                 </button>
             </div>
         </section>
