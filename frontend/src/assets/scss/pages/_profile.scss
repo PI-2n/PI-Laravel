@@ -174,6 +174,28 @@
         flex-direction: column;
         gap: 1.5rem;
 
+        .admin-separator {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 1rem 0 0.5rem;
+            color: $color-accent;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+
+            &::before,
+            &::after {
+                content: '';
+                flex: 1;
+                border-bottom: 1px solid rgba($color-separator, 0.3);
+            }
+
+            span {
+                padding: 0 10px;
+            }
+        }
+
         .profile-container {
             padding: 1.5rem;
             background-color: $color-bg-tertiary;

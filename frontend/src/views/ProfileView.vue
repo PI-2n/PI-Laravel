@@ -247,6 +247,10 @@ const importProducts = async () => {
             </div>
 
             <template v-if="authStore.isAdmin">
+                <div class="admin-separator">
+                    <span>PANEL DE ADMINISTRADOR</span>
+                </div>
+
                 <div class="profile-container sidebar-item">
                     <h3 class="add-product-title">Añadir producto</h3>
                     <div class="product-actions">
