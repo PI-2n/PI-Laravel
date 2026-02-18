@@ -38,7 +38,7 @@ export const useCartStore = defineStore('cart', () => {
             }
         } else {
             let finalPrice = parseFloat(product.price);
-            if (product.is_offer && product.offer_percentage) {
+            if (product.offer_percentage && product.offer_percentage > 0) {
                 finalPrice = finalPrice * (1 - (product.offer_percentage / 100));
             }
 

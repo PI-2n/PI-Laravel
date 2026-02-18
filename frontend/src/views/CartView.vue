@@ -62,9 +62,9 @@ const getPlatformIcon = (platformName) => {
                         </div>
 
                         <div class="item-pricing">
-                            <span v-if="item.product.is_offer" class="item-price-discounted">{{
+                            <span v-if="item.product.final_price < item.product.price" class="item-price-discounted">{{
                                 formatPrice(item.product.final_price) }}</span>
-                            <span v-if="item.product.is_offer" class="item-price-original">{{
+                            <span v-if="item.product.final_price < item.product.price" class="item-price-original">{{
                                 formatPrice(item.product.price) }}</span>
                             <span v-else class="item-price">{{ formatPrice(item.product.final_price) }}</span>
 
