@@ -27,14 +27,10 @@ A continuación se muestra un resumen de las tareas realizadas en cada Sprint pa
 - Modificación de productos desde la web
 - PhPSpreadsheet para importar productos de excel
 
-
-## <img src="https://vuejs.org/images/logo.png" width="25"> [Sprint 4 (13/02/2026 - 17/02/2026)](sprints/sprint4.md)
+## :fontawesome-brands-vuejs:{ style="color: #4FC08D;" } [Sprint 4 (13/02/2026 - 17/02/2026)](sprints/sprint4.md)
 - Migración de frontend de laravel blades a vue
-- Creación de base de datos
-- Vistas blade
-- Controladores para API
-- Gestión de login con Breeze
-- Modificación de productos desde la web
-- PhPSpreadsheet para importar productos de excel
+- Gestión de roles
+- Pinia
+- Validación en cliente con vee-validate y yup
 
 
