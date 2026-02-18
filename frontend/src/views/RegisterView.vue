@@ -1,37 +1,40 @@
 <script setup>
-import { reactive, ref } from 'vue';
+import { ref } from 'vue';
 import { useAuthStore } from '../stores/auth';
 import { RouterLink } from 'vue-router';
+import { Form, Field, ErrorMessage } from 'vee-validate';
+import * as yup from 'yup';
 
 const authStore = useAuthStore();
+const isLoading = ref(false);
+const apiErrors = ref({});
 
-const form = reactive({
-    name: '',
-    last_name: '',
-    email: '',
-    username: '',
-    password: '',
-    confirm_password: ''
+const schema = yup.object().shape({
+    name: yup.string().required('El nombre es obligatorio'),
+    last_name: yup.string().required('Los apellidos son obligatorios'),
+    email: yup.string().email('Email no válido').required('El email es obligatorio'),
+    username: yup.string().required('El nick es obligatorio'),
+    password: yup.string().min(6, 'La contraseña debe tener al menos 6 caracteres').required('La contraseña es obligatoria'),
+    confirm_password: yup.string()
+        .oneOf([yup.ref('password'), null], 'Las contraseñas no coinciden')
+        .required('Repetir la contraseña es obligatorio')
 });
 
-const errors = ref({});
-const isLoading = ref(false);
-
-const handleRegister = async () => {
+const handleRegister = async (values) => {
     isLoading.value = true;
-    errors.value = {};
+    apiErrors.value = {};
 
     try {
-        await authStore.register(form);
+        await authStore.register(values);
     } catch (error) {
         if (error.response && error.response.data && error.response.data.message) {
             if (error.response.data.info) {
-                errors.value = error.response.data.info;
+                apiErrors.value = error.response.data.info;
             } else {
-                errors.value = { general: [error.response.data.message] };
+                apiErrors.value = { general: [error.response.data.message] };
             }
         } else {
-            errors.value = { general: ['Ha ocurrido un error inesperado via Api.'] };
+            apiErrors.value = { general: ['Ha ocurrido un error inesperado via Api.'] };
         }
     } finally {
         isLoading.value = false;
@@ -43,51 +46,57 @@ const handleRegister = async () => {
     <div class="register-page">
         <h1>Registro</h1>
 
-        <form @submit.prevent="handleRegister">
-            <div v-if="errors.general" class="error-general">
-                {{ errors.general[0] }}
+        <Form :validation-schema="schema" @submit="handleRegister">
+            <div v-if="apiErrors.general" class="error-general">
+                {{ apiErrors.general[0] }}
             </div>
 
             <div class="form-group">
                 <label for="name">Nombre*:</label>
-                <input type="text" id="name" v-model="form.name" required>
-                <span v-if="errors.name" class="error-text">{{ errors.name[0] }}</span>
+                <Field name="name" type="text" id="name" />
+                <ErrorMessage name="name" class="error-text" />
+                <span v-if="apiErrors.name" class="error-text">{{ apiErrors.name[0] }}</span>
             </div>
 
             <div class="form-group">
                 <label for="last_name">Apellidos*:</label>
-                <input type="text" id="last_name" v-model="form.last_name" required>
-                <span v-if="errors.last_name" class="error-text">{{ errors.last_name[0] }}</span>
+                <Field name="last_name" type="text" id="last_name" />
+                <ErrorMessage name="last_name" class="error-text" />
+                <span v-if="apiErrors.last_name" class="error-text">{{ apiErrors.last_name[0] }}</span>
             </div>
 
             <div class="form-group">
                 <label for="email">Email*:</label>
-                <input type="email" id="email" v-model="form.email" required>
-                <span v-if="errors.email" class="error-text">{{ errors.email[0] }}</span>
+                <Field name="email" type="email" id="email" />
+                <ErrorMessage name="email" class="error-text" />
+                <span v-if="apiErrors.email" class="error-text">{{ apiErrors.email[0] }}</span>
             </div>
 
             <div class="form-group">
                 <label for="username">Nick*:</label>
-                <input type="text" id="username" v-model="form.username" required>
-                <span v-if="errors.username" class="error-text">{{ errors.username[0] }}</span>
+                <Field name="username" type="text" id="username" />
+                <ErrorMessage name="username" class="error-text" />
+                <span v-if="apiErrors.username" class="error-text">{{ apiErrors.username[0] }}</span>
             </div>
 
             <div class="form-group">
                 <label for="password">Contraseña*:</label>
-                <input type="password" id="password" v-model="form.password" required>
-                <span v-if="errors.password" class="error-text">{{ errors.password[0] }}</span>
+                <Field name="password" type="password" id="password" />
+                <ErrorMessage name="password" class="error-text" />
+                <span v-if="apiErrors.password" class="error-text">{{ apiErrors.password[0] }}</span>
             </div>
 
             <div class="form-group">
                 <label for="confirm_password">Repetir contraseña*:</label>
-                <input type="password" id="confirm_password" v-model="form.confirm_password" required>
-                <span v-if="errors.confirm_password" class="error-text">{{ errors.confirm_password[0] }}</span>
+                <Field name="confirm_password" type="password" id="confirm_password" />
+                <ErrorMessage name="confirm_password" class="error-text" />
+                <span v-if="apiErrors.confirm_password" class="error-text">{{ apiErrors.confirm_password[0] }}</span>
             </div>
 
             <button type="submit" :disabled="isLoading">
                 {{ isLoading ? 'Registrando...' : 'Registrarse' }}
             </button>
-        </form>
+        </Form>
 
         <p>¿Ya tienes cuenta? <RouterLink to="/login"><b>Inicia sesión</b></RouterLink>
         </p>
