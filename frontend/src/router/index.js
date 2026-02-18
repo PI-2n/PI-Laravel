@@ -106,10 +106,20 @@ router.beforeEach(async (to, from, next) => {
     }
 
     if (to.meta.roles) {
-        const userRole = authStore.user?.role_id === 1 ? 'admin' : 'user';
+        const roleId = authStore.user?.role_id;
+        let userRole = 'user';
+
+        switch (roleId) {
+            case 1: userRole = 'admin'; break;
+            case 2: userRole = 'editor'; break;
+            case 3: userRole = 'user'; break;
+            case 4: userRole = 'vendor'; break;
+            default: userRole = 'guest';
+        }
+
         if (!authStore.user || !to.meta.roles.includes(userRole)) {
-            next({ name: 'home' })
-            return
+            next({ name: 'forbidden' });
+            return;
         }
     }
 

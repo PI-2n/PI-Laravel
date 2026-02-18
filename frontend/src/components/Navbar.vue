@@ -4,10 +4,12 @@ import { useRouter } from 'vue-router';
 import { computed, ref } from 'vue';
 
 import { useCartStore } from '../stores/cart';
+import { useRole } from '../composables/useRole';
 
 const authStore = useAuthStore();
 const cartStore = useCartStore();
 const router = useRouter();
+const { can } = useRole();
 
 const searchQuery = ref('');
 

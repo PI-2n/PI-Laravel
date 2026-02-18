@@ -1,34 +1,39 @@
-import { storeToRefs } from 'pinia'
-import { useAuthStore } from '../stores/auth'
+import { computed } from 'vue';
+import { useAuthStore } from '../stores/auth';
 
 export function useRole() {
-    const authStore = useAuthStore()
-    const { user } = storeToRefs(authStore)
+    const authStore = useAuthStore();
+
+    const role = computed(() => {
+        if (!authStore.user) return 'guest';
+        switch (authStore.user.role_id) {
+            case 1: return 'admin';
+            case 2: return 'moderator';
+            case 3: return 'customer';
+            default: return 'customer';
+        }
+    });
+
+    const is = (roleName) => role.value === roleName;
 
     const can = (permission) => {
-        const role = user.value?.role
+        const currentRole = role.value;
 
-        const rules = {
-            admin: ['create', 'edit', 'delete', 'moderate', 'view_admin'],
-            vendor: ['create', 'edit', 'delete', 'view_vendor'],
-            editor: ['moderate', 'view_editor'],
-            user: ['read', 'view_user']
-        }
+        const permissions = {
+            admin: ['create', 'edit', 'delete', 'moderate', 'view_admin_panel'],
+            moderator: ['moderate', 'view_admin_panel'],
+            customer: ['read', 'comment', 'rate', 'buy'],
+            guest: ['read']
+        };
 
-        if (rules[role]?.includes(permission)) {
-            return true;
-        }
+        if (currentRole === 'admin') return true;
 
-        if (role === permission) {
-            return true;
-        }
+        return permissions[currentRole]?.includes(permission) ?? false;
+    };
 
-        return false
-    }
-
-    const hasRole = (roleName) => {
-        return user.value?.role === roleName;
-    }
-
-    return { can, hasRole, user }
+    return {
+        role,
+        is,
+        can
+    };
 }
