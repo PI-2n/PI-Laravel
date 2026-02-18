@@ -16,6 +16,7 @@
 @use "pages/cart";
 @use "pages/checkout";
 @use 'pages/checkout-success';
+@use "pages/n8n";
 
 @include header.styles;
 @include footer.styles;

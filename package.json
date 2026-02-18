@@ -19,6 +19,7 @@
         "vite": "^7.0.7"
     },
     "dependencies": {
-        "@vee-validate/yup": "^4.15.1"
+        "@vee-validate/yup": "^4.15.1",
+        "@n8n/chat": "^1.9.1"
     }
 }
