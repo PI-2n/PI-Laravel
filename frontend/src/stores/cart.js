@@ -77,6 +77,11 @@ export const useCartStore = defineStore('cart', () => {
         saveCart();
     };
 
+    const instantBuy = (product, platform = null) => {
+        clearCart();
+        addToCart(product, platform);
+    };
+
     return {
         items,
         cartCount,
@@ -84,6 +89,7 @@ export const useCartStore = defineStore('cart', () => {
         addToCart,
         removeFromCart,
         updateQuantity,
-        clearCart
+        clearCart,
+        instantBuy
     };
 });

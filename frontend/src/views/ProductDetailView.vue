@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import api from '../services/api';
 import { useCartStore } from '../stores/cart';
 import { useAuthStore } from '../stores/auth'; // Import Auth Store
@@ -8,6 +8,7 @@ import ToastNotification from '../components/ToastNotification.vue';
 import CommentList from '../components/comments/CommentList.vue';
 
 const route = useRoute();
+const router = useRouter();
 const product = ref(null);
 const loading = ref(true);
 const cartStore = useCartStore();
@@ -89,6 +90,13 @@ const addToCartRelated = (relatedProduct) => {
     toastMessage.value = `${relatedProduct.name} añadido al carrito`;
     toast.value.show();
 };
+
+const handleInstantBuy = () => {
+    if (!product.value) return;
+    const selectedPlatformObj = product.value.platforms.find(p => p.name.toLowerCase() === selectedPlatform.value);
+    cartStore.instantBuy(product.value, selectedPlatformObj);
+    router.push({ name: 'checkout' });
+};
 </script>
 
 <template>
@@ -141,7 +149,7 @@ const addToCartRelated = (relatedProduct) => {
                             </button>
                         </form>
 
-                        <button class="btn-fast-buy" title="Comprar ahora">
+                        <button class="btn-fast-buy" title="Comprar ahora" @click="handleInstantBuy">
                             <img src="/images/icons/fast-buy.png" alt="Fast Buy">
                         </button>
                     </div>
