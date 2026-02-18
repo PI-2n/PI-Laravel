@@ -140,16 +140,30 @@ const importProducts = async () => {
 
                     <form @submit.prevent="updateProfile" class="profile-form">
                         <div class="form-group">
+                            <label for="username">Nombre de usuario</label>
+                            <input id="username" type="text" v-model="user.username" class="form-control" required
+                                autocomplete="username">
+                            <span v-if="errors.username" class="error-text">{{ errors.username[0] }}</span>
+                        </div>
+
+                        <div class="form-group">
                             <label for="name">Nombre</label>
-                            <input id="name" type="text" v-model="user.name" class="form-control" required autofocus
-                                autocomplete="name">
+                            <input id="name" type="text" v-model="user.name" class="form-control" required
+                                autocomplete="given-name">
                             <span v-if="errors.name" class="error-text">{{ errors.name[0] }}</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="last_name">Apellidos</label>
+                            <input id="last_name" type="text" v-model="user.last_name" class="form-control" required
+                                autocomplete="family-name">
+                            <span v-if="errors.last_name" class="error-text">{{ errors.last_name[0] }}</span>
                         </div>
 
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input id="email" type="email" v-model="user.email" class="form-control" required
-                                autocomplete="username">
+                                autocomplete="email">
                             <span v-if="errors.email" class="error-text">{{ errors.email[0] }}</span>
                         </div>
 
@@ -182,7 +196,7 @@ const importProducts = async () => {
                             <input id="password" type="password" v-model="passwordForm.password" class="form-control"
                                 autocomplete="new-password">
                             <span v-if="passwordErrors.password" class="error-text">{{ passwordErrors.password[0]
-                                }}</span>
+                            }}</span>
                         </div>
 
                         <div class="form-group">
