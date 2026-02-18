@@ -1,3 +1,8 @@
+# Archivos de entorno
+.env
+.env.example
+.env.testing
+
 # Logs & cache
 *.log
 .phpunit.result.cache
