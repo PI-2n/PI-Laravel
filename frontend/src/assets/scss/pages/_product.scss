@@ -623,4 +623,94 @@
         color: #e58e27;
         font-size: 2.5rem;
     }
+
+    // Estilos Slider Móvil (inspirados en _index.scss)
+    @media (max-width: 768px) {
+        .related-products-section {
+            padding: 0 10px;
+
+            h2 {
+                font-size: 1.5rem;
+                margin-left: 10px;
+            }
+
+            .related-grid {
+                display: flex;
+                flex-wrap: nowrap;
+                gap: 15px;
+                overflow-x: auto;
+                scrollbar-width: none;
+                padding-bottom: 20px;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+            }
+
+            .related-card {
+                flex: 0 0 auto;
+                width: 140px;
+                margin: 0;
+                background-color: $color-bg-secondary;
+                border: 1px solid rgba(255, 255, 255, 0.05);
+
+                .related-image {
+                    aspect-ratio: 2/3;
+
+                    img {
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+
+                .related-info {
+                    padding: 10px;
+
+                    h3 {
+                        font-size: 0.8rem;
+                        line-height: 1.2;
+                        margin-bottom: 5px;
+                        height: 2.4em;
+                        overflow: hidden;
+                    }
+
+                    .price {
+                        flex-wrap: wrap;
+                        gap: 4px;
+
+                        .old-price {
+                            font-size: 0.75rem;
+                        }
+
+                        .current-price {
+                            font-size: 0.9rem;
+                        }
+                    }
+
+                    .related-platforms {
+                        margin-bottom: 8px;
+
+                        .related-platform-icon {
+                            width: 24px;
+                            height: 24px;
+
+                            img {
+                                width: 14px;
+                                height: 14px;
+                            }
+                        }
+                    }
+
+                    .btn-view {
+                        padding: 6px;
+
+                        img {
+                            width: 16px;
+                            height: 16px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
