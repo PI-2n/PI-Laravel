@@ -18,6 +18,11 @@ class CheckoutController extends BaseController
     /**
      * Get checkout data (cart summary, total, saved cards)
      */
+    /**
+     * Get checkout data (cart summary, total, saved cards)
+     * 
+     * @authenticated
+     */
     public function index(Request $request)
     {
         $user = $request->user();
@@ -46,6 +51,11 @@ class CheckoutController extends BaseController
 
     /**
      * Process payment
+     */
+    /**
+     * Process payment
+     * 
+     * @authenticated
      */
     public function processPayment(Request $request)
     {

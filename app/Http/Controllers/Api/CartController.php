@@ -15,6 +15,11 @@ class CartController extends BaseController
     /**
      * Sync frontend cart with backend database.
      */
+    /**
+     * Sync frontend cart with backend database.
+     * 
+     * @authenticated
+     */
     public function sync(Request $request)
     {
         \Log::info('Cart Sync Payload:', $request->all());

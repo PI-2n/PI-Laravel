@@ -64,6 +64,11 @@ class AuthController extends BaseController
         return $this->sendResponse($result, 'User created successfully', 201);
     }
 
+    /**
+     * Log the user out (Invalidate the token).
+     * 
+     * @authenticated
+     */
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();

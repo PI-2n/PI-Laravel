@@ -13,6 +13,9 @@ class CommentController extends Controller
 {
     use AuthorizesRequests;
 
+    /**
+     * @authenticated
+     */
     public function store(Request $request, Product $product)
     {
         $validated = $request->validate([
@@ -40,6 +43,9 @@ class CommentController extends Controller
         return new CommentResource($comment);
     }
 
+    /**
+     * @authenticated
+     */
     public function update(Request $request, Comment $comment)
     {
         $this->authorize('update', $comment);
@@ -54,6 +60,9 @@ class CommentController extends Controller
         return new CommentResource($comment);
     }
 
+    /**
+     * @authenticated
+     */
     public function destroy(Comment $comment)
     {
         $this->authorize('delete', $comment);

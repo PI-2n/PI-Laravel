@@ -13,6 +13,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ProductImportController extends Controller
 {
+    /**
+     * Import products from Excel/CSV.
+     * 
+     * @authenticated
+     */
     public function import(Request $request)
     {
         // 🔐 1️⃣ Autorización REAL

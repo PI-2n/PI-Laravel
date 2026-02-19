@@ -237,6 +237,24 @@ const importProducts = async () => {
                         </div>
                     </form>
                 </section>
+
+                <div class="section-divider"></div>
+
+                <section>
+                    <header>
+                        <h3>Documentación API</h3>
+                        <p class="description">Accede a la documentación completa de la API para desarrolladores.</p>
+                    </header>
+
+                    <div class="profile-form">
+                        <div class="form-actions" style="margin-top: 1rem;">
+                            <a href="http://localhost:8000/docs" target="_blank" class="btn-secondary"
+                                style="text-decoration: none; display: inline-block;">
+                                Ver Documentación
+                            </a>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
 

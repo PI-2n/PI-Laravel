@@ -101,6 +101,11 @@ class ProductController extends Controller
             ]);
     }
 
+    /**
+     * Store a newly created resource in storage.
+     * 
+     * @authenticated
+     */
     public function store(ProductRequest $request)
     {
         // ProductRequest handles validation.

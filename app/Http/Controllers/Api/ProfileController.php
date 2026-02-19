@@ -14,6 +14,11 @@ class ProfileController extends BaseController
     /**
      * Update the user's profile information.
      */
+    /**
+     * Update the user's profile information.
+     * 
+     * @authenticated
+     */
     public function update(ProfileUpdateRequest $request)
     {
         $request->user()->fill($request->validated());
@@ -29,6 +34,11 @@ class ProfileController extends BaseController
 
     /**
      * Update the user's password.
+     */
+    /**
+     * Update the user's password.
+     * 
+     * @authenticated
      */
     public function updatePassword(Request $request)
     {
@@ -46,6 +56,11 @@ class ProfileController extends BaseController
 
     /**
      * Delete the user's account.
+     */
+    /**
+     * Delete the user's account.
+     * 
+     * @authenticated
      */
     public function destroy(Request $request)
     {

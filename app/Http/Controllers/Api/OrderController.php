@@ -12,6 +12,11 @@ class OrderController extends BaseController
     /**
      * Get order details.
      */
+    /**
+     * Get order details.
+     * 
+     * @authenticated
+     */
     public function show(Request $request, $id)
     {
         $order = Order::with(['items.product', 'payment'])->find($id);
