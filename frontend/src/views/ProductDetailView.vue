@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import api from '../services/api';
 import { useCartStore } from '../stores/cart';
@@ -47,6 +47,17 @@ onMounted(async () => {
     await fetchProduct();
     if (product.value && product.value.platforms && product.value.platforms.length > 0) {
         selectedPlatform.value = product.value.platforms[0].name.toLowerCase();
+    }
+});
+
+watch(() => route.params.id, async (newId) => {
+    if (newId) {
+        loading.value = true;
+        await fetchProduct();
+        if (product.value && product.value.platforms && product.value.platforms.length > 0) {
+            selectedPlatform.value = product.value.platforms[0].name.toLowerCase();
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 });
 
