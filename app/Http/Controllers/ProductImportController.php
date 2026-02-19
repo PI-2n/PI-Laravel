@@ -65,7 +65,7 @@ class ProductImportController extends Controller
                         [
                             'name' => $row[1] ?? '',
                             'description' => $row[2] ?? null,
-                            'image_url' => $row[3] ?? null,
+                            'image_url' => !empty($row[3]) ? $row[3] : 'placeholder.jpg',
                             'video_url' => $row[4] ?? null,
                             'price' => (float) ($row[5] ?? 0),
                             'is_new' => (bool) ($row[6] ?? 0),

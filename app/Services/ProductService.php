@@ -18,6 +18,8 @@ class ProductService
             $imageName = time() . '_' . $image->getClientOriginalName();
             $image->move(public_path('images/products'), $imageName);
             $data['image_url'] = $imageName;
+        } else {
+            $data['image_url'] = "placeholder.jpg";
         }
 
         // Handle Video

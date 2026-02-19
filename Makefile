@@ -51,11 +51,16 @@ migrate_fresh:
 populate:
 	docker compose run --rm app php artisan db:seed
 
+db:
+	docker compose run --rm app bash -c "until nc -z db 3306; do echo 'Waiting for DB...'; sleep 2; done; php artisan migrate:fresh"
+	docker compose run --rm app php artisan db:seed
+
 test:
 	docker compose run --rm -e APP_ENV=testing -e DB_CONNECTION=sqlite -e DB_DATABASE=:memory: app php artisan test
 
 artisan:
 	@docker compose run --rm app php artisan $(if $(CMD),$(CMD),$(cmd))
 	@true
+	
 
 # Comandillo para volver al docker de daemon por defecto de linux: docker context use default
