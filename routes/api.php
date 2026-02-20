@@ -15,6 +15,7 @@ Route::get('auth/google/callback', [AuthController::class, 'handleGoogleCallback
 Route::get('products', [ProductController::class, 'index'])->name('api.products.index');
 Route::get('home', [ProductController::class, 'home'])->name('api.home'); // New endpoint
 Route::get('products/{product}', [ProductController::class, 'show'])->name('api.products.show');
+Route::get('/tags', [App\Http\Controllers\Api\TagController::class, 'index']); // Public so frontend can fetch them
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
@@ -45,7 +46,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Admin routes
     Route::post('/products/import', [App\Http\Controllers\ProductImportController::class, 'import']);
-    Route::get('/tags', [App\Http\Controllers\Api\TagController::class, 'index']);
 
     // Comments
     Route::post('products/{product}/comments', [App\Http\Controllers\Api\CommentController::class, 'store']);

@@ -22,9 +22,14 @@ class ProductController extends Controller
     {
         $platform = $request->query('platform');
         $search = $request->query('q');
+        $tags = $request->query('tags');
+        $minPrice = $request->query('min_price');
+        $maxPrice = $request->query('max_price');
+        $releaseDateFrom = $request->query('release_date_from');
+        $releaseDateTo = $request->query('release_date_to');
 
         // If no filter is provided, return empty collection (as requested)
-        if (!$platform && !$search) {
+        if (!$platform && !$search && !$tags && !$minPrice && !$maxPrice && !$releaseDateFrom && !$releaseDateTo) {
             return ProductResource::collection(collect());
         }
 
@@ -38,6 +43,31 @@ class ProductController extends Controller
 
         if ($search) {
             $query->where('name', 'like', "%{$search}%");
+        }
+
+        if ($tags) {
+            $tagsArray = is_array($tags) ? $tags : explode(',', $tags);
+            foreach ($tagsArray as $tagId) {
+                $query->whereHas('tags', function ($q) use ($tagId) {
+                    $q->where('tags.id', $tagId);
+                });
+            }
+        }
+
+        if (is_numeric($minPrice)) {
+            $query->where('price', '>=', $minPrice);
+        }
+
+        if (is_numeric($maxPrice)) {
+            $query->where('price', '<=', $maxPrice);
+        }
+
+        if ($releaseDateFrom) {
+            $query->whereDate('release_date', '>=', $releaseDateFrom);
+        }
+
+        if ($releaseDateTo) {
+            $query->whereDate('release_date', '<=', $releaseDateTo);
         }
 
         return ProductResource::collection($query->paginate(10));
