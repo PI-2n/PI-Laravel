@@ -81,6 +81,12 @@ const router = createRouter({
             meta: { requiresAuth: true }
         },
         {
+            path: '/profile/library',
+            name: 'library',
+            component: () => import('../views/LibraryView.vue'),
+            meta: { requiresAuth: true }
+        },
+        {
             path: '/auth/callback',
             name: 'auth-callback',
             component: () => import('../views/AuthCallback.vue')

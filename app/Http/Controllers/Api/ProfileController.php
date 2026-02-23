@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Resources\ProductResource;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -52,6 +54,29 @@ class ProfileController extends BaseController
         ]);
 
         return $this->sendResponse([], 'Password updated successfully');
+    }
+
+    /**
+     * Get the user's purchased products (library) along with their given rating.
+     * 
+     * @authenticated
+     */
+    public function library(Request $request)
+    {
+        $user = $request->user();
+
+        $products = \App\Models\Product::whereHas('orderItems.order', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->with([
+                    'comments' => function ($query) use ($user) {
+                        $query->where('user_id', $user->id);
+                    }
+                ])->get();
+
+        return $this->sendResponse(
+            \App\Http\Resources\ProductResource::collection($products),
+            'User library fetched successfully'
+        );
     }
 
     /**

@@ -196,7 +196,7 @@ const importProducts = async () => {
                             <input id="password" type="password" v-model="passwordForm.password" class="form-control"
                                 autocomplete="new-password">
                             <span v-if="passwordErrors.password" class="error-text">{{ passwordErrors.password[0]
-                            }}</span>
+                                }}</span>
                         </div>
 
                         <div class="form-group">
@@ -260,6 +260,13 @@ const importProducts = async () => {
 
         <div class="profile-sidebar">
             <div class="profile-container sidebar-item">
+                <h3>Mi Biblioteca</h3>
+                <RouterLink to="/profile/library" class="btn-primary btn-block" style="text-align: center;">
+                    Mis Juegos
+                </RouterLink>
+            </div>
+
+            <div class="profile-container sidebar-item" style="margin-top: 1rem;">
                 <h3>Cerrar Sesión</h3>
                 <button @click="logout" class="btn-secondary btn-block">Cerrar sesión</button>
             </div>

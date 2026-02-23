@@ -1,0 +1,193 @@
+@use "../base/variables" as *;
+@use "../utils/mixins" as mixins;
+
+
+main {
+    background: $color-bg-secondary;
+}
+
+.library-page {
+    max-width: 100%;
+    margin: 0;
+    padding: 2rem 0;
+
+    .library-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+
+    .library-header {
+        margin-bottom: 2rem;
+
+        h2 {
+            font-size: 2rem;
+            color: $color-text;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            color: $color-separator;
+            font-size: 1.1rem;
+        }
+    }
+
+    .loading-state,
+    .error-state,
+    .empty-state {
+        text-align: center;
+        padding: 4rem 2rem;
+        background: $color-card;
+        border-radius: 8px;
+        border: 1px solid $color-border;
+        margin: 0 1rem;
+
+        p {
+            color: $color-text;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+    }
+
+    .error-state p {
+        color: $color-danger;
+    }
+
+    .library-view-main {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        .user-header-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.25rem;
+            border: 1px solid $color-border;
+            border-radius: 8px;
+            background: $color-bg-tertiary;
+
+            .user-info {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+
+                .user-avatar {
+                    width: 38px;
+                    height: 38px;
+                    border-radius: 50%;
+                    background: $color-border;
+                    padding: 4px;
+                }
+
+                .user-name {
+                    font-weight: 500;
+                    color: $color-text;
+                    font-size: 1.1rem;
+                }
+            }
+
+            .card-options {
+                color: $color-separator;
+                font-weight: bold;
+                letter-spacing: 2px;
+                cursor: pointer;
+                font-size: 1.2rem;
+            }
+        }
+
+        .library-full-list {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            .library-list-item {
+                display: flex;
+                padding: 1.5rem 0;
+                gap: 1.5rem;
+                border-bottom: 2px solid $color-border;
+
+                &:last-child {
+                    border-bottom: none;
+                }
+
+                .product-image-link {
+                    flex-shrink: 0;
+                    display: block;
+                    width: 170px;
+                    height: 250px;
+                    border-radius: 4px;
+                    overflow: hidden;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+
+                    .product-image {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+
+                .product-info-col {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    flex-grow: 1;
+                    padding: 0.5rem 0;
+
+                    .product-title-link {
+                        text-decoration: none;
+
+                        h3 {
+                            font-size: 1.3rem;
+                            color: $color-text;
+                            margin: 0;
+                            line-height: 1.3;
+                            display: -webkit-box;
+                            -webkit-line-clamp: 2;
+                            line-clamp: 2;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+
+                            &:hover {
+                                color: $color-accent;
+                            }
+                        }
+                    }
+
+                    .rating-display {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.5rem;
+
+                        .star {
+                            color: $color-accent;
+                            font-size: 1.6rem;
+                            line-height: 1;
+                        }
+
+                        .rating-value {
+                            font-size: 1.6rem;
+                            font-weight: bold;
+                            color: $color-text;
+                        }
+
+                        .rate-link {
+                            font-size: 0.9rem;
+                            color: $color-accent;
+                            text-decoration: none;
+                            font-weight: 500;
+                            padding: 0.25rem 0.5rem;
+                            border: 1px solid $color-accent;
+                            border-radius: 4px;
+                            transition: all 0.2s;
+
+                            &:hover {
+                                background: rgba($color-accent, 0.1);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

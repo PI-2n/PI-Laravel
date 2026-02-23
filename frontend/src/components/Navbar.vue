@@ -1,7 +1,7 @@
 <script setup>
 import { useAuthStore } from '../stores/auth';
 import { useRouter } from 'vue-router';
-import { computed, ref } from 'vue';
+import { computed, ref, onMounted, onUnmounted } from 'vue';
 
 import { useCartStore } from '../stores/cart';
 import { useRole } from '../composables/useRole';
@@ -18,6 +18,37 @@ const handleSearch = () => {
         router.push({ name: 'products', query: { q: searchQuery.value } });
         searchQuery.value = '';
     }
+};
+
+const isDropdownOpen = ref(false);
+
+const toggleDropdown = () => {
+    isDropdownOpen.value = !isDropdownOpen.value;
+};
+
+const closeDropdown = () => {
+    isDropdownOpen.value = false;
+};
+
+const handleClickOutside = (event) => {
+    const dropdownContainer = document.querySelector('.user-dropdown-container');
+    if (dropdownContainer && !dropdownContainer.contains(event.target)) {
+        closeDropdown();
+    }
+};
+
+onMounted(() => {
+    document.addEventListener('click', handleClickOutside);
+});
+
+onUnmounted(() => {
+    document.removeEventListener('click', handleClickOutside);
+});
+
+const logout = async () => {
+    await authStore.logout();
+    router.push({ name: 'home' });
+    closeDropdown();
 };
 
 </script>
@@ -55,12 +86,19 @@ const handleSearch = () => {
         <div class="separator"></div>
         <div class="user-btn-container">
             <template v-if="authStore.isAuthenticated">
-                <RouterLink to="/profile" custom v-slot="{ href, navigate, isActive: isRouterActive }">
-                    <a :href="href" @click="navigate">
+                <div class="user-dropdown-container">
+                    <a href="#" @click.prevent="toggleDropdown">
                         <img src="/images/icons/user.png" alt="Usuario" class="user-btn"
-                            :class="{ 'is-active': isRouterActive }" />
+                            :class="{ 'is-active': isDropdownOpen }" />
                     </a>
-                </RouterLink>
+                    <div class="user-dropdown-menu" :class="{ 'show': isDropdownOpen }">
+                        <RouterLink to="/profile/library" class="dropdown-item">Mi Biblioteca
+                        </RouterLink>
+                        <RouterLink to="/profile" class="dropdown-item">Editar Perfil
+                        </RouterLink>
+                        <button @click="logout" class="dropdown-item logout-btn">Cerrar Sesión</button>
+                    </div>
+                </div>
             </template>
             <template v-else>
                 <RouterLink to="/login" custom v-slot="{ href, navigate, isActive: isRouterActive }">

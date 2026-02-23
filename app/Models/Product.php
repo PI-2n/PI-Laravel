@@ -45,6 +45,11 @@ class Product extends Model
         return $this->belongsToMany(Platform::class);
     }
 
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
     public function getFinalPriceAttribute()
     {
         if (!$this->offer_percentage || $this->offer_percentage <= 0) {
@@ -53,13 +58,13 @@ class Product extends Model
 
         $discount = $this->offer_percentage / 100;
         $finalPrice = $this->price * (1 - $discount);
-    
+
         return round($finalPrice, 2);
     }
 
     public function hasDiscount(): bool
     {
-        return $this->offer_percentage > 0 && 
+        return $this->offer_percentage > 0 &&
             $this->getFinalPriceAttribute() < $this->price;
     }
 }

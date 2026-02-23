@@ -41,6 +41,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/checkout', [App\Http\Controllers\Api\CheckoutController::class, 'processPayment']);
 
     // Profile
+    Route::get('/profile/library', [App\Http\Controllers\Api\ProfileController::class, 'library']);
     Route::patch('/profile', [App\Http\Controllers\Api\ProfileController::class, 'update']);
     Route::put('/password', [App\Http\Controllers\Api\ProfileController::class, 'updatePassword']);
     Route::delete('/profile', [App\Http\Controllers\Api\ProfileController::class, 'destroy']);
