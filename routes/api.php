@@ -14,6 +14,7 @@ Route::get('auth/google/callback', [AuthController::class, 'handleGoogleCallback
 
 Route::get('products', [ProductController::class, 'index'])->name('api.products.index');
 Route::get('home', [ProductController::class, 'home'])->name('api.home'); // New endpoint
+Route::get('cart/recommendations', [ProductController::class, 'cartRecommendations']);
 Route::get('products/{product}', [ProductController::class, 'show'])->name('api.products.show');
 Route::get('/tags', [App\Http\Controllers\Api\TagController::class, 'index']); // Public so frontend can fetch them
 Route::get('/platforms', [App\Http\Controllers\Api\PlatformController::class, 'index']);

@@ -128,6 +128,42 @@ class ProductController extends Controller
             ]);
     }
 
+    public function cartRecommendations(Request $request)
+    {
+        $productIds = $request->query('product_ids', []);
+
+        if (empty($productIds)) {
+            return ProductResource::collection(collect());
+        }
+
+        // Fetch tags from the products in the cart
+        $tagIds = \Illuminate\Support\Facades\DB::table('product_tag')
+            ->whereIn('product_id', $productIds)
+            ->pluck('tag_id')
+            ->unique();
+
+        if ($tagIds->isEmpty()) {
+            return ProductResource::collection(collect());
+        }
+
+        $related = Product::whereNotIn('id', $productIds)
+            ->where('active', true)
+            ->whereHas('tags', function ($query) use ($tagIds) {
+                $query->whereIn('tags.id', $tagIds);
+            })
+            ->withCount([
+                'tags' => function ($query) use ($tagIds) {
+                    $query->whereIn('tags.id', $tagIds);
+                }
+            ])
+            ->with('platforms')
+            ->orderByDesc('tags_count')
+            ->take(4)
+            ->get();
+
+        return ProductResource::collection($related);
+    }
+
     /**
      * Store a newly created resource in storage.
      * 
