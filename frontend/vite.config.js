@@ -1,11 +1,15 @@
 import { fileURLToPath, URL } from 'node:url'
-
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import laravel from 'laravel-vite-plugin'
 
-// https://vitejs.dev/config/
 export default defineConfig({
     plugins: [
+        laravel({
+            input: ['resources/scss/app.scss', 'resources/js/app.js'],
+            buildDirectory: 'build',
+            refresh: true,
+        }),
         vue(),
     ],
     resolve: {
@@ -14,15 +18,17 @@ export default defineConfig({
         }
     },
     server: {
+        host: '0.0.0.0',
+        port: 5173,
         proxy: {
             '/api': {
-                target: 'http://localhost:8000',
-                changeOrigin: true,
-                headers: {
-                    Accept: 'application/json',
-                    "X-Requested-With": "XMLHttpRequest"
-                }
+                target: 'http://app:9000',
+                changeOrigin: true
             }
         }
+    },
+    build: {
+        manifest: true,
+        outDir: 'dist',
     }
 })
