@@ -77,19 +77,75 @@ const getPlatformIcon = (name) => {
     return 'pc';
 };
 
+const animateToCart = (startEl, imageUrl) => {
+    const cartEl = document.querySelector('.cart-btn-wrapper img');
+    if (!cartEl || !startEl) return;
+
+    const startRect = startEl.getBoundingClientRect();
+    const cartRect = cartEl.getBoundingClientRect();
+
+    const flyingImg = document.createElement('img');
+    flyingImg.src = imageUrl;
+    flyingImg.style.position = 'fixed';
+    flyingImg.style.left = `${startRect.left}px`;
+    flyingImg.style.top = `${startRect.top}px`;
+    flyingImg.style.width = `${startRect.width}px`;
+    flyingImg.style.height = `${startRect.height}px`;
+    flyingImg.style.objectFit = 'cover';
+    flyingImg.style.borderRadius = '15px';
+    flyingImg.style.zIndex = '9999';
+    flyingImg.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    flyingImg.style.pointerEvents = 'none';
+    flyingImg.style.boxShadow = '0 10px 25px rgba(230, 110, 0, 0.5)';
+
+    document.body.appendChild(flyingImg);
+
+    // Trigger reflow
+    void flyingImg.offsetWidth;
+
+    // Distances
+    const destX = cartRect.left + cartRect.width / 2;
+    const destY = cartRect.top + cartRect.height / 2;
+
+    flyingImg.style.left = `${destX}px`;
+    flyingImg.style.top = `${destY}px`;
+    flyingImg.style.width = '20px';
+    flyingImg.style.height = '20px';
+    flyingImg.style.opacity = '0.2';
+    flyingImg.style.transform = 'translate(-50%, -50%) scale(0.1) rotate(15deg)';
+
+    setTimeout(() => {
+        if (document.body.contains(flyingImg)) {
+            document.body.removeChild(flyingImg);
+            if (cartEl) {
+                cartEl.style.transform = 'scale(1.2)';
+                cartEl.style.transition = 'transform 0.2s';
+                setTimeout(() => { cartEl.style.transform = 'scale(1)'; }, 200);
+            }
+        }
+    }, 400);
+};
+
 const handleAddToCart = () => {
     if (!product.value) return;
+
+    const imgEl = document.querySelector('.product-image > img');
+    if (imgEl) animateToCart(imgEl, product.value.image_url);
 
     const selectedPlatformObj = product.value.platforms.find(p => p.name.toLowerCase() === selectedPlatform.value);
 
     cartStore.addToCart(product.value, selectedPlatformObj);
-
-    toastMessage.value = 'Producto añadido al carrito';
-    toast.value.show();
 };
 
-const addToCartRelated = (relatedProduct) => {
+const addToCartRelated = (relatedProduct, e) => {
     if (!relatedProduct) return;
+
+    if (e) {
+        const btn = e.currentTarget;
+        const card = btn.closest('.related-card');
+        const imgEl = card ? card.querySelector('.related-image img') : null;
+        if (imgEl) animateToCart(imgEl, relatedProduct.image_url);
+    }
 
     let platform = null;
     if (relatedProduct.platforms && relatedProduct.platforms.length > 0) {
@@ -197,7 +253,7 @@ const handleInstantBuy = () => {
                                 </div>
                             </div>
 
-                            <button class="btn-view" @click.prevent="addToCartRelated(related)">
+                            <button class="btn-view" @click.prevent="addToCartRelated(related, $event)">
                                 <img src="/images/icons/carrito.png" alt="Añadir al carrito">
                             </button>
                         </div>
