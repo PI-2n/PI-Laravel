@@ -165,8 +165,8 @@
 }
 
 .btn-toggle-filters {
-    background-color: var(--secondary-color, #2a2a2a);
-    color: white;
+    background-color: $color-bg-input;
+    color: $color-text;
     border: none;
     padding: 10px 20px;
     border-radius: 8px;
@@ -175,10 +175,12 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    transition: background-color 0.2s;
+    transition: all 0.3s;
 
     &:hover {
-        background-color: var(--primary-color, #444);
+        background-color: $color-accent-hover;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba($color-accent, 0.4);
     }
 }
 
@@ -188,7 +190,7 @@
 }
 
 .filters-panel {
-    background-color: var(--bg-card, #1e1e1e);
+    background-color: $color-bg-tertiary;
     border-radius: 12px;
     padding: 24px;
     margin-bottom: 30px;
@@ -209,24 +211,26 @@
 
     label {
         font-weight: 600;
-        color: var(--text-color, #fff);
+        color: $color-text;
         font-size: 0.95rem;
     }
 
     select,
     input[type="number"],
     input[type="date"] {
-        background-color: #2a2a2a;
-        border: 1px solid #444;
-        color: white;
+        background-color: $color-bg-input;
+        border: 1px solid rgba($color-separator, 0.3);
+        color: $color-text;
         padding: 10px 12px;
         border-radius: 6px;
         width: 100%;
         outline: none;
-        transition: border-color 0.2s;
+        transition: all 0.3s ease;
+        font-family: $font-main;
 
         &:focus {
-            border-color: var(--primary-color, #007bff);
+            border-color: $color-accent;
+            box-shadow: 0 0 0 3px rgba($color-accent, 0.2);
         }
     }
 }
@@ -241,7 +245,7 @@
     }
 
     span {
-        color: #888;
+        color: $color-separator;
     }
 }
 
@@ -259,18 +263,24 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    background-color: #2a2a2a;
+    background-color: $color-bg-input;
     padding: 6px 12px;
     border-radius: 20px;
     cursor: pointer;
     font-size: 0.85rem;
-    transition: background-color 0.2s;
+    transition: all 0.3s;
     user-select: none;
     border: 1px solid transparent;
+    color: $color-text;
 
     &:has(input:checked) {
-        background-color: rgba(0, 123, 255, 0.2);
-        border-color: var(--primary-color, #007bff);
+        background-color: rgba($color-accent, 0.2);
+        border-color: $color-accent;
+    }
+
+    &:hover {
+        background-color: $color-accent;
+        color: $color-text;
     }
 
     input {
@@ -285,36 +295,43 @@
     gap: 12px;
     margin-top: 10px;
     padding-top: 20px;
-    border-top: 1px solid #444;
+    border-top: 1px solid rgba($color-separator, 0.3);
 }
 
 .btn-apply {
-    background-color: var(--primary-color, #007bff);
-    color: white;
+    background-color: $color-accent;
+    color: $color-text;
     border: none;
     padding: 10px 24px;
-    border-radius: 6px;
+    border-radius: 50px;
     cursor: pointer;
     font-weight: bold;
-    transition: opacity 0.2s;
+    transition: all 0.3s;
+    font-family: $font-main;
 
     &:hover {
-        opacity: 0.9;
+        background-color: $color-accent-hover;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba($color-accent, 0.4);
     }
 }
 
 .btn-clear {
-    background-color: transparent;
-    color: #bbb;
-    border: 1px solid #555;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: $color-text;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 10px 24px;
-    border-radius: 6px;
+    border-radius: 50px;
     cursor: pointer;
     font-weight: bold;
-    transition: all 0.2s;
+    transition: all 0.3s;
+    font-family: $font-main;
 
     &:hover {
-        background-color: #333;
-        color: white;
+        background-color: $color-danger;
+        border-color: $color-danger;
+        color: $color-text;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba($color-danger, 0.4);
     }
 }

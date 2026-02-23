@@ -1,5 +1,4 @@
 Próximos juegos y wishlist
 Listas de puntuación de juegos de los usuarios 
-Filtros por tags en busqueda
 Animación de producto al añadir a carrito
 Mejora de slider en movil de ofertas

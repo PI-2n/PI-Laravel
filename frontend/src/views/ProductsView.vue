@@ -88,9 +88,9 @@ const fetchProducts = async (page = 1) => {
         };
 
         const response = await api.get('/products', { params });
-        products.value = response.data.data;
-        currentPage.value = response.data.meta.current_page;
-        lastPage.value = response.data.meta.last_page;
+        products.value = response.data.data || [];
+        currentPage.value = response.data.meta?.current_page || 1;
+        lastPage.value = response.data.meta?.last_page || 1;
     } catch (error) {
         console.error('Error fetching products:', error);
     } finally {
@@ -117,6 +117,7 @@ onMounted(() => {
             <div class="filters-toggle">
                 <button type="button" @click="showFilters = !showFilters" class="btn-toggle-filters">
                     <span class="filter-icon" v-if="!showFilters">≡</span>
+                    <span class="filter-icon" v-else>✕</span>
                     {{ showFilters ? 'Ocultar Filtros' : 'Mostrar Filtros' }}
                 </button>
             </div>
@@ -181,16 +182,16 @@ onMounted(() => {
                 <div v-for="product in products" :key="product.id" class="product-card">
                     <RouterLink :to="`/products/${product.id}`">
                         <span v-if="product.is_offer" class="discount-badge">-{{ parseInt(product.offer_percentage)
-                        }}%</span>
+                            }}%</span>
                         <img :src="product.image_url" :alt="product.name">
                         <div class="product-info">
                             <span class="title">{{ product.name }}</span>
                             <div class="price-container">
                                 <span v-if="product.is_offer" class="old-price">{{ parseFloat(product.price).toFixed(2)
-                                }}€</span>
+                                    }}€</span>
                                 <span class="current-price">{{ product.is_offer ? (product.price * (1 -
                                     product.offer_percentage / 100)).toFixed(2) : parseFloat(product.price).toFixed(2)
-                                }}€</span>
+                                    }}€</span>
                             </div>
                         </div>
                     </RouterLink>

@@ -28,10 +28,7 @@ class ProductController extends Controller
         $releaseDateFrom = $request->query('release_date_from');
         $releaseDateTo = $request->query('release_date_to');
 
-        // If no filter is provided, return empty collection (as requested)
-        if (!$platform && !$search && !$tags && !$minPrice && !$maxPrice && !$releaseDateFrom && !$releaseDateTo) {
-            return ProductResource::collection(collect());
-        }
+
 
         $query = Product::query()->where('active', true);
 
