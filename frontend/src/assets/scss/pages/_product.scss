@@ -44,7 +44,30 @@
             font-size: clamp(2rem, 5vw, 3rem);
             font-weight: 700;
             color: $color-text;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .rating-summary {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+
+            .star {
+                color: $color-accent;
+                font-size: 1.3rem;
+            }
+
+            .rating-value {
+                font-size: 1.2rem;
+                font-weight: bold;
+                color: $color-text;
+            }
+
+            .reviews-count {
+                font-size: 0.95rem;
+                color: $color-separator;
+            }
         }
 
         .price {

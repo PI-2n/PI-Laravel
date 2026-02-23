@@ -68,6 +68,14 @@ const discountedPrice = computed(() => {
     return parseFloat(product.value?.price).toFixed(2);
 });
 
+const averageRating = computed(() => {
+    return parseFloat(product.value?.average_rating || 0).toFixed(1);
+});
+
+const totalComments = computed(() => {
+    return product.value?.comments?.length || 0;
+});
+
 const getPlatformIcon = (name) => {
     name = name.toLowerCase();
     if (name.includes('xbox')) return 'xbox';
@@ -184,6 +192,11 @@ const handleInstantBuy = () => {
 
                 <div class="product-info">
                     <h1>{{ product.name }}</h1>
+
+                    <div class="rating-summary" v-if="totalComments > 0" title="Valoración promedio de los usuarios">
+                        <span class="star">★</span> <span class="rating-value">{{ averageRating }}</span>
+                        <span class="reviews-count">({{ totalComments }} opiniones)</span>
+                    </div>
 
                     <div class="price">
                         <span v-if="product.offer_percentage > 0" class="old-price">{{

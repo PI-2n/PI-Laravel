@@ -30,6 +30,7 @@ class ProductResource extends JsonResource
             'offer_end_date' => $this->offer_end_date,
             'release_date' => $this->release_date,
             'active' => (bool) $this->active,
+            'average_rating' => $this->average_rating,
             'platforms' => $this->whenLoaded('platforms'),
             'comments' => CommentResource::collection($this->whenLoaded('comments')),
             'created_at' => $this->created_at,

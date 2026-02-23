@@ -62,6 +62,8 @@ class ProductRequest extends FormRequest
             'featured' => ['boolean'],
             'tag_ids' => ['nullable', 'array'],
             'tag_ids.*' => ['integer', 'exists:tags,id'],
+            'platform_ids' => ['nullable', 'array'],
+            'platform_ids.*' => ['integer', 'exists:platforms,id'],
         ];
     }
 }

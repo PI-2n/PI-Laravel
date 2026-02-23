@@ -39,6 +39,10 @@ class ProductService
         if (isset($data['tag_id']))
             unset($data['tag_id']);
 
+        // Handle Platforms
+        $platformIds = $data['platform_ids'] ?? [];
+        unset($data['platform_ids']);
+
         // Default valid fields for creation
         $data['release_date'] = now();
 
@@ -54,6 +58,10 @@ class ProductService
 
         if (!empty($tagIds)) {
             $product->tags()->sync($tagIds);
+        }
+
+        if (!empty($platformIds)) {
+            $product->platforms()->sync($platformIds);
         }
 
         return $product;
@@ -99,6 +107,12 @@ class ProductService
         // Remove legacy tag_id if present
         if (isset($data['tag_id']))
             unset($data['tag_id']);
+
+        // Handle Platforms
+        if (isset($data['platform_ids'])) {
+            $product->platforms()->sync($data['platform_ids']);
+            unset($data['platform_ids']);
+        }
 
         // Handle 'featured' checkbox mapping for 'is_new' if present
         if (isset($data['featured'])) {

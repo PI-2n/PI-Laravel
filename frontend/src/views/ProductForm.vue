@@ -17,6 +17,7 @@ const form = ref({
     price: '',
     description: '',
     tag_ids: [],
+    platform_ids: [],
     image_url: null,
     video_url: null,
     is_offer: false,
@@ -28,6 +29,7 @@ const form = ref({
 });
 
 const tags = ref([]);
+const platforms = ref([]);
 const errors = ref({});
 const isLoading = ref(false);
 const currentImage = ref(null);
@@ -39,6 +41,13 @@ onMounted(async () => {
         tags.value = response.data;
     } catch (error) {
         console.error('Error fetching tags:', error);
+    }
+
+    try {
+        const response = await api.get('/platforms');
+        platforms.value = response.data;
+    } catch (error) {
+        console.error('Error fetching platforms:', error);
     }
 
     if (isEditing.value) {
@@ -65,6 +74,10 @@ const fetchProduct = async () => {
 
         if (product.tags) {
             form.value.tag_ids = product.tags.map(tag => tag.id);
+        }
+
+        if (product.platforms) {
+            form.value.platform_ids = product.platforms.map(platform => platform.id);
         }
 
         currentImage.value = product.image_url;
@@ -101,6 +114,7 @@ const submitForm = async () => {
     if (form.value.offer_end_date) formData.append('offer_end_date', form.value.offer_end_date);
 
     form.value.tag_ids.forEach(id => formData.append('tag_ids[]', id));
+    form.value.platform_ids.forEach(id => formData.append('platform_ids[]', id));
 
     if (form.value.image_url instanceof File) {
         formData.append('image_url', form.value.image_url);
@@ -210,6 +224,22 @@ const submitButtonText = computed(() => {
                 </div>
 
                 <div class="form-group">
+                    <label class="form-label">Plataformas</label>
+                    <div class="tags-container">
+                        <div v-for="platform in platforms" :key="platform.id" class="tag-checkbox-group">
+                            <input type="checkbox" :id="`platform_${platform.id}`" :value="platform.id"
+                                v-model="form.platform_ids" class="form-checkbox">
+                            <label :for="`platform_${platform.id}`" class="form-checkbox-label">
+                                {{ platform.name }}
+                            </label>
+                        </div>
+                        <p v-if="platforms.length === 0" class="no-tags-message">No hay plataformas disponibles.</p>
+                    </div>
+                    <p class="form-hint">Selecciona en qué plataformas está disponible el producto</p>
+                    <span v-if="errors.platform_ids" class="error-message">{{ errors.platform_ids[0] }}</span>
+                </div>
+
+                <div class="form-group">
                     <label for="price" class="form-label">Precio (€) *</label>
                     <input type="number" id="price" step="0.01" v-model="form.price" required class="form-input"
                         placeholder="Ej: 999.99" min="0">
@@ -275,7 +305,7 @@ const submitButtonText = computed(() => {
                         <input type="date" id="offer_start_date" v-model="form.offer_start_date" class="form-input">
                         <p class="form-hint">Deja vacío si no quieres programar una oferta futura</p>
                         <span v-if="errors.offer_start_date" class="error-message">{{ errors.offer_start_date[0]
-                            }}</span>
+                        }}</span>
                     </div>
 
                     <div class="form-group">
@@ -294,7 +324,7 @@ const submitButtonText = computed(() => {
 
                     <div v-if="isEditing && form.offer_percentage && form.price" class="current-offer-info">
                         Precio actual con oferta: <strong>{{ (form.price * (1 - form.offer_percentage / 100)).toFixed(2)
-                            }}€</strong>
+                        }}€</strong>
                         <br>
                         <span class="old-price">Precio original: {{ parseFloat(form.price).toFixed(2) }}€</span>
                     </div>

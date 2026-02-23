@@ -1,4 +1,3 @@
 Próximos juegos y wishlist
-Listas de puntuación de juegos de los usuarios 
-Animación de producto al añadir a carrito
+Listas de puntuación de juegos de los usuarios
 Mejora de slider en movil de ofertas
