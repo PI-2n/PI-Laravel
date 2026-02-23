@@ -65,16 +65,39 @@ class ProfileController extends BaseController
     {
         $user = $request->user();
 
-        $products = \App\Models\Product::whereHas('orderItems.order', function ($query) use ($user) {
+        $purchasedProducts = \App\Models\Product::whereHas('orderItems.order', function ($query) use ($user) {
             $query->where('user_id', $user->id);
         })->with([
                     'comments' => function ($query) use ($user) {
                         $query->where('user_id', $user->id);
+                    },
+                    'tags',
+                    'orderItems' => function ($query) use ($user) {
+                        $query->whereHas('order', function ($q) use ($user) {
+                            $q->where('user_id', $user->id);
+                        })->with('platform');
                     }
                 ])->get();
 
+        // Attach purchased_platform to each product mapping from the orderItem
+        $purchasedProducts->each(function ($product) {
+            $product->purchased_platform = $product->orderItems->first()?->platform;
+        });
+
+        $ratedProducts = \App\Models\Product::whereHas('comments', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->with([
+                    'comments' => function ($query) use ($user) {
+                        $query->where('user_id', $user->id);
+                    },
+                    'tags'
+                ])->get();
+
         return $this->sendResponse(
-            \App\Http\Resources\ProductResource::collection($products),
+            [
+                'purchased' => \App\Http\Resources\ProductResource::collection($purchasedProducts),
+                'rated' => \App\Http\Resources\ProductResource::collection($ratedProducts),
+            ],
             'User library fetched successfully'
         );
     }

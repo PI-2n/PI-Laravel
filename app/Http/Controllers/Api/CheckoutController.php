@@ -119,6 +119,7 @@ class CheckoutController extends BaseController
                 OrderItem::create([
                     'order_id' => $order->id,
                     'product_id' => $cartItem->product_id,
+                    'platform_id' => $cartItem->platform_id,
                     'quantity' => $cartItem->quantity,
                     'price' => $cartItem->unit_price,
                 ]);

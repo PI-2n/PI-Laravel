@@ -18,9 +18,12 @@ class OrderItemSeeder extends Seeder
             $itemsCount = rand(1, 5);
             for ($i = 0; $i < $itemsCount; $i++) {
                 $product = $products->random();
+                $platform = $product->platforms()->inRandomOrder()->first();
+
                 OrderItem::factory()->create([
                     'order_id' => $order->id,
                     'product_id' => $product->id,
+                    'platform_id' => $platform ? $platform->id : null,
                 ]);
             }
 

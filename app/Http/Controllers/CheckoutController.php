@@ -79,6 +79,7 @@ class CheckoutController extends Controller
                 OrderItem::create([
                     'order_id' => $order->id,
                     'product_id' => $cartItem->product_id,
+                    'platform_id' => $cartItem->platform_id,
                     'quantity' => $cartItem->quantity,
                     'price' => $cartItem->unit_price,
                 ]);
@@ -86,11 +87,11 @@ class CheckoutController extends Controller
 
             // 3. Guardar tarjeta si es nueva y el usuario quiere guardarla
             $creditCard = null;
-            
+
             if ($request->payment_method === 'new_card' && $request->save_card) {
                 // Eliminar espacios del número de tarjeta antes de guardar
                 $cardNumber = preg_replace('/\s+/', '', $request->card_number);
-                
+
                 $creditCard = CreditCard::create([
                     'user_id' => auth()->id(),
                     'card_number' => $cardNumber,
@@ -106,7 +107,7 @@ class CheckoutController extends Controller
 
             // 4. Registrar el pago (simulado)
             $transactionId = 'TXN-' . strtoupper(uniqid());
-            
+
             OrderPayment::create([
                 'order_id' => $order->id,
                 'credit_card_id' => $creditCard?->id,
@@ -128,7 +129,7 @@ class CheckoutController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             \Log::error('Error en checkout: ' . $e->getMessage());
-            
+
             return back()->withInput()->with('error', 'Hubo un error procesando tu pago. Por favor intenta nuevamente.');
         }
     }
@@ -139,7 +140,7 @@ class CheckoutController extends Controller
     public function success($orderId)
     {
         $order = Order::with(['items.product', 'payment'])->findOrFail($orderId);
-        
+
         // Verificar que el pedido pertenece al usuario
         if ($order->user_id !== auth()->id()) {
             abort(403);

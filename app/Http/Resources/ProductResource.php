@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\TagResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -31,7 +32,9 @@ class ProductResource extends JsonResource
             'release_date' => $this->release_date,
             'active' => (bool) $this->active,
             'average_rating' => $this->average_rating,
+            'purchased_platform' => $this->whenNotNull($this->purchased_platform),
             'platforms' => $this->whenLoaded('platforms'),
+            'tags' => TagResource::collection($this->whenLoaded('tags')),
             'comments' => CommentResource::collection($this->whenLoaded('comments')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
