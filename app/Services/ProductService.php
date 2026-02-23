@@ -18,6 +18,8 @@ class ProductService
             $imageName = time() . '_' . $image->getClientOriginalName();
             $image->move(public_path('images/products'), $imageName);
             $data['image_url'] = $imageName;
+        } else {
+            $data['image_url'] = "placeholder.jpg";
         }
 
         // Handle Video
@@ -37,14 +39,29 @@ class ProductService
         if (isset($data['tag_id']))
             unset($data['tag_id']);
 
+        // Handle Platforms
+        $platformIds = $data['platform_ids'] ?? [];
+        unset($data['platform_ids']);
+
         // Default valid fields for creation
         $data['release_date'] = now();
-        $data['is_new'] = 1;
+
+        // Handle 'featured' checkbox mapping for 'is_new'
+        if (isset($data['featured'])) {
+            $data['is_new'] = $data['featured'] ? 1 : 0;
+            unset($data['featured']);
+        } else {
+            $data['is_new'] = 1;
+        }
 
         $product = Product::create($data);
 
         if (!empty($tagIds)) {
             $product->tags()->sync($tagIds);
+        }
+
+        if (!empty($platformIds)) {
+            $product->platforms()->sync($platformIds);
         }
 
         return $product;
@@ -91,6 +108,12 @@ class ProductService
         if (isset($data['tag_id']))
             unset($data['tag_id']);
 
+        // Handle Platforms
+        if (isset($data['platform_ids'])) {
+            $product->platforms()->sync($data['platform_ids']);
+            unset($data['platform_ids']);
+        }
+
         // Handle 'featured' checkbox mapping for 'is_new' if present
         if (isset($data['featured'])) {
             $data['is_new'] = $data['featured'] ? 1 : 0;
@@ -132,6 +155,7 @@ class ProductService
         } else {
             $data['offer_start_date'] = isset($data['offer_start_date']) ? \Carbon\Carbon::parse($data['offer_start_date']) : null;
             $data['offer_end_date'] = isset($data['offer_end_date']) ? \Carbon\Carbon::parse($data['offer_end_date']) : null;
+            $data['offer_percentage'] = null;
         }
     }
 }

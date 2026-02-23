@@ -1,0 +1,138 @@
+@use "../base/variables" as *;
+
+.login-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    padding: 20px;
+    background-color: $color-bg-secondary;
+
+    form {
+        background-color: $color-bg-tertiary;
+        padding: 2rem;
+        border-radius: 15px;
+        width: 100%;
+        max-width: 400px;
+        color: $color-text;
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            background-color: $color-bg-input;
+            border: none;
+            border-radius: 5px;
+            color: $color-text;
+
+            &:focus {
+                outline: 2px solid $color-accent;
+            }
+        }
+
+        button {
+            width: 100%;
+            padding: 1rem;
+            background-color: $color-accent;
+            border: none;
+            border-radius: 5px;
+            color: $color-text;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: $color-accent-hover;
+            }
+        }
+
+        .google-login {
+            margin-top: 1rem;
+            width: 100%;
+
+            .btn-google {
+                display: flex;
+                align-items: center;
+                background-color: #1a1a1a;
+                color: white;
+                border: 1px solid #333;
+                border-radius: 5px;
+                text-decoration: none;
+                font-family: 'Roboto', sans-serif;
+                font-weight: 500;
+                transition: all 0.3s ease;
+                width: 100%;
+                overflow: hidden;
+                padding: 1px;
+                position: relative;
+                height: 48px;
+                box-sizing: border-box;
+
+                &:hover {
+                    background-color: #333;
+                    border-color: #555;
+                }
+
+                .icon-wrapper {
+                    background-color: white;
+                    height: 100%;
+                    width: 46px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 4px 0 0 4px;
+                    margin-left: 0;
+
+                    img {
+                        height: 24px;
+                        width: 24px;
+                        display: block;
+                    }
+                }
+
+                span {
+                    flex: 1;
+                    text-align: center;
+                    font-size: 1rem;
+                    padding-right: 46px;
+                    /* Balance icon width */
+                }
+            }
+        }
+    }
+
+    p {
+        margin-top: 1rem;
+        color: $color-text;
+
+        a {
+            color: $color-accent;
+            text-decoration: none;
+            font-weight: bold;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+.callback-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #1a1a1a;
+    color: white;
+
+    .loading {
+        font-size: 1.2rem;
+        color: $color-text;
+    }
+}

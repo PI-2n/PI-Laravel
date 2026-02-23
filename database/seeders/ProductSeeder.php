@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Product;
-use Illuminate\Database\Seeder;
+use App\Models\Tag;
+use App\Models\Platform;
 use Carbon\Carbon;
+use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
 {
@@ -20,11 +22,13 @@ class ProductSeeder extends Seeder
                 'price' => 20,
                 'is_new' => true,
                 'is_offer' => false,
-                'offer_percentage' => null,
+                'offer_percentage' => 5,
                 'offer_start_date' => null,
                 'offer_end_date' => null,
                 'release_date' => Carbon::now()->subDays(10),
                 'active' => true,
+                'tags' => ['Aventura', 'Plataformas', 'Indie'],
+                'platforms' => ['Steam', 'PlayStation 5', 'Xbox Series X', 'Nintendo Switch'],
             ],
             [
                 'sku' => 'P00002',
@@ -40,6 +44,8 @@ class ProductSeeder extends Seeder
                 'offer_end_date' => null,
                 'release_date' => Carbon::now()->subDays(30),
                 'active' => true,
+                'tags' => ['Plataformas', 'Indie'],
+                'platforms' => ['Steam', 'PlayStation 5', 'Xbox Series X', 'Nintendo Switch'],
             ],
             [
                 'sku' => 'P00003',
@@ -50,26 +56,13 @@ class ProductSeeder extends Seeder
                 'price' => 40,
                 'is_new' => true,
                 'is_offer' => false,
-                'offer_percentage' => null,
+                'offer_percentage' => 10,
                 'offer_start_date' => null,
                 'offer_end_date' => null,
                 'release_date' => Carbon::now()->subDays(60),
                 'active' => true,
-            ],
-            [
-                'sku' => 'P000010',
-                'name' => "Baldur's Gate III",
-                'description' => "Sumérgete en un RPG épico ambientado en el universo de Dungeons & Dragons. Baldur's Gate III ofrece una narrativa rica, decisiones que influyen directamente en la historia y un sistema de combate por turnos profundo y estratégico.",
-                'image_url' => 'cover_baldurs_gate.jpg',
-                'video_url' => 'baldurs_gate.mp4',
-                'price' => 40,
-                'is_new' => true,
-                'is_offer' => false,
-                'offer_percentage' => null,
-                'offer_start_date' => null,
-                'offer_end_date' => null,
-                'release_date' => Carbon::now()->subDays(60),
-                'active' => true,
+                'tags' => ['RPG', 'Aventura'],
+                'platforms' => ['Steam', 'PlayStation 5', 'Xbox Series X'],
             ],
             [
                 'sku' => 'P00004',
@@ -85,6 +78,8 @@ class ProductSeeder extends Seeder
                 'offer_end_date' => Carbon::now()->addDays(20),
                 'release_date' => Carbon::now()->subMonths(6),
                 'active' => true,
+                'tags' => ['Shooter', 'Acción', 'Multijugador'],
+                'platforms' => ['Steam', 'PlayStation 5', 'Xbox Series X'],
             ],
             [
                 'sku' => 'P00005',
@@ -100,6 +95,8 @@ class ProductSeeder extends Seeder
                 'offer_end_date' => Carbon::now()->addDays(15),
                 'release_date' => Carbon::now()->subYears(3),
                 'active' => true,
+                'tags' => ['Acción', 'Plataformas', 'Indie'],
+                'platforms' => ['Steam', 'PlayStation 5', 'Xbox Series X', 'Nintendo Switch'],
             ],
             [
                 'sku' => 'P00006',
@@ -115,6 +112,8 @@ class ProductSeeder extends Seeder
                 'offer_end_date' => Carbon::now()->addDays(30),
                 'release_date' => Carbon::now()->subMonths(4),
                 'active' => true,
+                'tags' => ['Acción', 'Shooter', 'Multijugador'],
+                'platforms' => ['Steam'],
             ],
             [
                 'sku' => 'P00007',
@@ -130,6 +129,8 @@ class ProductSeeder extends Seeder
                 'offer_end_date' => Carbon::now()->addDays(25),
                 'release_date' => Carbon::now()->subYear(),
                 'active' => true,
+                'tags' => ['RPG', 'Aventura'],
+                'platforms' => ['Steam', 'PlayStation 5', 'Xbox Series X', 'Nintendo Switch'],
             ],
             [
                 'sku' => 'P00008',
@@ -145,6 +146,8 @@ class ProductSeeder extends Seeder
                 'offer_end_date' => Carbon::now()->addDays(10),
                 'release_date' => Carbon::now()->subMonths(2),
                 'active' => true,
+                'tags' => ['RPG', 'Aventura'],
+                'platforms' => ['Nintendo Switch'],
             ],
             [
                 'sku' => 'P00009',
@@ -160,20 +163,49 @@ class ProductSeeder extends Seeder
                 'offer_end_date' => Carbon::now()->addDays(60),
                 'release_date' => Carbon::now()->subMonths(18),
                 'active' => true,
+                'tags' => ['Productividad'],
+                'platforms' => ['Software'],
+            ],
+            [
+                'sku' => 'P00010',
+                'name' => 'Mewgenics',
+                'description' => '¡ALERTA DE LABORATORIO! \n\n¿Cansado de la genética aburrida? ¡Mewgenics es la solución! Conviértete en el Arquitecto del ADN Gatuno.\n\nEn este laboratorio de bolsillo, cruza 150+ razas, manipula la herencia de pelajes y gestiona un ecosistema de ronroneos. ¿El objetivo? Sobrevivir a mazmorras roguelike usando un mazo de cartas táctico.\n\n⚠️ ADVERTENCIA ACADÉMICA: Este software puede causar olvido temporal de exámenes y deseos incontrolables de adoptar 47 gatos. ¡Matricúlate en la escuela de la vida... gatuna!',
+                'image_url' => 'mewgenics.jpg',
+                'image_url' => 'cover_mewgenics.jpg',
+                'video_url' => 'mewgenics.mp4',
+                'price' => 26,
+                'is_new' => true,
+                'is_offer' => false,
+                'offer_percentage' => 10,
+                'offer_start_date' => Carbon::now()->subDays(1),
+                'offer_end_date' => Carbon::now()->addDays(60),
+                'release_date' => Carbon::now()->subMonths(18),
+                'active' => true,
+                'tags' => ['Aventura', 'Indie', 'Estrategia'],
+                'platforms' => ['Steam'],
             ],
         ];
 
-        foreach ($products as $product) {
-            Product::create($product);
+        foreach ($products as $productData) {
+            // Extraer los tags y platforms antes de crear el producto
+            $tagNames = $productData['tags'] ?? [];
+            $platformNames = $productData['platforms'] ?? [];
+            unset($productData['tags'], $productData['platforms']);
+
+            // Crear el producto
+            $product = Product::create($productData);
+
+            // Asignar los tags si existen
+            if (!empty($tagNames)) {
+                $tagIds = Tag::whereIn('name', $tagNames)->pluck('id');
+                $product->tags()->attach($tagIds);
+            }
+
+            // Asignar las plataformas si existen
+            if (!empty($platformNames)) {
+                $platformIds = Platform::whereIn('name', $platformNames)->pluck('id');
+                $product->platforms()->attach($platformIds);
+            }
         }
     }
 }
-
-
-/*
-public function run(): void
-{
-    // Crea 10 productos de ejemplo
-    Product::factory(10)->create();
-}
-    */

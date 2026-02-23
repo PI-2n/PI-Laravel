@@ -16,15 +16,33 @@ class Comment extends Model
         'message',
     ];
 
-    // Relación con usuario
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // Relación con producto
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    protected static function booted()
+    {
+        static::saved(function ($comment) {
+            $comment->updateProductAverageRating();
+        });
+
+        static::deleted(function ($comment) {
+            $comment->updateProductAverageRating();
+        });
+    }
+
+    public function updateProductAverageRating()
+    {
+        $product = $this->product;
+        if ($product) {
+            $average = $product->comments()->avg('rating') ?? 0;
+            $product->update(['average_rating' => $average]);
+        }
     }
 }

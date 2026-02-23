@@ -7,12 +7,12 @@
         <div class="cart-page-container">
             <h1>Cesta</h1>
 
-            @if($cart && $cart->items->count() > 0)
+            @if ($cart && $cart->items->count() > 0)
                 <div class="cart-grid">
 
                     {{-- ITEMS LIST --}}
                     <div class="cart-items">
-                        @foreach($cart->items as $item)
+                        @foreach ($cart->items as $item)
                             <div class="cart-item-card">
                                 <div class="item-image">
                                     <img src="{{ asset('images/products/' . $item->product->image_url) }}"
@@ -22,18 +22,19 @@
                                 <div class="item-details">
                                     <h3 class="item-title">{{ $item->product->name }}</h3>
                                     <div class="item-platform">
-                                        @if($item->platform)
+                                        @if ($item->platform)
                                             @php
                                                 $iconName = 'pc';
                                                 $name = strtolower($item->platform->name);
-                                                if (Str::contains($name, 'xbox'))
+                                                if (Str::contains($name, 'xbox')) {
                                                     $iconName = 'xbox';
-                                                elseif (Str::contains($name, ['ps', 'playstation']))
+                                                } elseif (Str::contains($name, ['ps', 'playstation'])) {
                                                     $iconName = 'ps';
-                                                elseif (Str::contains($name, ['switch', 'nintendo']))
+                                                } elseif (Str::contains($name, ['switch', 'nintendo'])) {
                                                     $iconName = 'switch';
-                                                elseif (Str::contains($name, 'steam'))
+                                                } elseif (Str::contains($name, 'steam')) {
                                                     $iconName = 'steam';
+                                                }
                                             @endphp
                                             <img src="{{ asset('images/icons/' . $iconName . '.png') }}"
                                                 alt="{{ $item->platform->name }}">
@@ -45,29 +46,43 @@
                                 </div>
 
                                 <div class="item-pricing">
-                                    <span class="item-price">{{ number_format($item->product->price, 2) }} €</span>
+                                    @php
+                                        $finalPrice = $item->product->final_price;
+                                        $hasDiscount = $item->product->hasDiscount() && $finalPrice < $item->product->price;
+                                    @endphp
+
+                                    @if ($hasDiscount)
+                                        <span class="item-price-discounted">{{ number_format($finalPrice, 2) }} €</span>
+                                        <span class="item-price-original">{{ number_format($item->product->price, 2) }} €</span>
+                                    @else
+                                        <span class="item-price">{{ number_format($item->product->price, 2) }} €</span>
+                                    @endif
 
                                     <div class="actions-container">
-                                        <form action="{{ route('cart.update', $item->id) }}" method="POST" class="update-form">
+                                        <form action="{{ route('cart.update', $item->id) }}" method="POST"
+                                            class="update-form">
                                             @csrf
                                             @method('PATCH')
-                                            <input type="number" name="quantity" value="{{ $item->quantity }}" min="1" max="10"
-                                                class="quantity-input" onchange="this.form.submit()">
+                                            <input type="number" name="quantity" value="{{ $item->quantity }}"
+                                                min="1" max="10" class="quantity-input"
+                                                onchange="this.form.submit()">
                                         </form>
 
                                         <form action="{{ route('cart.remove', $item->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn-delete" title="Eliminar producto">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                     <polyline points="3 6 5 6 21 6"></polyline>
                                                     <path
                                                         d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
                                                     </path>
-                                                    <line x1="10" y1="11" x2="10" y2="17"></line>
-                                                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                    <line x1="10" y1="11" x2="10" y2="17">
+                                                    </line>
+                                                    <line x1="14" y1="11" x2="14" y2="17">
+                                                    </line>
                                                 </svg>
                                             </button>
                                         </form>
@@ -88,22 +103,19 @@
 
                         <div class="summary-row total">
                             <span>Total</span>
-                            <span>{{ number_format($cart->items->sum(function ($item) {
-                return $item->quantity * $item->product->price; }), 2) }}
-                                €</span>
+                            <span>{{ number_format($cart->items->sum(fn($item) => $item->quantity * $item->product->final_price), 2) }} €</span>
                         </div>
 
-                        <button class="btn-checkout">Comprar</button>
+                        <a href="{{ route('checkout.index') }}" class="btn-checkout">Comprar</a>
                     </div>
 
                 </div>
 
-                {{-- HEADER RECOMENDADOS (Placeholder) --}}
+                {{-- RECOMENDADOS (Placeholder) --}}
                 <div class="cart-recommendations">
                     <h2>Recomendados</h2>
-                    {{-- To be implemented with product component potentially --}}
+                    {{-- To be implemented --}}
                 </div>
-
             @else
                 <div class="cart-empty-state">
                     <h2>Tu carrito está vacío</h2>

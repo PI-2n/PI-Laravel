@@ -20,11 +20,12 @@ class DatabaseSeeder extends Seeder
             PlatformSeeder::class,
             ProductSeeder::class,
             CommentSeeder::class,
-            ProductRelationSeeder::class,
+            //ProductRelationSeeder::class,
             ShoppingCartSeeder::class,
             ShoppingCartItemSeeder::class,
             OrderSeeder::class,
             OrderItemSeeder::class,
+            CreditCardSeeder::class,
         ]);
     }
 }

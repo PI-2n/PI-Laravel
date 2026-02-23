@@ -7,16 +7,21 @@
     <main class="product-page-main">
         <div class="product-page-container">
 
-            <div class="product-detail">
+            {{-- Mensajes de sesión --}}
+            @if(session('success'))
+                <p class="msg-alert success">{{ session('success') }}</p>
+            @endif
+            @if(session('error'))
+                <p class="msg-alert error">{{ session('error') }}</p>
+            @endif
 
+            <div class="product-detail">
                 <div class="product-image">
                     <img src="{{ asset('images/products/' . $product->image_url) }}" alt="{{ $product->name }}">
-
                     @auth
                         @if(Auth::user()->role_id === 1)
                             <div class="edit-container">
-                                <a href="{{ route('products.edit', $product) }}"
-                                    class="btn-secondary">{{ __('Editar Producto') }}</a>
+                                <a href="{{ route('products.edit', $product) }}" class="btn-secondary">{{ __('Editar Producto') }}</a>
                             </div>
                         @endif
                     @endauth
@@ -76,35 +81,99 @@
                         </form>
 
                         <button class="btn-fast-buy"><img src="{{ asset('images/icons/fast-buy.png') }}"
-                                title="Comprar ahora" alt="carrito"></button>
+                                title="Comprar ahora" alt="comprar"></button>
                     </div>
                 </div>
-
             </div>
 
-
-
-            {{-- COMENTARIOS --}}
             <hr>
 
-            <div class="comments-section">
-                <h2>Opiniones de los usuarios</h2>
+            {{-- SECCIÓN DE COMENTARIOS --}}
+            <section class="comments-section">
+                <h2>Comentarios</h2>
 
-                @forelse($product->comments as $comment)
-                    <div class="comment-item">
-                        <div class="comment-header">
-                            <span>{{ $comment->user->name ?? 'Usuario anónimo' }}</span>
-                            <span class="rating">{{ $comment->rating }}/5</span>
+                {{-- LISTADO DE COMENTARIOS --}}
+                <div class="comments-list">
+                    @forelse($product->comments as $comment)
+                        <div class="comment-item">
+                            <div class="comment-header">
+                                <strong>{{ $comment->user->name ?? 'Usuario anónimo' }}</strong>
+                                <span class="rating">⭐ {{ $comment->rating }}</span>
+                            </div>
+                            <p>{{ $comment->message }}</p>
+                            <small class="comment-date">{{ $comment->created_at->format('d/m/Y') }}</small>
+
+                            {{-- BOTONES DE ACCIÓN (Editar/Borrar) --}}
+                            <div class="comment-actions">
+                                @can('update', $comment)
+                                    <button type="button" class="btn-edit-comment" onclick="editComment({{ $comment->id }}, '{{ $comment->rating }}', `{{ addslashes($comment->message) }}`)">
+                                        Editar
+                                    </button>
+                                @endcan
+
+                                @can('delete', $comment)
+                                    <form action="{{ route('comments.destroy', $comment) }}" method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de eliminar este comentario?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn-delete-comment">Eliminar</button>
+                                    </form>
+                                @endcan
+                            </div>
                         </div>
-                        <p>{{ $comment->message }}</p>
-                        <span class="comment-date">{{ $comment->created_at->format('d/m/Y') }}</span>
-                    </div>
-                @empty
-                    <p>No hay comentarios todavía.</p>
-                @endforelse
-            </div>
+                    @empty
+                        <p>Todavía no hay comentarios de este producto.</p>
+                    @endforelse
+                </div>
+
+                {{-- FORMULARIO PARA AÑADIR/EDITAR COMENTARIO --}}
+                <div class="comment-form-container">
+                    <h3>{{ $product->comments->where('user_id', Auth::id())->first() ? 'Edita tu comentario' : 'Deja tu comentario' }}</h3>
+
+                    @auth
+                        @php
+                            $userComment = $product->comments->where('user_id', Auth::id())->first();
+                        @endphp
+
+                        <form action="{{ $userComment ? route('comments.update', $userComment) : route('comments.store', $product) }}" method="POST">
+                            @csrf
+                            @if($userComment)
+                                @method('PUT')
+                            @endif
+
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+
+                            <div class="form-group">
+                                <label for="rating">Puntuación:</label>
+                                <select name="rating" id="rating" required>
+                                    <option value="5">⭐ 5</option>
+                                    <option value="4">⭐ 4</option>
+                                    <option value="3">⭐ 3</option>
+                                    <option value="2">⭐ 2</option>
+                                    <option value="1">⭐ 1</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Comentario:</label>
+                                <textarea name="message" id="message" rows="4" placeholder="¿Qué te ha parecido este producto?" required>{{ $userComment->message ?? '' }}</textarea>
+                            </div>
+
+                            <button type="submit" class="btn-submit">
+                                {{ $userComment ? 'Actualizar Comentario' : 'Publicar Comentario' }}
+                            </button>
+                        </form>
+                    @else
+                        <p>
+                            <a href="{{ route('login') }}" style="color: #dd7710ec; text-decoration: underline;">Inicia sesión</a> 
+                            para dejar un comentario.
+                        </p>
+                    @endauth
+                </div>
+            </section>
 
         </div>
     </main>
 
 @endsection
+
+@vite('resources/js/comments-form.js')

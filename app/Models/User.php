@@ -18,6 +18,7 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'google_id', // Added for OAuth
         'role_id',
     ];
 
@@ -36,10 +37,18 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
-    // Relación con comentarios
-    // Relación con tarjetas de crédito
     public function creditCards()
     {
         return $this->hasMany(CreditCard::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function isAdminOrModerator()
+    {
+        return in_array($this->role->name, ['admin', 'moderator']);
     }
 }

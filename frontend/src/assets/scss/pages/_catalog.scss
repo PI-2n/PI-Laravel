@@ -1,0 +1,337 @@
+@use "../base/variables" as *;
+@use "../utils/mixins" as mixins;
+@use "sass:color";
+
+.page-products {
+    display: block; // Or flex if you want to center content
+    flex: 1; // Grow to fill .main
+    background-color: $color-bg-secondary;
+}
+
+.catalog {
+    padding-top: 40px;
+    padding-bottom: 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+
+    h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: $color-text;
+        font-size: 2rem;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 4rem 1rem;
+        color: $color-text;
+        min-height: 50vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        p {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: $color-separator;
+            font-weight: 400;
+        }
+    }
+}
+
+.loading-container {
+    text-align: center;
+    color: $color-text;
+    padding: 2rem;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 2rem;
+    padding: 0 1rem;
+}
+
+.product-card {
+    position: relative;
+    background-color: $color-card;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    @include mixins.hover-shadow($color-accent-hover);
+
+    a {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: $color-accent;
+            color: $color-text;
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            border-bottom: 1px solid $color-border;
+        }
+
+        .product-info {
+            padding: 1rem;
+            text-align: center;
+
+            .title {
+                display: block;
+                font-weight: bold;
+                margin-bottom: 0.5rem;
+                color: $color-text;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .price-container {
+                display: flex;
+                justify-content: center;
+                gap: 0.5rem;
+                align-items: center;
+
+                .old-price {
+                    text-decoration: line-through;
+                    color: $color-separator;
+                    font-size: 0.9rem;
+                }
+
+                .current-price {
+                    color: $color-accent;
+                    font-weight: bold;
+                    font-size: 1.1rem;
+                }
+            }
+        }
+    }
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    gap: 1rem;
+    align-items: center;
+
+    .btn-nav {
+        padding: 0.5rem 1rem;
+        background-color: $color-bg-input;
+        color: $color-text;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+
+        &:hover:not(:disabled) {
+            background-color: color.scale($color-bg-input, $lightness: 10%);
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+
+    .page-info {
+        color: $color-text;
+    }
+}
+
+// Filtros
+.filters-toggle {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.btn-toggle-filters {
+    background-color: $color-bg-input;
+    color: $color-text;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+
+    &:hover {
+        background-color: $color-accent-hover;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba($color-accent, 0.4);
+    }
+}
+
+.filter-icon {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.filters-panel {
+    background-color: $color-bg-tertiary;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.filters-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.filter-group {
+    flex: 1 1 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    label {
+        font-weight: 600;
+        color: $color-text;
+        font-size: 0.95rem;
+    }
+
+    select,
+    input[type="number"],
+    input[type="date"] {
+        background-color: $color-bg-input;
+        border: 1px solid rgba($color-separator, 0.3);
+        color: $color-text;
+        padding: 10px 12px;
+        border-radius: 6px;
+        width: 100%;
+        outline: none;
+        transition: all 0.3s ease;
+        font-family: $font-main;
+
+        &:focus {
+            border-color: $color-accent;
+            box-shadow: 0 0 0 3px rgba($color-accent, 0.2);
+        }
+    }
+}
+
+.multi-inputs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    input {
+        width: 100%;
+    }
+
+    span {
+        color: $color-separator;
+    }
+}
+
+.tags-group {
+    flex: 1 1 100%;
+}
+
+.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.tag-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: $color-bg-input;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s;
+    user-select: none;
+    border: 1px solid transparent;
+    color: $color-text;
+
+    &:has(input:checked) {
+        background-color: rgba($color-accent, 0.2);
+        border-color: $color-accent;
+    }
+
+    &:hover {
+        background-color: $color-accent;
+        color: $color-text;
+    }
+
+    input {
+        display: none;
+    }
+}
+
+.filter-actions {
+    flex: 1 1 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 10px;
+    padding-top: 20px;
+    border-top: 1px solid rgba($color-separator, 0.3);
+}
+
+.btn-apply {
+    background-color: $color-accent;
+    color: $color-text;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    font-family: $font-main;
+
+    &:hover {
+        background-color: $color-accent-hover;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba($color-accent, 0.4);
+    }
+}
+
+.btn-clear {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: $color-text;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 24px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    font-family: $font-main;
+
+    &:hover {
+        background-color: $color-danger;
+        border-color: $color-danger;
+        color: $color-text;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba($color-danger, 0.4);
+    }
+}

@@ -5,33 +5,63 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CommentController extends Controller
 {
-    /**
-     * Guarda el comentario y regresa a la ficha del producto.
-     */
-    public function store(Request $request)
+    use AuthorizesRequests;
+
+    public function store(Request $request, Product $product)
     {
-        // Validamos asegurando que product_id existe en la tabla products
-        $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'message'    => 'required|min:5',
-            'rating'     => 'required|integer|min:1|max:5',
+        $validated = $request->validate([
+            'rating' => 'required|integer|min:1|max:5',
+            'message' => 'nullable|string|max:1000',
         ]);
 
-        // Buscamos el producto primero para asegurar la integridad
-        $product = Product::findOrFail($request->product_id);
+        $existingComment = Comment::where('user_id', auth()->id())
+            ->where('product_id', $product->id)
+            ->first();
 
-        // Creamos el comentario usando la relación para evitar errores de ID
-        $product->comments()->create([
-            'user_id' => auth()->id() ?? 1, // Cambiar a auth()->id() cuando tengas login
-            'message' => $request->message,
-            'rating'  => $request->rating,
+        if ($existingComment) {
+            return redirect()->route('products.show', $product)
+                ->with('error', 'Ya has dejado una opinión en este producto. Edítala si quieres cambiarla.');
+        }
+
+        Comment::create([
+            'user_id' => auth()->id(),
+            'product_id' => $product->id,
+            'rating' => $validated['rating'],
+            'message' => $validated['message'],
         ]);
 
-        // Redirigimos especificando el parámetro 'product' que es el que espera Route::resource
-        return redirect()->route('products.show', ['product' => $product->id])
-                         ->with('success', '¡Gracias por tu comentario!');
+        return redirect()->route('products.show', $product)
+            ->with('success', 'Comentario añadido correctamente.');
+    }
+
+    public function update(Request $request, Comment $comment)
+    {
+        $this->authorize('update', $comment);
+
+        $validated = $request->validate([
+            'rating' => 'required|integer|min:1|max:5',
+            'message' => 'nullable|string|max:1000',
+        ]);
+
+        $comment->update($validated);
+
+        return redirect()->route('products.show', $comment->product)
+            ->with('success', 'Comentario actualizado.');
+    }
+
+    public function destroy(Comment $comment)
+    {
+        $this->authorize('delete', $comment);
+
+        $product = $comment->product;
+        $comment->delete();
+
+        return redirect()->route('products.show', $product)
+            ->with('success', 'Comentario eliminado.');
     }
 }

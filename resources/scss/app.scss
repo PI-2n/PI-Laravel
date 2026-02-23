@@ -13,6 +13,8 @@
 @use "pages/product";
 @use "pages/product-form";
 @use "pages/cart";
+@use "pages/checkout";
+@use 'pages/checkout-success';
 
 @include header.styles;
 @include footer.styles;

@@ -1,0 +1,117 @@
+@use "../base/variables" as *;
+
+.register-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    padding: 20px;
+    background-color: $color-bg-secondary;
+
+    form {
+        background-color: $color-bg-tertiary;
+        padding: 2rem;
+        border-radius: 15px;
+        width: 100%;
+        max-width: 400px;
+        color: $color-text;
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            position: relative;
+            /* necesario para posición absoluta del error */
+        }
+
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            background-color: $color-bg-input;
+            border: none;
+            border-radius: 5px;
+            color: $color-text;
+            box-sizing: border-box;
+            display: block;
+        }
+
+        input:focus {
+            outline: 2px solid $color-accent;
+        }
+
+        .error {
+            position: absolute;
+            top: 0;
+            left: 100%;
+            margin-left: 0.75rem;
+            margin-top: 2.5rem;
+            color: $color-danger;
+            font-size: 0.85rem;
+            $color-text-space: nowrap;
+            display: none;
+        }
+
+        .error:not(:empty) {
+            display: block;
+        }
+
+        button {
+            width: 100%;
+            padding: 1rem;
+            background-color: $color-accent;
+            border: none;
+            border-radius: 5px;
+            color: $color-text;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: $color-accent-hover;
+        }
+    }
+
+    p {
+        margin-top: 1rem;
+        color: $color-text;
+    }
+
+    p a {
+        color: $color-accent;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    p a:hover {
+        text-decoration: underline;
+    }
+
+    h1 {
+        color: $color-text;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        font-weight: bold;
+    }
+
+    .error-general {
+        margin-bottom: 1rem;
+        color: $color-danger;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+        position: relative;
+    }
+
+    .error-text {
+        color: $color-danger;
+        font-size: 0.85rem;
+        display: block;
+        margin-top: -0.5rem;
+        margin-bottom: 0.5rem;
+    }
+}

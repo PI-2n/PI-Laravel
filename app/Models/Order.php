@@ -12,7 +12,11 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'total',
-        'status', // 'pending', 'completed', 'cancelled'
+        'status', // 'active', 'completed'
+    ];
+
+    protected $casts = [
+        'total' => 'decimal:2',
     ];
 
     public function user()
@@ -23,5 +27,10 @@ class Order extends Model
     public function items()
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function payment()
+    {
+        return $this->hasOne(OrderPayment::class);
     }
 }

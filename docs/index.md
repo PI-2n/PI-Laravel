@@ -13,8 +13,24 @@ A continuación se muestra un resumen de las tareas realizadas en cada Sprint pa
 - Diseño del formulario
 - Elaboración del plan de riesgos laborales y prevención
 
-## 🚀 Sprint 2
-_Pendiente de completar..._
+## 🚀 [Sprint 2 (31/10/2025 - 12/12/2025)](sprints/sprint2.md)
+- Importación de excel con PhPSpreadsheet
+- Gestión de usuarios, sesiones y cookies
+- Comentarios y valoraciones
 
-## 📈 Sprint 3
-_Pendiente de completar..._
+## 📈 [Sprint 3 (09/01/2026 - 06/02/2026)](sprints/sprint3.md)
+- Migración a Laravel con MVC
+- Creación de base de datos
+- Vistas blade
+- Controladores para API
+- Gestión de login con Breeze
+- Modificación de productos desde la web
+- PhPSpreadsheet para importar productos de excel
+
+## :fontawesome-brands-vuejs:{ style="color: #4FC08D;" } [Sprint 4 (13/02/2026 - 17/02/2026)](sprints/sprint4.md)
+- Migración de frontend de laravel blades a vue
+- Gestión de roles
+- Pinia
+- Validación en cliente con vee-validate y yup
+
+

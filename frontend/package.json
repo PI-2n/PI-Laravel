@@ -1,0 +1,25 @@
+{
+    "name": "frontend",
+    "version": "0.0.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "@n8n/chat": "^1.9.1",
+        "axios": "^1.6.7",
+        "pinia": "^2.1.7",
+        "vee-validate": "^4.15.1",
+        "vue": "^3.4.19",
+        "vue-router": "^4.2.5",
+        "yup": "^1.7.1"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^5.0.4",
+        "sass": "^1.97.3",
+        "vite": "^5.1.4"
+    }
+}

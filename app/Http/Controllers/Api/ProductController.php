@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
@@ -17,16 +18,121 @@ class ProductController extends Controller
         $this->productService = $productService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return ProductResource::collection(Product::query()->paginate(10));
+        $platform = $request->query('platform');
+        $search = $request->query('q');
+        $tags = $request->query('tags');
+        $minPrice = $request->query('min_price');
+        $maxPrice = $request->query('max_price');
+        $releaseDateFrom = $request->query('release_date_from');
+        $releaseDateTo = $request->query('release_date_to');
+
+
+
+        $query = Product::query()->where('active', true);
+
+        if ($platform) {
+            $query->whereHas('platforms', function ($q) use ($platform) {
+                $q->where('name', 'like', "%{$platform}%");
+            });
+        }
+
+        if ($search) {
+            $query->where('name', 'like', "%{$search}%");
+        }
+
+        if ($tags) {
+            $tagsArray = is_array($tags) ? $tags : explode(',', $tags);
+            foreach ($tagsArray as $tagId) {
+                $query->whereHas('tags', function ($q) use ($tagId) {
+                    $q->where('tags.id', $tagId);
+                });
+            }
+        }
+
+        if (is_numeric($minPrice)) {
+            $query->where('price', '>=', $minPrice);
+        }
+
+        if (is_numeric($maxPrice)) {
+            $query->where('price', '<=', $maxPrice);
+        }
+
+        if ($releaseDateFrom) {
+            $query->whereDate('release_date', '>=', $releaseDateFrom);
+        }
+
+        if ($releaseDateTo) {
+            $query->whereDate('release_date', '<=', $releaseDateTo);
+        }
+
+        return ProductResource::collection($query->paginate(10));
+    }
+
+    public function home()
+    {
+        $featured = Product::where('active', true)
+            ->where('is_new', true)
+            ->where('sku', "P00010")
+            ->whereNotNull('video_url')
+            ->first();
+
+        $news = Product::where('active', true)
+            ->where('is_new', true)
+            ->orderByDesc('release_date')
+            ->take(10) // Limit for API
+            ->get();
+
+        $offers = Product::where('active', true)
+            ->where('is_offer', true)
+            ->orderByDesc('offer_percentage')
+            ->get();
+
+        return response()->json([
+            'featured' => $featured ? new ProductResource($featured) : null,
+            'news' => ProductResource::collection($news),
+            'offers' => ProductResource::collection($offers),
+        ]);
     }
 
     public function show(Product $product)
     {
-        return new ProductResource($product);
+        $product->load(['platforms', 'comments.user', 'tags']);
+
+        // Get tags of the current product
+        $tagIds = $product->tags->pluck('id');
+
+        $related = collect();
+
+        if ($tagIds->isNotEmpty()) {
+            $related = Product::where('id', '!=', $product->id)
+                ->where('active', true)
+                ->whereHas('tags', function ($query) use ($tagIds) {
+                    $query->whereIn('tags.id', $tagIds);
+                })
+                ->withCount([
+                    'tags' => function ($query) use ($tagIds) {
+                        $query->whereIn('tags.id', $tagIds);
+                    }
+                ])
+                ->with('platforms')
+                ->orderByDesc('tags_count')
+                ->take(5)
+                ->get();
+        }
+
+        return (new ProductResource($product))
+            ->additional([
+                'related_products' => ProductResource::collection($related)
+            ]);
     }
 
+    /**
+     * Store a newly created resource in storage.
+     * 
+     * @authenticated
+     */
     public function store(ProductRequest $request)
     {
         // ProductRequest handles validation.
@@ -46,6 +152,9 @@ class ProductController extends Controller
 
     public function update(ProductRequest $request, Product $product)
     {
+        // Debugging validation errors
+        // Log::info('Update Product Request Data:', $request->all());
+
         $data = $request->validated();
 
         $product = $this->productService->updateProduct(

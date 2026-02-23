@@ -13,6 +13,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ProductImportController extends Controller
 {
+    /**
+     * Import products from Excel/CSV.
+     * 
+     * @authenticated
+     */
     public function import(Request $request)
     {
         // 🔐 1️⃣ Autorización REAL
@@ -30,11 +35,19 @@ class ProductImportController extends Controller
             $file = $request->file('file');
 
             // 🔎 Validar MIME real
-            if (! in_array($file->getMimeType(), [
-                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                'text/csv',
-                'application/vnd.ms-excel',
-            ])) {
+            if (
+                !in_array($file->getMimeType(), [
+                    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                    'text/csv',
+                    'application/vnd.ms-excel',
+                ])
+            ) {
+                if ($request->wantsJson()) {
+                    return response()->json([
+                        'message' => 'Formato de archivo no válido',
+                        'errors' => ['file' => ['Formato de archivo no válido']]
+                    ], 422);
+                }
                 return back()->withErrors(['file' => 'Formato de archivo no válido']);
             }
 
@@ -57,7 +70,7 @@ class ProductImportController extends Controller
                         [
                             'name' => $row[1] ?? '',
                             'description' => $row[2] ?? null,
-                            'image_url' => $row[3] ?? null,
+                            'image_url' => !empty($row[3]) ? $row[3] : 'placeholder.jpg',
                             'video_url' => $row[4] ?? null,
                             'price' => (float) ($row[5] ?? 0),
                             'is_new' => (bool) ($row[6] ?? 0),
@@ -71,10 +84,10 @@ class ProductImportController extends Controller
                     );
 
                     // TAGS
-                    if (! empty($row[13])) {
+                    if (!empty($row[13])) {
 
                         $tagIds = collect(explode(',', $row[13]))
-                            ->map(fn ($tag) => trim($tag))
+                            ->map(fn($tag) => trim($tag))
                             ->filter()
                             ->map(function ($tagName) {
                                 return Tag::firstOrCreate([
@@ -86,10 +99,10 @@ class ProductImportController extends Controller
                     }
 
                     // PLATFORMS
-                    if (! empty($row[14])) {
+                    if (!empty($row[14])) {
 
                         $platformIds = collect(explode(',', $row[14]))
-                            ->map(fn ($platform) => trim($platform))
+                            ->map(fn($platform) => trim($platform))
                             ->filter()
                             ->map(function ($platformName) {
                                 return Platform::firstOrCreate([
@@ -104,9 +117,20 @@ class ProductImportController extends Controller
 
         } catch (\Throwable $e) {
 
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'message' => 'Error al procesar el archivo.',
+                    'errors' => ['file' => ['Error al procesar el archivo.']]
+                ], 422);
+            }
+
             return back()->withErrors([
                 'file' => 'Error al procesar el archivo.',
             ]);
+        }
+
+        if ($request->wantsJson()) {
+            return response()->json(['message' => 'Productos importados correctamente'], 200);
         }
 
         return back()->with('success', 'Productos importados correctamente');
