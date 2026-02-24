@@ -4,6 +4,7 @@
 
 Durante este sprint se ha implementado la **integración con APIs externas**, asegurando una **gestión segura de tokens y credenciales**.
 Se han aplicado buenas prácticas de seguridad, incluyendo:
+
 - Almacenamiento seguro de tokens mediante variables de entorno.
 - Rotación automática de credenciales sensibles.
 - Validación de autenticidad y permisos en cada solicitud hacia los servicios externos.
@@ -15,6 +16,7 @@ Esta integración permitirá que el proyecto se conecte de manera fiable y segur
 ## 📚 Documentación de la API propia con Swagger
 
 Se ha documentado la **API interna del proyecto** utilizando **Swagger**, generando una referencia clara y navegable:
+
 - Cada endpoint cuenta con descripción, parámetros, ejemplos de respuesta y códigos de estado HTTP.
 - La documentación permite a los desarrolladores probar endpoints directamente desde el navegador.
 - Se ha integrado en el flujo de despliegue automático para mantenerla siempre actualizada junto con el código.
@@ -26,6 +28,7 @@ Esto asegura que cualquier nuevo desarrollador o integrador pueda comprender rá
 # ⚛️ Mejoras avanzadas de Vue
 
 Se han aplicado mejoras avanzadas en la interfaz frontend con Vue.js, incluyendo:
+
 - Filtros dinámicos para búsqueda y clasificación de datos.
 - Paginación eficiente para grandes volúmenes de información.
 - Validación en tiempo real de formularios, mejorando la experiencia de usuario.
@@ -37,6 +40,7 @@ Estas mejoras refuerzan la usabilidad y la consistencia de la interfaz, preparan
 # 🎨 Presentación estética, consistencia y accesibilidad
 
 Se ha trabajado en la consistencia visual y accesibilidad de toda la aplicación:
+
 - Ajustes de colores, tipografía y diseño para cumplir criterios de accesibilidad WCAG.
 - Uniformidad de estilos entre módulos frontend y documentación.
 - Optimización de componentes interactivos para mejorar la experiencia de usuario en dispositivos móviles y escritorio.

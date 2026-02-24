@@ -22,20 +22,24 @@ A continuación, se listan los impactos ambientales, sociales y éticos y los ri
 ### 2.1. Impactos ambientales 🌱
 
 **Negativos:**
+
 - Consumo energético derivado del uso de servidores y centros de datos.
 - Generación de “residuos digitales” por almacenamiento de datos innecesarios, copias redundantes o contenido no optimizado.
 - Emisiones indirectas de CO₂ asociadas a la infraestructura tecnológica.
 
 **Positivos:**
+
 - No se utilizan recursos físicos como envases, transporte ni materiales, al tratarse de productos 100% digitales.
 - Fomento del consumo digital frente al consumo físico, reduciendo residuos y emisiones del transporte.
 
 ### 2.2. Impactos sociales y éticos 🤝
 
 **Negativos:**
+
 - Riesgos de privacidad y seguridad de datos personales.
 
 **Positivos:**
+
 - Promueve la inclusión digital al ofrecer productos accesibles globalmente.
 - Facilita el acceso legal y seguro a software y entretenimiento digital, evitando la piratería.
 - Puede generar empleo en el sector tecnológico y fomentar competencias digitales.
@@ -45,6 +49,7 @@ A continuación, se listan los impactos ambientales, sociales y éticos y los ri
 **Riesgos:** Ciberataques, pérdida de datos, mala gestión de privacidad o de proveedores no sostenibles.
 
 **Oportunidades:**
+
 - Usar hosting verde o servidores con energía renovable.
 - Optimizar bases de datos y archivos para reducir el consumo de almacenamiento.
 - Incorporar medidas de accesibilidad, políticas de privacidad claras.
