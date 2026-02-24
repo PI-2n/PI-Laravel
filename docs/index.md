@@ -33,4 +33,12 @@ A continuación se muestra un resumen de las tareas realizadas en cada Sprint pa
 - Pinia
 - Validación en cliente con vee-validate y yup
 
-
+## ☁️ [Sprint 5-6 (18/02/2026 - 27/02/2026)](sprints/sprint5-6.md)
+- Integración con servicios extyernos y gestión segura de tokens
+- Documentación de la API propia con Swagger
+- Mejoras avanzadas de Vue (filtros, paginación y validación en tiempo real)
+- Presentación estética, consistencia y accesibilidad profesional
+- Mejora digital: IA y recomendaciones inteligentes
+- E-comerce sostenible: criterios ASG y ecodiseño
+- Despliegue en cloud
+- Documentación final, manual de usuario y validación

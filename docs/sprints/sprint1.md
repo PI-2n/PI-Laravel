@@ -7,6 +7,7 @@ El entorno principal se ha configurado en **Visual Studio Code**, con una estruc
 
 La estructura de carpetas del proyecto es la siguiente:
 
+```
 ├── backend/  
 ├── database/  
 ├── docs/  
@@ -17,6 +18,7 @@ La estructura de carpetas del proyecto es la siguiente:
 └── frontend/  
 ├── css/  
 └── js/
+```
 
 Se ha instalado y configurado **MkDocs** junto con el tema **Material for MkDocs**, lo que permitirá generar documentación técnica clara y profesional.  
 Además, se ha preparado un entorno **Docker** para ejecutar y probar código PHP de forma aislada y reproducible.

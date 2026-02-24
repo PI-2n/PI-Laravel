@@ -2,42 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://pi-2n.github.io/PI-Laravel/index.html</loc>
-         <lastmod>2026-02-18</lastmod>
+         <lastmod>2026-02-24</lastmod>
     </url>
     <url>
          <loc>https://pi-2n.github.io/PI-Laravel/riesgos/prevencion_riesgos.html</loc>
-         <lastmod>2026-02-18</lastmod>
+         <lastmod>2026-02-24</lastmod>
     </url>
     <url>
          <loc>https://pi-2n.github.io/PI-Laravel/riesgos/riesgos_individuales.html</loc>
-         <lastmod>2026-02-18</lastmod>
+         <lastmod>2026-02-24</lastmod>
     </url>
     <url>
          <loc>https://pi-2n.github.io/PI-Laravel/sostenibilidad/sostenibilidad.html</loc>
-         <lastmod>2026-02-18</lastmod>
+         <lastmod>2026-02-24</lastmod>
     </url>
     <url>
          <loc>https://pi-2n.github.io/PI-Laravel/sprints/sprint1.html</loc>
-         <lastmod>2026-02-18</lastmod>
+         <lastmod>2026-02-24</lastmod>
     </url>
     <url>
          <loc>https://pi-2n.github.io/PI-Laravel/sprints/sprint2.html</loc>
-         <lastmod>2026-02-18</lastmod>
+         <lastmod>2026-02-24</lastmod>
     </url>
     <url>
          <loc>https://pi-2n.github.io/PI-Laravel/sprints/sprint3.html</loc>
-         <lastmod>2026-02-18</lastmod>
+         <lastmod>2026-02-24</lastmod>
     </url>
     <url>
          <loc>https://pi-2n.github.io/PI-Laravel/sprints/sprint4.html</loc>
-         <lastmod>2026-02-18</lastmod>
+         <lastmod>2026-02-24</lastmod>
     </url>
     <url>
-         <loc>https://pi-2n.github.io/PI-Laravel/sprints/sprint5.html</loc>
-         <lastmod>2026-02-18</lastmod>
-    </url>
-    <url>
-         <loc>https://pi-2n.github.io/PI-Laravel/sprints/sprint6.html</loc>
-         <lastmod>2026-02-18</lastmod>
+         <loc>https://pi-2n.github.io/PI-Laravel/sprints/sprint5-6.html</loc>
+         <lastmod>2026-02-24</lastmod>
     </url>
 </urlset>

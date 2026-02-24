@@ -8,10 +8,10 @@
       
       
       
-        <link rel="canonical" href="https://pi-2n.github.io/PI-Laravel/sprints/sprint6.html">
+        <link rel="canonical" href="https://pi-2n.github.io/PI-Laravel/sprints/sprint5-6.html">
       
       
-        <link rel="prev" href="sprint5.html">
+        <link rel="prev" href="sprint4.html">
       
       
         <link rel="next" href="../diagrama_gantt.pdf">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Sprint 6 - Projecte Intermodular 2DAW</title>
+        <title>Sprint 5 y 6 - Projecte Intermodular 2DAW</title>
       
     
     
@@ -83,6 +83,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#sprint-5-6-integracion-avanzada-cloud-y-documentacion-final" class="md-skip">
+          Saltar a contenido
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -114,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Sprint 6
+              Sprint 5 y 6
             
           </span>
         </div>
@@ -388,29 +393,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="sprint5.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Sprint 5
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -420,18 +402,70 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
       
-      <a href="sprint6.html" class="md-nav__link md-nav__link--active">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Sprint 5 y 6
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="sprint5-6.html" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
-    Sprint 6
+    Sprint 5 y 6
     
   </span>
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#integracion-con-servicios-externos-y-gestion-segura-de-tokens" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔗 Integración con servicios externos y gestión segura de tokens
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentacion-de-la-api-propia-con-swagger" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Documentación de la API propia con Swagger
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -621,6 +655,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../despliegue/despliegue.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Despliegue y AWS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -644,9 +701,74 @@
 
 
 
-  <h1>Sprint 6</h1>
-
-
+<h1 id="sprint-5-6-integracion-avanzada-cloud-y-documentacion-final">☁️ Sprint 5-6 — Integración Avanzada, Cloud y Documentación Final<a class="headerlink" href="#sprint-5-6-integracion-avanzada-cloud-y-documentacion-final" title="Permanent link">&para;</a></h1>
+<h2 id="integracion-con-servicios-externos-y-gestion-segura-de-tokens">🔗 Integración con servicios externos y gestión segura de tokens<a class="headerlink" href="#integracion-con-servicios-externos-y-gestion-segura-de-tokens" title="Permanent link">&para;</a></h2>
+<p>Durante este sprint se ha implementado la <strong>integración con APIs externas</strong>, asegurando una <strong>gestión segura de tokens y credenciales</strong>.
+Se han aplicado buenas prácticas de seguridad, incluyendo:
+- Almacenamiento seguro de tokens mediante variables de entorno.
+- Rotación automática de credenciales sensibles.
+- Validación de autenticidad y permisos en cada solicitud hacia los servicios externos.</p>
+<p>Esta integración permitirá que el proyecto se conecte de manera fiable y segura con servicios de terceros, mejorando la escalabilidad y funcionalidad del sistema.</p>
+<hr />
+<h2 id="documentacion-de-la-api-propia-con-swagger">📚 Documentación de la API propia con Swagger<a class="headerlink" href="#documentacion-de-la-api-propia-con-swagger" title="Permanent link">&para;</a></h2>
+<p>Se ha documentado la <strong>API interna del proyecto</strong> utilizando <strong>Swagger</strong>, generando una referencia clara y navegable:
+- Cada endpoint cuenta con descripción, parámetros, ejemplos de respuesta y códigos de estado HTTP.
+- La documentación permite a los desarrolladores probar endpoints directamente desde el navegador.
+- Se ha integrado en el flujo de despliegue automático para mantenerla siempre actualizada junto con el código.</p>
+<p>Esto asegura que cualquier nuevo desarrollador o integrador pueda comprender rápidamente la API y utilizarla correctamente.</p>
+<hr />
+<h1 id="mejoras-avanzadas-de-vue">⚛️ Mejoras avanzadas de Vue<a class="headerlink" href="#mejoras-avanzadas-de-vue" title="Permanent link">&para;</a></h1>
+<p>Se han aplicado mejoras avanzadas en la interfaz frontend con Vue.js, incluyendo:
+- Filtros dinámicos para búsqueda y clasificación de datos.
+- Paginación eficiente para grandes volúmenes de información.
+- Validación en tiempo real de formularios, mejorando la experiencia de usuario.</p>
+<p>Estas mejoras refuerzan la usabilidad y la consistencia de la interfaz, preparando la aplicación para un entorno profesional.</p>
+<hr />
+<h1 id="presentacion-estetica-consistencia-y-accesibilidad">🎨 Presentación estética, consistencia y accesibilidad<a class="headerlink" href="#presentacion-estetica-consistencia-y-accesibilidad" title="Permanent link">&para;</a></h1>
+<p>Se ha trabajado en la consistencia visual y accesibilidad de toda la aplicación:
+- Ajustes de colores, tipografía y diseño para cumplir criterios de accesibilidad WCAG.
+- Uniformidad de estilos entre módulos frontend y documentación.
+- Optimización de componentes interactivos para mejorar la experiencia de usuario en dispositivos móviles y escritorio.</p>
+<hr />
+<h1 id="mejora-digital-ia-y-recomendaciones-inteligentes">🤖 Mejora digital: IA y recomendaciones inteligentes<a class="headerlink" href="#mejora-digital-ia-y-recomendaciones-inteligentes" title="Permanent link">&para;</a></h1>
+<p>Se han incorporado funciones de inteligencia artificial para mejorar la interacción con los usuarios:</p>
+<ul>
+<li>Recomendaciones personalizadas basadas en comportamiento previo.</li>
+<li>Automatización de tareas y sugerencias contextuales dentro de la plataforma.</li>
+<li>Integración de un ChatBot con acceso a la base de datos para poder gestionar las consultas de los usuarios.</li>
+</ul>
+<hr />
+<h1 id="e-commerce-sostenible-criterios-asg-y-ecodiseno">🌱 E-commerce sostenible: criterios ASG y ecodiseño<a class="headerlink" href="#e-commerce-sostenible-criterios-asg-y-ecodiseno" title="Permanent link">&para;</a></h1>
+<p>Se ha revisado el proyecto bajo criterios de sostenibilidad y responsabilidad social:</p>
+<ul>
+<li>Cumplimiento de criterios ASG (Ambientales, Sociales y de Gobernanza).</li>
+<li>Integración de principios de ecodiseño en la arquitectura del software.</li>
+<li>Documentación de buenas prácticas para un e-commerce ético y sostenible.</li>
+</ul>
+<p>Para poder obtener mas información acerca de la sostenibilidad del proyecto puedes consultar el siguiente documento:</p>
+<p>&rarr; <a href="../sostenibilidad/sostenibilidad.html">Documento sosteniblidad</a></p>
+<hr />
+<h1 id="despliegue-en-cloud">☁️ Despliegue en cloud<a class="headerlink" href="#despliegue-en-cloud" title="Permanent link">&para;</a></h1>
+<p>Se ha completado el despliegue del proyecto en la nube, asegurando:</p>
+<ul>
+<li>Escalabilidad y disponibilidad de la plataforma.</li>
+<li>Integración con servicios de almacenamiento, bases de datos y APIs externas.</li>
+<li>Automatización del despliegue continuo para producción y testing.</li>
+</ul>
+<p>Para mas información sobre el despliegue de la aplicación en la nube y los servicios de AWS utilizados puedes consultar el siguiente documento:</p>
+<p>&rarr; <a href="../despliegue/despliegue.pdf">Documento despliegue y AWS</a></p>
+<hr />
+<h1 id="documentacion-final-manual-de-usuario-y-validacion">🗂️ Documentación final, manual de usuario y validación<a class="headerlink" href="#documentacion-final-manual-de-usuario-y-validacion" title="Permanent link">&para;</a></h1>
+<p>Se ha preparado la documentación final del proyecto, incluyendo:</p>
+<ul>
+<li>Manual de usuario completo y navegable.</li>
+<li>Guía de instalación y despliegue en entornos locales y cloud.</li>
+<li>Validación de todas las funcionalidades mediante pruebas unitarias y de integración.</li>
+</ul>
+<p>Todo el material está disponible en el repositorio y vinculado a GitHub Pages para acceso público y actualizado.</p>
+<h2 id="conclusion-del-sprint-5-6">✅ Conclusión del Sprint 5-6<a class="headerlink" href="#conclusion-del-sprint-5-6" title="Permanent link">&para;</a></h2>
+<p>Este sprint ha consolidado las funcionalidades avanzadas del proyecto, integrando servicios externos, mejorando la interfaz, incorporando inteligencia artificial y garantizando despliegue seguro en la nube.
+La documentación final asegura que el proyecto esté listo para uso, mantenimiento y futuras ampliaciones, cumpliendo estándares profesionales y criterios de sostenibilidad.</p>
 
 
 

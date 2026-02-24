@@ -161,7 +161,7 @@ La gestión se realiza mediante vistas Blade sencillas, sin necesidad de JavaScr
 
 ## 🗂️ Estructura del proyecto (Directorios relevantes)
 
-~~~text
+```
 PI-Laravel/
 ├── app/
 │   ├── Helpers/
@@ -239,7 +239,7 @@ PI-Laravel/
 │   └── Unit/
 │
 └── uploads/
-~~~
+```
 
 ---
 
