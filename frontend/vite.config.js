@@ -1,11 +1,15 @@
 import { fileURLToPath, URL } from 'node:url'
-
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import laravel from 'laravel-vite-plugin'
 
-// https://vitejs.dev/config/
 export default defineConfig({
     plugins: [
+        laravel({
+            input: ['resources/scss/app.scss', 'resources/js/app.js'],
+            buildDirectory: 'build',  // Laravel buscará en public/build/
+            refresh: true,
+        }),
         vue(),
     ],
     resolve: {
@@ -16,7 +20,7 @@ export default defineConfig({
     server: {
         proxy: {
             '/api': {
-                target: 'http://localhost:8000',
+                target: 'http://app:9000',  // ← Cambiar localhost por el servicio Docker 'app'
                 changeOrigin: true,
                 headers: {
                     Accept: 'application/json',
@@ -24,5 +28,9 @@ export default defineConfig({
                 }
             }
         }
+    },
+    build: {
+        manifest: true,  // ← IMPORTANTE: Genera manifest.json
+        outDir: 'dist',
     }
 })

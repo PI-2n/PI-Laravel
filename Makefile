@@ -1,66 +1,145 @@
+# ============================================
+# Makefile para Producción - AWS EC2 + Docker
+# ============================================
+# Uso: make -f Makefile.prod [comando]
+# Ejemplo: make -f Makefile.prod up
+# ============================================
+
 SHELL := /bin/bash
-.PHONY: artisan up down reset sh logs install migrate test migrate_fresh populate
+.PHONY: up down restart logs sh install build migrate migrate_fresh populate optimize clear artisan status backup
+
+# ============================================
+# GESTIÓN DE CONTENEDORES
+# ============================================
 
 up:
-	docker compose up -d --build
-	docker compose up -d vite
-	@echo "Esperando a que los contenedores arranquen..."
-	@sleep 5
-	cd frontend && npm install && npm run dev
+	@echo "🚀 Levantando contenedores..."
+	docker compose up -d
+	@echo "⏳ Esperando a que los contenedores arranquen..."
+	@sleep 10
+	@echo "✅ Contenedores levantados"
 
 down:
+	@echo "🛑 Deteniendo contenedores..."
 	docker compose down
+	@echo "✅ Contenedores detenidos"
 
-reset:
-	docker compose down -v
-	rm -rf vendor node_modules bootstrap/cache/*.php public/storage
-	rm -f .env
+restart:
+	@echo "🔄 Reiniciando contenedores..."
+	docker compose restart
+	@echo "✅ Contenedores reiniciados"
 
-sh:
-	docker compose exec -u www-data app bash
+status:
+	@echo "📊 Estado de los contenedores:"
+	docker compose ps
+
+# ============================================
+# LOGS Y ACCESO
+# ============================================
 
 logs:
 	docker compose logs -f --tail=100
 
+logs-app:
+	docker compose logs -f app --tail=100
+
+logs-nginx:
+	docker compose logs -f web --tail=100
+
+logs-db:
+	docker compose logs -f db --tail=100
+
+sh:
+	docker compose exec app bash
+
+sh-root:
+	docker compose exec -u root app bash
+
+# ============================================
+# INSTALACIÓN Y BUILD
+# ============================================
+
 install:
-	# Crear proyecto Laravel si aún no existe
-	if [ ! -f artisan ]; then \
-		docker compose run --rm app bash -lc 'set -e; \
-		  composer create-project laravel/laravel /tmp/laravel; \
-		  shopt -s dotglob; \
-		  cp -an /tmp/laravel/* /var/www/html/'; \
-	fi
+	@echo "📦 Instalando dependencias de producción..."
+	docker compose exec -u root app composer install --optimize-autoloader --no-dev --no-interaction --ignore-platform-reqs
+	docker compose exec vite npm install
+	docker compose exec vite npm run build
+	@echo "✅ Dependencias instaladas"
 
-	# Copiar .env si no existe
-	cp -n .env.example .env || true
+build:
+	@echo "🔨 Compilando frontend para producción..."
+	docker compose exec vite npm run build
+	@echo "✅ Frontend compilado"
 
-	# Instalar dependencias PHP y Node
-	docker compose run --rm app bash -lc 'composer install --no-interaction --prefer-dist --optimize-autoloader'
-	docker compose run --rm app bash -lc 'npm install'
-
-	# Generar key y enlazar storage
-	docker compose run --rm app bash -lc 'php artisan key:generate && php artisan storage:link'
+# ============================================
+# BASE DE DATOS
+# ============================================
 
 migrate:
-	# Espera a que MySQL esté listo antes de migrar
-	docker compose run --rm app bash -c "until nc -z db 3306; do echo 'Waiting for DB...'; sleep 2; done; php artisan migrate"
+	@echo "🗄️  Ejecutando migraciones..."
+	docker compose exec app php artisan migrate --force
+	@echo "✅ Migraciones completadas"
 
 migrate_fresh:
-	docker compose run --rm app bash -c "until nc -z db 3306; do echo 'Waiting for DB...'; sleep 2; done; php artisan migrate:fresh"
+	@echo "⚠️  ¡ATENCIÓN! Esto borrará todos los datos de la BD"
+	@read -p "¿Estás seguro? (y/N): " confirm && [ "$$confirm" = "y" ] || (echo "Cancelado" && exit 1)
+	docker compose exec app php artisan migrate:fresh --force
+	@echo "✅ BD reseteada"
 
 populate:
-	docker compose run --rm app php artisan db:seed
+	@echo "🌱 Ejecutando seeders..."
+	docker compose exec app php artisan db:seed
+	@echo "✅ Seeders completados"
 
 db:
-	docker compose run --rm app bash -c "until nc -z db 3306; do echo 'Waiting for DB...'; sleep 2; done; php artisan migrate:fresh"
-	docker compose run --rm app php artisan db:seed
+	@echo "🗄️  Resetear BD y seedear..."
+	@read -p "¿Estás seguro? (y/N): " confirm && [ "$$confirm" = "y" ] || (echo "Cancelado" && exit 1)
+	docker compose exec app php artisan migrate:fresh --force
+	docker compose exec app php artisan db:seed
+	@echo "✅ BD reseteada y seedeada"
 
-test:
-	docker compose run --rm -e APP_ENV=testing -e DB_CONNECTION=sqlite -e DB_DATABASE=:memory: app php artisan test
+# ============================================
+# OPTIMIZACIÓN Y CACHE
+# ============================================
+
+optimize:
+	@echo "⚡ Optimizando Laravel para producción..."
+	docker compose exec app php artisan config:cache
+	docker compose exec app php artisan route:cache
+	docker compose exec app php artisan view:cache
+	docker compose exec app php artisan event:cache
+	@echo "✅ Laravel optimizado"
+
+clear:
+	@echo "🧹 Limpiando cachés..."
+	docker compose exec app php artisan config:clear
+	docker compose exec app php artisan route:clear
+	docker compose exec app php artisan view:clear
+	docker compose exec app php artisan cache:clear
+	docker compose exec app php artisan event:clear
+	@echo "✅ Cachés limpiados"
+
+# ============================================
+# ARTISAN COMANDOS
+# ============================================
 
 artisan:
-	@docker compose run --rm app php artisan $(if $(CMD),$(CMD),$(cmd))
-	@true
-	
+	@docker compose exec app php artisan $(CMD)
 
-# Comandillo para volver al docker de daemon por defecto de linux: docker context use default
+# ============================================
+# BACKUPS
+# ============================================
+
+backup:
+	@echo "💾 Creando backup de la base de datos..."
+	@mkdir -p /home/backup/ftp/fitxers
+	docker compose exec db mysqldump -upi -ppi pi_laravel > /home/backup/ftp/fitxers/db_backup_$$(date +%Y%m%d_%H%M%S).sql
+	@echo "✅ Backup completado en /home/backup/ftp/fitxers/"
+
+# ============================================
+# DESPLIEGUE COMPLETO
+# ============================================
+
+deploy: up install migrate optimize
+	@echo "🎉 ¡Despliegue completado!"
+	@echo "📍 Accede a: https://app.projecteGrupG1.es"
