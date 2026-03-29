@@ -1,59 +1,139 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# PI-Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> **Proyecto Intermodular de Desarrollo de Aplicaciones Web**
 
-## About Laravel
+| | |
+|---|---|
+| **Grupo** | 1 |
+| **Integrantes** | Adrián Gutiérrez Galvañ, Alejandro Rico Sánchez |
+| **Fecha de presentación** | 31/03/2026 |
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📋 Descripción
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Este proyecto consiste en una aplicación web desarrollada con **Laravel** (backend) y **Vue** (frontend) para simular un funcionamiento moderno, desplegada mediante contenedores Docker. Incluye documentación de API, vistas Blade legacy y despliegue en GitHub Pages.
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## 📅 Planificación del Proyecto
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+La gestión y planificación del proyecto se ha realizado mediante **GitHub Projects**.
 
-## Laravel Sponsors
+- ✅ Creación y organización de tasks/tarjetas
+- ✅ Asignación de tareas a los 2 integrantes del grupo
+- ✅ Seguimiento del progreso mediante tableros Kanban
+- ✅ Registro de actividades y milestones
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+🔗 **Tablero del proyecto:** https://github.com/orgs/PI-2n/projects/1
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 🔗 URLs Importantes
 
-## Contributing
+| Servicio | URL |
+|---|---|
+| **GitHub Pages** | https://pi-2n.github.io/PI-Laravel/ |
+| **API Documentation** | http://localhost:8000/docs |
+| **Vistas Blade (Legacy)** | http://localhost:8000/ |
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+> **Nota:** Para acceder a la documentación de la API, el contenedor debe estar levantado.
 
-## Code of Conduct
+En GitHub Pages se encuentra un resumen del proyecto con todas las funcionalidades implementadas en el proyecto así como toda la documentación relacionada con prevención de riesgos, digitalización, sostenibilidad y el despliegue (que ya no está disponible) de la aplicación.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## 🚀 Instrucciones de Instalación
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 1. Clonar el repositorio
+```bash
+git clone https://github.com/pi-2n/PI-Laravel.git
+cd PI-Laravel
+```
 
-## License
+### 2. Instalar dependencias
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**En la raíz del proyecto:**
+```bash
+docker compose --build
+npm install
+```
+**En el frontend:**
+```bash
+cd frontend
+npm install
+cd ..
+```
+
+### 3. Configurar base de datos
+
+**Realizar migraciones:**
+```bash
+make migrate_fresh
+```
+**Poblar base de datos (seeders):**
+```bash
+make populate
+```
+**Atajo (migrar + poblar):**
+```bash
+make db
+```
+---
+
+## ▶️ Levantar el Proyecto
+
+### Opción A: API + Frontend juntos (Recomendado)
+```bash
+make up
+```
+### Opción B: Servicios por separado
+
+**Solo API:**
+```bash
+docker compose up -d
+```
+**Solo Frontend:**
+```bash
+cd frontend
+npm run dev
+```
+---
+
+## ⏹️ Detener el Proyecto
+```bash
+make down
+```
+---
+
+## 🛠️ Comandos Make Disponibles
+
+| Comando | Descripción |
+|---|---|
+| make up | Levanta API + Frontend |
+| make down | Detiene todos los contenedores |
+| make db | Ejecuta migrate_fresh + populate |
+| make migrate_fresh | Refresca la base de datos |
+| make populate | Ejecuta los seeders |
+
+---
+
+## 📁 Estructura del Proyecto
+
+PI-Laravel/
+├── frontend/          # Aplicación frontend
+├── docker-compose.yml # Configuración de contenedores
+├── Makefile          # Comandos automatizados
+└── README.md         # Este archivo
+
+---
+
+## 📄 Licencia
+
+Este proyecto es parte de un trabajo académico.
+
+---
+
+<div align="center">
+  <strong>Desarrollo de aplicaciones WEB CIPFP Batoi - G1</strong>
+</div>
